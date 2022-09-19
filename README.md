@@ -17,3 +17,6 @@ Security software, users can use this software to protect their security at any 
 
 idea_3: 
 A slack/piazza like website for NYU. Professors and students, when need interns or team members to complete a research/project, can post the information on the website to recruit helpers, and people who are interested can send out their resumes and other materials, and finally the leader of the project can choose the most suited one to help him/her. The project in this case means larger independent projects rather than some small class projects. 
+
+idea_4:
+A software for people to find gamers to play with them by paying a small amount of money. The people who are employed on the software are skilled and experienced players of specific games. The users can be starters who simply wants to comprehend the experience of new games or gamers who need coaches to give them some suggestions about how to improve gaming skills. Users submit their requests and the system will create orders. After employees accept the orders, the system will send the players imformation to the users to choose.
