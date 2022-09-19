@@ -13,6 +13,8 @@ api = Api(app)
 LIST = 'list'
 HELLO = '/hello'
 MESSAGE = 'message'
+DATA_LIST = f'/data_list/{LIST}'
+DATA_LIST_NM = 'data_list'
 
 
 @api.route('/hello')
@@ -28,6 +30,16 @@ class HelloWorld(Resource):
         """
         return {MESSAGE: 'hello world'}
 
+@api.route(DATA_LIST)
+class DataList(Resource):
+    """
+    This will get a list of data names
+    """
+    def get(self):
+        """
+        Return a list of data names
+        """
+        return {DATA_LIST_NM: []}
 
 @api.route('/endpoints')
 class Endpoints(Resource):
