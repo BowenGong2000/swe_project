@@ -22,7 +22,7 @@ lint: FORCE
 	$(LINTER) $(DB_DIR)/*.py
 
 dev_env: FORCE
-	pip install -r $(REQ_DIR)/requirements-dev.txt
+	pip3 install -r $(REQ_DIR)/requirements-dev.txt
 
 docs: FORCE
 	cd $(API_DIR); make docs

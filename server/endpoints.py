@@ -18,6 +18,7 @@ DATA_LIST_NM = 'data_list'
 
 A_DATA_TYPE = 'User'
 
+
 @api.route('/hello')
 class HelloWorld(Resource):
     """
@@ -31,6 +32,7 @@ class HelloWorld(Resource):
         """
         return {MESSAGE: 'hello world'}
 
+
 @api.route(DATA_LIST)
 class DataList(Resource):
     """
@@ -41,6 +43,7 @@ class DataList(Resource):
         Return a list of data names
         """
         return {DATA_LIST_NM: [A_DATA_TYPE]}
+
 
 @api.route('/endpoints')
 class Endpoints(Resource):
