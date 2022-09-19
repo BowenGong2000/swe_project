@@ -21,3 +21,12 @@ def test_get_DataList():
     resp_json = TEST_CLIENT.get(ep.DATA_LIST).get_json()
     assert isinstance(resp_json[ep.DATA_LIST_NM], list)
 
+def test_get_DataList_not_empty():
+    """
+    see if we can get data list properly
+    Return should look like:
+        {DATA_LIST_NM: [list of data ...]}
+    """
+    resp_json = TEST_CLIENT.get_not_empty(ep.DATA_LIST).get_json()
+    assert len(resp_json[ep.DATA_LIST_NM]) > 0
+
