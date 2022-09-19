@@ -10,6 +10,10 @@ from flask_restx import Resource, Api
 app = Flask(__name__)
 api = Api(app)
 
+LIST = 'list'
+HELLO = '/hello'
+MESSAGE = 'message'
+
 
 @api.route('/hello')
 class HelloWorld(Resource):
@@ -22,7 +26,7 @@ class HelloWorld(Resource):
         A trivial endpoint to see if the server is running.
         It just answers with "hello world."
         """
-        return {'hello': 'world'}
+        return {MESSAGE: 'hello world'}
 
 
 @api.route('/endpoints')
@@ -38,4 +42,3 @@ class Endpoints(Resource):
         endpoints = ''
         # sorted(rule.rule for rule in api.app.url_map.iter_rules())
         return {"Available endpoints": endpoints}
-
