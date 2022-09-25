@@ -4,7 +4,14 @@ An example flask rest API server, for SE Fall 2022.
 To build production, type `make prod`.
 
 To create the env for a new developer, run `make dev_env`.
-
+Tech Stack used for this project:
+Testing: pytest
+Server: Flask && flask-restx
+Lint: flake8
+Database: MongoDB
+CI/CD: Github Action
+Cloud deployment: Heroku
+Frontend: React
 ###################################
 
 Brainstorming:
