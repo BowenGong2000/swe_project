@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from app import db
 import uuid
 
 class User:
@@ -14,5 +15,7 @@ class User:
       "phone": request.form.get('phone'),
       "password": request.form.get('password')
         }
+
+        db.users.insert_one(user)
 
         return jsonify(user), 200

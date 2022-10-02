@@ -1,12 +1,14 @@
 from flask import Flask, render_template
+import pymongo
 
 app = Flask(__name__)
+
+client = pymongo.MongoClient('mongodb+srv://tracyzhu0608:1234@cluster0.8pa03kh.mongodb.net/?retryWrites=true&w=majority', 27017)
+db = client.user_login_system
 
 # Routes
 from server import routes
 
-
 @app.route('/')
 def home():
   return render_template('user_login.html')
-
