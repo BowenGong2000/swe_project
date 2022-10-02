@@ -1,27 +1,4 @@
-<<<<<<< HEAD
-# demo-repo3
-An example flask rest API server, for SE Fall 2022.
 
-To build production, type `make prod`.
-
-To create the env for a new developer, run `make dev_env`.
-
-###################################
-
-Brainstorming:
-
-idea_1:
-Map Social, we intend to create a map software that will allow users to interact, make friends, receive tasks and earn income on this software just like the map of the game.
-
-idea_2:
-Security software, users can use this software to protect their security at any time, users can turn on the password every 15 minutes to enter to confirm the status of their security. If the user is in danger, the location will be shared to the user's friends and people around them.
-
-idea_3: 
-A slack/piazza like website for NYU. Professors and students, when need interns or team members to complete a research/project, can post the information on the website to recruit helpers, and people who are interested can send out their resumes and other materials, and finally the leader of the project can choose the most suited one to help him/her. The project in this case means larger independent projects rather than some small class projects. 
-
-idea_4:
-A software for people to find gamers to play with them by paying a small amount of money. The people who are employed on the software are skilled and experienced players of specific games. The users can be starters who simply wants to comprehend the experience of new games or gamers who need coaches to give them some suggestions about how to improve gaming skills. Users submit their requests and the system will create orders. After employees accept the orders, the system will send the players imformation to the users to choose.
-=======
 # demo-repo3
 An example flask rest API server, for SE Fall 2022.
 
@@ -57,4 +34,3 @@ A software for people to find gamers to play with them by paying a small amount 
 We pick idea 3 as our final project. We hope to realize the five functions of users posting information, commenting and replying, logging in, and searching in the project. The entire project will be composed by 4 major web pages, indluding user end topics/projects visualizing page, a visualize page for specific topics/projects, a manager page where web controller could make modifications or delete any of the project posted. We plan to finished the project by steps. 
 
 In the first step, we want to enable users to publish text and picture information on the platform in the project. Meaning we need a user input page and a index page that shows the posted in formation. In the user editor page, we want to include functionalities of Text editing includes the possibility to post links, adjust text size, and adjust fonts. We will implement the storage of published text information through mongoDB.
->>>>>>> 2641e4f920a45c2a875ed04046593a6f2a9146c7
