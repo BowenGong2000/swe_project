@@ -120,19 +120,19 @@ h3 {
 }
 
 .frame {
-    width: 600px;
-    height: 600px;
-    background-size: 650px;
-    background-image: url(frame.jpg);
+    width: 300px;
+    height: 300px;
+    background-size: 300px;
+    background-image: url(info.gif);
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 25px;
 }
 
 .smooth {
-    width: 600px;
-    height: 600px;
-    background-size: 1000px;
+    width: 300px;
+    height: 300px;
+    background-size: 500px;
     background-image: url(glass.gif);
     background-repeat: no-repeat;
     background-position: center;
@@ -140,9 +140,9 @@ h3 {
 }
 
 .line {
-    width: 600px;
-    height: 600px;
-    background-size: 1000px;
+    width: 300px;
+    height: 300px;
+    background-size: 500px;
     background-image: url(line.gif);
     background-repeat: no-repeat;
     background-position: center;
