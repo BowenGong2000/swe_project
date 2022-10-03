@@ -16,6 +16,19 @@ Cloud deployment: Heroku
 Frontend: React
 ###################################
 
+Project Setup Update: 
+
+1. install pymongo, 
+    pip install pymongo
+2. install pymongo[srv]
+    pip install "pymongo[srv]"
+3. run command
+    sed -i -e 's/\r$//' run.sh
+4. run command
+    ./run.sh
+The login and register page should appears. 
+
+
 Brainstorming:
 
 idea_1:
