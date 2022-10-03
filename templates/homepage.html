@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>homepage</title>
+  </head>
+
+  <body>
+    <h1>Search for you interests</h1>
+    <form action="some_function_name" method="POST">
+        <lable for="some_variable_name">Search for key words</lable>
+        <input type="text" name = "some _variable_name" placeholder="..." maxlength="20" required/> </br>
+
+    </form>
+
+
+    <h1>Recent Activities/Projects</h1>
+    {% if posts %}
+    <table >
+        <th>Topic</th>
+        <th>Number of helper needed</th>
+        <th>Requirements</th>
+        <th>Open Until</th>
+        <th>contact Info</th>
+    {% for line in posts %}
+        <tr>
+            <td>some_variable_name</td>
+            <td>some_variable_name</td>
+            <td>some_variable_name</td>
+            <td>some_variable_name</td>
+            <td>some_variable_name</td>
+        </tr>
+    {% end for %}
+    </table>
+
+  </body>
+</html>

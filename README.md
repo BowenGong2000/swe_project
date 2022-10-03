@@ -44,6 +44,7 @@ and PHD students that need to find other students that might interested in colla
 idea_4:
 A software for people to find gamers to play with them by paying a small amount of money. The people who are employed on the software are skilled and experienced players of specific games. The users can be starters who simply wants to comprehend the experience of new games or gamers who need coaches to give them some suggestions about how to improve gaming skills. Users submit their requests and the system will create orders. After employees accept the orders, the system will send the players imformation to the users to choose.
 
+
 We pick idea 3 as our final project. We hope to realize the five functions of users posting information, commenting and replying, logging in, and searching in the project. The entire project will be composed by 4 major web pages, indluding user end topics/projects visualizing page, a visualize page for specific topics/projects, a manager page where web controller could make modifications or delete any of the project posted. We plan to finished the project by steps. 
 
 In the first step, we want to enable users to publish text and picture information on the platform in the project. Meaning we need a user input page and a index page that shows the posted in formation. In the user editor page, we want to include functionalities of Text editing includes the possibility to post links, adjust text size, and adjust fonts. We will implement the storage of published text information through mongoDB.

@@ -12,3 +12,7 @@ from server import routes
 @app.route('/')
 def home():
   return render_template('user_login.html')
+
+# @app.route('/')
+# def home():
+#   return render_template('homepage.html')
