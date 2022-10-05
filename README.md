@@ -1,5 +1,5 @@
 
-# demo-repo3
+# swe_project
 An example flask rest API server, for SE Fall 2022.
 
 To build production, type `make prod`.
