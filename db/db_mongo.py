@@ -4,8 +4,8 @@
 from pymongo import MongoClient
 
 cluster = MongoClient(
-    "mongodb+srv://tracyzhu0608:1234"\
-    "@cluster0.8pa03kh.mongodb.net/?re"\
+    "mongodb+srv://tracyzhu0608:1234"
+    "@cluster0.8pa03kh.mongodb.net/?re"
     "tryWrites=true&w=majority"
     )
 db = cluster["test"]
