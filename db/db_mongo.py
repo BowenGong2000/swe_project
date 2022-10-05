@@ -35,4 +35,4 @@ def hello():
     """
     #todo
     """
-    return 'hello'
+    return list(post1.keys())
