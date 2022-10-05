@@ -42,7 +42,7 @@ class DataList(Resource):
         """
         Return a list of data names
         """
-        return {DATA_LIST_NM: [A_DATA_TYPE]}
+        return {DATA_LIST_NM: ["A_DATA_TYPE"]}
 
 
 @api.route('/endpoints')
