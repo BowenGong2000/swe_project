@@ -5,6 +5,7 @@ import uuid
 from flask import jsonify, request
 from app import db
 
+
 class User:
     """
     info of user
@@ -15,16 +16,14 @@ class User:
         '''
         print(request.form)
 
-#The user form
         user = {
-        "_id": uuid.uuid4().hex,
-        "name": request.form.get('name'),
-        "email": request.form.get('email'),
-        "phone": request.form.get('phone'),
-        "password": request.form.get('password')
+            "_id": uuid.uuid4().hex,
+            "name": request.form.get('name'),
+            "email": request.form.get('email'),
+            "phone": request.form.get('phone'),
+            "password": request.form.get('password')
         }
 
         db.users.insert_one(user)
 
         return jsonify(user), 200
-      
