@@ -30,6 +30,7 @@ for x in results:
 post_count = collection.count_documents({})
 print(post_count)
 
+
 def hello():
     """
     #todo
