@@ -1,5 +1,5 @@
 
-import db.db_mongo as mg
+import db.dbmongo as mg
 
 
 def initial_test():
