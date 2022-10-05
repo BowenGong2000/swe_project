@@ -2,6 +2,6 @@
 import db.dbmongo as mg
 
 
-def initial_test():
+def test_init():
     mgs = mg.hello()
     assert isinstance(mgs,list)
