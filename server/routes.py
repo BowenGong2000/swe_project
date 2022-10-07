@@ -3,7 +3,9 @@ process request form app
 """
 from flask import Flask
 from server.models import User
-from app import app
+
+app = Flask(__name__)
+
 
 @app.route('/user/signup', methods=['POST'])
 def signup():

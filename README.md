@@ -22,8 +22,6 @@ Project Setup Update:
     pip install pymongo
 2. install pymongo[srv]
     pip install "pymongo[srv]"
-   install passlib for password encyption
-    pip install passlib
 3. run command
     sed -i -e 's/\r$//' run.sh
 4. run command
