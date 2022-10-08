@@ -22,11 +22,9 @@ Project Setup Update:
     pip install pymongo
 2. install pymongo[srv]
     pip install "pymongo[srv]"
-3. install passlib for password encyption
-    pip install passlib
-4. run command
+3. run command
     sed -i -e 's/\r$//' run.sh
-5. run command
+4. run command
     ./run.sh
 The login and register page should appears. 
 
