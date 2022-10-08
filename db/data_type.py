@@ -16,14 +16,17 @@ def get_data_type_details(data_type):
 
 
 def main():
-    #print details of a given data type (dictionary)
+    """
+    print details of a given data type (dictionary)
+    """
     print(DATA_TYPES["Project"]) 
     print(get_data_type_details("Project"))
-    
-    #print a list of data types
+
+    """
+    print a list of data types
+    """
     char_types = get_data_types()
     print(char_types)
-    
 
 if __name__ == '__main__':
     main()
