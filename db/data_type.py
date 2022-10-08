@@ -2,9 +2,9 @@
 This module encapsulates details about data type.
 """
 
-DATA_TYPES = {"Project": {'info': 6},
-              "User": {'info': 7},
-              "Comment": {'info': 8}, }
+DATA_TYPES = {"Project": {'Name': 'info', 'Requirments':'info', 'Start_time':'time', 'Time_period':'time', 'Salary':'number'},
+              "Students": {'Name': 'info', 'Email_address': 'info', 'Phone_number':'info', 'Skills': 'info'},
+              "Sponor": {'Name': 'info', 'Email_address': 'info', 'Phone_number':'info'}, }
 
 
 def get_data_types():
@@ -12,7 +12,7 @@ def get_data_types():
 
 
 def get_data_type_details(data_type):
-    return DATA_TYPES[data_type]
+    return DATA_TYPES.get(data_type, None)
 
 
 def main():

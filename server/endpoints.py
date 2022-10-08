@@ -3,9 +3,11 @@ This is the file containing all of the endpoints for our flask app.
 The endpoint called `endpoints` will return all available endpoints.
 """
 
+from http import HTTPStatus
 from flask import Flask
 from flask_restx import Resource, Api
 import db.data_type as dtyp
+import werkzeug.exceptions as wz
 
 app = Flask(__name__)
 api = Api(app)
@@ -50,11 +52,17 @@ class DataTypeDetails(Resource):
     """
     This will get a list of data types.
     """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     def get(self, data_type):
         """
         Returns a list of data types.
         """
-        return {data_type: {}}
+        dt = dtyp.get_data_type_details(data_type)
+        if dt is not None:
+            return {data_type: dtyp.get_data_type_details(data_type)}
+        else:
+            raise wz.NotFound(f'{data_type} not found.')
 
 
 @api.route('/endpoints')

@@ -4,7 +4,7 @@ import pytest
 import server.endpoints as ep
 
 TEST_CLIENT = ep.app.test_client()
-TEST_DATA_TYPE = 'Project'
+TEST_DATA_TYPE = 'Students'
 
 def test_hello():
     """
