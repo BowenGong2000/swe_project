@@ -19,7 +19,6 @@ DATA_LIST_NM = 'data_list'
 DATA_TYPE_DETAILS = f'/data_list/{DETAILS}'
 
 
-
 @api.route('/hello')
 class HelloWorld(Resource):
     """
