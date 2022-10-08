@@ -5,7 +5,7 @@ The endpoint called `endpoints` will return all available endpoints.
 
 from flask import Flask
 from flask_restx import Resource, Api
-# import db.db as db
+import db.data_type as dtyp
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,8 +18,6 @@ DATA_LIST = f'/data_list/{LIST}'
 DATA_LIST_NM = 'data_list'
 DATA_TYPE_DETAILS = f'/data_list/{DETAILS}'
 
-A_DATA_TYPE = 'User'
-ANOTHER_DATA_TYPE = 'Project'
 
 
 @api.route('/hello')
@@ -45,7 +43,7 @@ class DataList(Resource):
         """
         Return a list of data names
         """
-        return {DATA_LIST_NM: ["A_DATA_TYPE", "ANOTHER_DATA_TYPE"]}
+        return {DATA_LIST_NM: dtyp.get_data_types()}
 
 
 @api.route(f'{DATA_TYPE_DETAILS}/<data_type>')
