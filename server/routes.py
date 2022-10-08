@@ -5,8 +5,6 @@ from flask import Flask
 from server.models import User
 
 app = Flask(__name__)
-from app import app
-
 
 @app.route('/user/signup', methods=['POST'])
 def signup():
