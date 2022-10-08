@@ -5,6 +5,8 @@ import server.endpoints as ep
 
 TEST_CLIENT = ep.app.test_client()
 
+TEST_DATA_TYPE = 'Project'
+
 def test_hello():
     """
     see if Hello works
@@ -30,3 +32,11 @@ def test_get_DataList_not_empty():
     resp_json = TEST_CLIENT.get(ep.DATA_LIST).get_json()
     assert len(resp_json[ep.DATA_LIST_NM]) > 0
 
+
+def test_get_data_type_details():
+    """
+    see if we can get data type details properly
+    """
+    resp_json = TEST_CLIENT.get(f'{ep.DATA_TYPE_DETAILS}/{TEST_DATA_TYPE}').get_json()
+    assert TEST_DATA_TYPE in resp_json
+    assert isinstance(resp_json[TEST_DATA_TYPE], dict) #store as disctionary

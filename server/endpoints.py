@@ -12,11 +12,15 @@ api = Api(app)
 
 LIST = 'list'
 HELLO = '/hello'
+DETAILS = 'details'
 MESSAGE = 'message'
-DATA_LIST = f'/data_list/{LIST}'
-DATA_LIST_NM = 'data_list'
+DATA_LIST = f'/data_types/{LIST}'
+DATA_LIST_NM = 'data_types_list'
+DATA_TYPE_DETAILS = f'/data_types/{DETAILS}'
 
 A_DATA_TYPE = 'User'
+ANOTHER_DATA_TYPE = 'Project'
+
 
 
 @api.route('/hello')
@@ -42,7 +46,7 @@ class DataList(Resource):
         """
         Return a list of data names
         """
-        return {DATA_LIST_NM: ["A_DATA_TYPE"]}
+        return {DATA_LIST_NM: ["A_DATA_TYPE", "ANOTHER_DATA_TYPE"]}
 
 
 @api.route('/endpoints')
@@ -58,3 +62,14 @@ class Endpoints(Resource):
         endpoints = ''
         # sorted(rule.rule for rule in api.app.url_map.iter_rules())
         return {"Available endpoints": endpoints}
+
+@api.route(f'{DATA_TYPE_DETAILS}/<data_type>')
+class DataTypeDetails(Resource):
+    """
+    This will get a list of data types.
+    """
+    def get(self, data_type):
+        """
+        Returns a list of data types.
+        """
+        return {data_type: {}}
