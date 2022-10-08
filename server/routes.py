@@ -1,7 +1,6 @@
 """
 process request form app
 """
-from flask import Flask
 from server.models import User
 from app import app
 

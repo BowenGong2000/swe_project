@@ -33,10 +33,10 @@ class User:
         """
         Check for same email address
         """
-        if db.users.find_one({ "email": user['email'] }):
-            return jsonify({ "error": "Email address already existed" }), 400
+        if db.users.find_one({"email": user['email']}):
+            return jsonify({"error": "Email address already existed"}), 400
 
         if db.users.insert_one(user):
             return jsonify(user), 200
 
-        return jsonify({ "error": "Signup failed" }), 400
+        return jsonify({"error": "Signup failed"}), 400
