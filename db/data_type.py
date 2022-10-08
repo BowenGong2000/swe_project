@@ -2,13 +2,15 @@
 This module encapsulates details about data type.
 """
 
-DATA_TYPES = {"Project": {'Name': 'info', 'Requirments': 'info',
-                            'Start_time': 'time', 'Time_period': 'time',
-                            'Salary': 'number'},
-              "Students": {'Name': 'info', 'Email_address': 'info',
-                            'Phone_number': 'info', 'Skills': 'info'},
-              "Sponor": {'Name': 'info', 'Email_address': 'info',
-                            'Phone_number': 'info'}, }
+DATA_TYPES = {
+    "Project": {'Name': 'info', 'Requirments': 'info',
+    'Start_time': 'time', 'Time_period': 'time',
+    'Salary': 'number'},
+    "Students": {'Name': 'info', 'Email_address': 'info',
+    'Phone_number': 'info', 'Skills': 'info'},
+    "Sponor": {'Name': 'info', 'Email_address': 'info',
+    'Phone_number': 'info'}
+    }
 
 
 def get_data_types():
