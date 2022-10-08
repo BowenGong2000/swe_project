@@ -19,7 +19,7 @@ def main():
     """
     print details of a given data type (dictionary)
     """
-    print(DATA_TYPES["Project"]) 
+    print(DATA_TYPES["Project"])
     print(get_data_type_details("Project"))
 
     """
@@ -28,5 +28,7 @@ def main():
     char_types = get_data_types()
     print(char_types)
 
+
 if __name__ == '__main__':
     main()
+
