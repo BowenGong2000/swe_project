@@ -80,13 +80,13 @@ body {
 }
 
 .tabs .tab-body>div {
-    width: 400px;
+    width: 10vw;
     height: 100vh;
     padding: 10vh 0px;
 }
 
 .tabs .tab-body div h2 {
-    font-size: 40px;
+    font-size: 5vh;
     margin-bottom: 0px;
     color: #222;
 }
@@ -100,8 +100,8 @@ h3 {
 }
 
 .logo {
-    width: 300px;
-    height: 300px;
+    width: 45vh;
+    height: 45vh;
     background-size: 1000px;
     background-image: url(react.gif);
     background-repeat: no-repeat;
@@ -110,8 +110,8 @@ h3 {
 }
 
 .logo2 {
-    width: 300px;
-    height: 300px;
+    width: 45vh;
+    height: 45vh;
     background-size: 550px;
     background-image: url(setting.gif);
     background-repeat: no-repeat;
@@ -120,8 +120,8 @@ h3 {
 }
 
 .frame {
-    width: 300px;
-    height: 300px;
+    width: 45vh;
+    height: 45vh;
     background-size: 300px;
     background-image: url(info.gif);
     background-repeat: no-repeat;
@@ -130,8 +130,8 @@ h3 {
 }
 
 .smooth {
-    width: 300px;
-    height: 300px;
+    width: 45vh;
+    height: 45vh;
     background-size: 500px;
     background-image: url(glass.gif);
     background-repeat: no-repeat;
@@ -140,8 +140,8 @@ h3 {
 }
 
 .line {
-    width: 300px;
-    height: 300px;
+    width: 45vh;
+    height: 45vh;
     background-size: 500px;
     background-image: url(line.gif);
     background-repeat: no-repeat;
