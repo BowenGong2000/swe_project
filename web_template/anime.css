@@ -19,7 +19,7 @@ body {
 }
 
 .tabs .tab-header {
-    width: 150px;
+    width: 120px;
     height: 100%;
 }
 
@@ -80,7 +80,7 @@ body {
 }
 
 .tabs .tab-body>div {
-    width: 10vw;
+    width: 200px;
     height: 100vh;
     padding: 10vh 0px;
 }
