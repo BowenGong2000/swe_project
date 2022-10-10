@@ -43,7 +43,7 @@ class User:
 
 
 def Username_Validation(Username):
-    if( len(Username) > 5):
+    if len(Username) > 5:
         return True
     return False
 
