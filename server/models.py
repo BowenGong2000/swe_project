@@ -41,15 +41,18 @@ class User:
 
         return jsonify({"error": "Signup failed"}), 400
 
+
 def Username_Validation(Username):
-    if(len(Username) > 5):
+    if len(Username) > 5:
         return True
     return False
+
 
 def Phone_Validation(Phone):
     if isinstance(Phone, int) and len(str(Phone)) == 9:
         return True
     return False
+
 
 def Password_Validation(Password):
     if len(Password) > 8:
