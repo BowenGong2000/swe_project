@@ -4,7 +4,7 @@ import pytest
 import server.endpoints as ep
 
 TEST_CLIENT = ep.app.test_client()
-TEST_DATA_TYPE = 'Students'
+TEST_DATA_TYPE = 'Student'
 
 def test_hello():
     """
@@ -35,6 +35,6 @@ def test_get_data_type_details():
     """
     see if we can get data type details properly
     """
-    resp_json = TEST_CLIENT.get(f'{ep.DATA_TYPE_DETAILS}/{TEST_DATA_TYPE}').get_json()
+    resp_json = TEST_CLIENT.get(f'{ep.DATA_DETAILS}/{TEST_DATA_TYPE}').get_json()
     assert TEST_DATA_TYPE in resp_json
     assert isinstance(resp_json[TEST_DATA_TYPE], dict) #store as disctionary
