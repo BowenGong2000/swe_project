@@ -9,7 +9,7 @@ DATA_TYPES = {
     "Student": {'Name': 'info', 'Email_address': 'info',
                 'Phone_number': 'info', 'Skills': 'info'},
     "Sponsor": {'Name': 'info', 'Email_address': 'info',
-               'Phone_number': 'info'}
+                'Phone_number': 'info'}
     }
 
 
