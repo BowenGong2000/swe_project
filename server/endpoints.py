@@ -4,8 +4,8 @@ The endpoint called `endpoints` will return all available endpoints.
 """
 
 from http import HTTPStatus
-from flask import Flask
-from flask_restx import Resource, Api
+from flask import Flask, request
+from flask_restx import Resource, Api, fields
 import db.data_type as dtyp
 import db.projects as pj
 import werkzeug.exceptions as wz
@@ -18,21 +18,25 @@ HELLO = '/hello'
 MESSAGE = 'message'
 DETAILS = 'details'
 DATA_NS = 'data'
+ADD = 'add'
 DATA_LIST = f'/{DATA_NS}/{LIST}'
 DATA_LIST_NM = '{DATA_NS}_list'
 DATA_DETAILS = f'/{DATA_NS}/{DETAILS}'
+
 PROJECTS_NS = 'projects'
 PROJECT_LIST = f'/{PROJECTS_NS}/{LIST}'
 PROJECT_LIST_NM = '{PROJECTS_NS}_list'
 PROJECT_DETAILS = f'/{PROJECTS_NS}/{DETAILS}'
+PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
+
 STUDENTS_NS = 'students'
 STUDENT_LIST = f'/{STUDENTS_NS}/{LIST}'
 STUDENT_LIST_NM = '{STUDENTS_NS}_list'
 STUDENT_DETAILS = f'/{STUDENTS_NS}/{DETAILS}'
-SPONORS_NS = 'sponors'
-SPONOR_LIST = f'/{SPONORS_NS}/{LIST}'
-SPONOR_LIST_NM = '{SPONORS_NS}_list'
-SPONOR_DETAILS = f'/{SPONORS_NS}/{DETAILS}'
+SPONSORS_NS = 'sponsors'
+SPONSOR_LIST = f'/{SPONSORS_NS}/{LIST}'
+SPONSOR_LIST_NM = '{SPONSORS_NS}_list'
+SPONSOR_DETAILS = f'/{SPONSORS_NS}/{DETAILS}'
 
 
 @api.route('/hello')
@@ -107,6 +111,30 @@ class ProjectDetails(Resource):
             return {project: pj.get_project_details(project)}
         else:
             raise wz.NotFound(f'{project} not found.')
+
+
+project_fields = api.model('NewProject', {
+    'Name': fields.String,
+    'Department': fields.String,
+    'Number of members needed': fields.Integer,
+    'Major requirements': fields.String,
+    'School Year': fields.String,
+    'GPA': fields.Float,
+    'Duration': fields.Integer
+})
+
+
+@api.route(PROJECT_ADD)
+class AddProject(Resource):
+    """
+    Add a new project.
+    """
+    @api.expect(project_fields)
+    def post(self):
+        """
+        Add a new project.
+        """
+        return print(f'{request.json=}')
 
 
 @api.route('/endpoints')

@@ -8,7 +8,7 @@ DATA_TYPES = {
                 'Salary': 'number'},
     "Student": {'Name': 'info', 'Email_address': 'info',
                 'Phone_number': 'info', 'Skills': 'info'},
-    "Sponor": {'Name': 'info', 'Email_address': 'info',
+    "Sponsor": {'Name': 'info', 'Email_address': 'info',
                'Phone_number': 'info'}
     }
 
