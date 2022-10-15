@@ -7,7 +7,7 @@ DATA_TYPES = {
                 'Start_time': 'time', 'Time_period': 'time',
                 'Salary': 'number'},
     "Student": {'Name': 'info', 'Email_address': 'info',
-                 'Phone_number': 'info', 'Skills': 'info'},
+                'Phone_number': 'info', 'Skills': 'info'},
     "Sponor": {'Name': 'info', 'Email_address': 'info',
                'Phone_number': 'info'}
     }
