@@ -34,6 +34,7 @@ SPONOR_LIST = f'/{SPONORS_NS}/{LIST}'
 SPONOR_LIST_NM = '{SPONORS_NS}_list'
 SPONOR_DETAILS = f'/{SPONORS_NS}/{DETAILS}'
 
+
 @api.route('/hello')
 class HelloWorld(Resource):
     """
