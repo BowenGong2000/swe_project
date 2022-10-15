@@ -6,7 +6,7 @@ DATA_TYPES = {
     "Project": {'Name': 'info', 'Requirments': 'info',
                 'Start_time': 'time', 'Time_period': 'time',
                 'Salary': 'number'},
-    "Students": {'Name': 'info', 'Email_address': 'info',
+    "Student": {'Name': 'info', 'Email_address': 'info',
                  'Phone_number': 'info', 'Skills': 'info'},
     "Sponor": {'Name': 'info', 'Email_address': 'info',
                'Phone_number': 'info'}

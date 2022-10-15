@@ -7,6 +7,7 @@ from http import HTTPStatus
 from flask import Flask
 from flask_restx import Resource, Api
 import db.data_type as dtyp
+import db.projects as pj
 import werkzeug.exceptions as wz
 
 app = Flask(__name__)
@@ -16,10 +17,22 @@ LIST = 'list'
 HELLO = '/hello'
 MESSAGE = 'message'
 DETAILS = 'details'
-DATA_LIST = f'/data_list/{LIST}'
-DATA_LIST_NM = 'data_list'
-DATA_TYPE_DETAILS = f'/data_list/{DETAILS}'
-
+DATA_NS = 'data'
+DATA_LIST = f'/{DATA_NS}/{LIST}'
+DATA_LIST_NM = '{DATA_NS}_list'
+DATA_DETAILS = f'/{DATA_NS}/{DETAILS}'
+PROJECTS_NS = 'projects'
+PROJECT_LIST = f'/{PROJECTS_NS}/{LIST}'
+PROJECT_LIST_NM = '{PROJECTS_NS}_list'
+PROJECT_DETAILS = f'/{PROJECTS_NS}/{DETAILS}'
+STUDENTS_NS = 'students'
+STUDENT_LIST = f'/{STUDENTS_NS}/{LIST}'
+STUDENT_LIST_NM = '{STUDENTS_NS}_list'
+STUDENT_DETAILS = f'/{STUDENTS_NS}/{DETAILS}'
+SPONORS_NS = 'sponors'
+SPONOR_LIST = f'/{SPONORS_NS}/{LIST}'
+SPONOR_LIST_NM = '{SPONORS_NS}_list'
+SPONOR_DETAILS = f'/{SPONORS_NS}/{DETAILS}'
 
 @api.route('/hello')
 class HelloWorld(Resource):
@@ -47,22 +60,52 @@ class DataList(Resource):
         return {DATA_LIST_NM: dtyp.get_data_types()}
 
 
-@api.route(f'{DATA_TYPE_DETAILS}/<data_type>')
+@api.route(f'{DATA_DETAILS}/<data_type>')
 class DataTypeDetails(Resource):
     """
-    This will get a list of data types.
+    This will return data details.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     def get(self, data_type):
         """
-        Returns a list of data types.
+        Returns data details.
         """
         dt = dtyp.get_data_type_details(data_type)
         if dt is not None:
             return {data_type: dtyp.get_data_type_details(data_type)}
         else:
             raise wz.NotFound(f'{data_type} not found.')
+
+
+@api.route(PROJECT_LIST)
+class ProjectList(Resource):
+    """
+    This will get a list of currrent projects.
+    """
+    def get(self):
+        """
+        Returns a list of current projects.
+        """
+        return {PROJECT_LIST_NM: pj.get_projects()}
+
+
+@api.route(f'{PROJECT_DETAILS}/<project>')
+class ProjectDetails(Resource):
+    """
+    This will get details on a project.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def get(self, project):
+        """
+        Returns a list of projects.
+        """
+        ct = pj.get_project_details(project)
+        if ct is not None:
+            return {project: pj.get_project_details(project)}
+        else:
+            raise wz.NotFound(f'{project} not found.')
 
 
 @api.route('/endpoints')
