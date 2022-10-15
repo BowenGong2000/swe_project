@@ -8,11 +8,11 @@ NUM_MEMBERS = 'num_members'
 # We expect the project database to change frequently:
 projects = {TEST_PROJECT_NAME:
             {NUM_MEMBERS: 7,
-            'Skill_requirement': 'math'},
+                'Skill_requirement': 'math'},
             'project2': {NUM_MEMBERS: 9,
-            'Skill_requirement': 'computer_science'},
+                'Skill_requirement': 'computer_science'},
             'project3': {NUM_MEMBERS: 6,
-            'Skill_requirement': 'design'},
+                'Skill_requirement': 'design'},
             }
 
 
