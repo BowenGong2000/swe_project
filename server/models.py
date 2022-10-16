@@ -58,3 +58,8 @@ def Password_Validation(Password):
     if len(Password) > 8:
         return True
     return False
+
+def Postlength_Validataion(Postinfo):
+    if len(Postinfo) < 500:
+        return True
+    return False
