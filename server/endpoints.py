@@ -113,14 +113,15 @@ class ProjectDetails(Resource):
             raise wz.NotFound(f'{project} not found.')
 
 
-project_fields = api.model('NewProject', {
-    'Name': fields.String,
-    'Department': fields.String,
-    'Number of members needed': fields.Integer,
-    'Major requirements': fields.String,
-    'School Year': fields.String,
-    'GPA': fields.Float,
-    'Duration': fields.Integer
+project_fields = api.model('NewProject1', {
+    pj.NAME: fields.String,
+    pj.NUM_MEMBERS: fields.Integer,
+    pj.DEPARTMENT: fields.String,
+    pj.MAJOR: fields.String,
+    pj.SCHOOL_YEAR: fields.String,
+    pj.GPA: fields.Float,
+    pj.DURATION: fields.String,
+    pj.SKILL: fields.String
 })
 
 
@@ -134,7 +135,14 @@ class AddProject(Resource):
         """
         Add a new project.
         """
-        return print(f'{request.json=}')
+        print(f'{request.json=}')
+        name = request.json[pj.NAME]
+        del request.json[pj.NAME]
+        pj.add_project(name, request.json)
+        return {MESSAGE: 'Project added.'}
+    
+    def get(self):
+        return {MESSAGE: 'Successfully added a new project.'}
 
 
 @api.route('/endpoints')
