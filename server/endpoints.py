@@ -140,6 +140,7 @@ class AddProject(Resource):
         del request.json[pj.NAME]
         pj.add_project(name, request.json)
         return {MESSAGE: 'Project added.'}
+
     def get(self):
         return {MESSAGE: 'Successfully added a new project.'}
 
