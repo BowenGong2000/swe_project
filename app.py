@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, request
 import pymongo
 import method
 
@@ -14,9 +14,20 @@ from server import routes
 def home():
   return render_template('user_login.html')
 
-# @app.route('/')
-# def home():
-#   return render_template('homepage.html')
+@app.route('/homepage')
+def homepage():
+  return render_template('/homepage.html')
+
+@app.route('/homepage_search', method=['GET', 'POST'])
+def homepage_search():
+  name = session['name']
+  email = session['phone']
+  phone = session['email']
+  key_word = request.form['key_word']
+
+  # unfinished
+
+  return render_template('/homepage.html')
 
 if __name__ == '__main__':    
     app.run(debug=True)
