@@ -22,9 +22,9 @@
     </div>
     <br>
     <h1>Search for you interests</h1>
-    <form action="some_function_name" method="POST">
-        <lable for="some_variable_name">Search for key words</lable>
-        <input type="text" name = "some _variable_name" placeholder="..." maxlength="20" required/> </br>
+    <form action="/homepge_search" method="POST">
+        <lable for="key_word">Search for key words</lable>
+        <input type="text" name = "key_word" placeholder="input keyword to search" maxlength="50" required/> </br>
 
     </form>
 
@@ -33,27 +33,23 @@
     {% if posts %}
     <table >
         <th>Topic</th>
-        <th>Number of helper needed</th>
-        <th>Requirements</th>
-        <th>Open Until</th>
-        <th>contact Info</th>
+        <th>Leader of the project</th>
+        <th>Open until</th>
+        <th>Subject/Major</th>
+        <th>Number of person needed</th>
+        <th>phone number</th>
+        <th>email</th>
     {% for line in posts %}
         <tr>
-            <td>some_variable_name</td>
-            <td>some_variable_name</td>
-            <td>some_variable_name</td>
-            <td>some_variable_name</td>
-            <td>some_variable_name</td>
+            <td>{{line['topic']}}</td>
+            <td>{{line['leader']}}</td>
+            <td>{{line['date']}}</td>
+            <td>{{line['subject']}}</td>
+            <td>{{line['need_person']}}</td>
+            <td>{{line['phone']}}</td>
+            <td>{{line['email']}}</td>
         </tr>
     {% end for %}
-
-    <h1>Sorted by Major</h1>
-    <p>Computer Science and Engineering</p>
-    <p>Electrical Engineering</p>
-    <p>Mechanical Engineering</p>
-    <p>Physics</p>
-    <p>Math</p>
-
     </table>
   </body>
 </html>
