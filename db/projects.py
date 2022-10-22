@@ -3,11 +3,10 @@ This module contains details about projects.
 """
 
 TEST_PROJECT_NAME = 'Test project'
-NAME = 'name'
 NUM_MEMBERS = 'num_members'
 DEPARTMENT = 'department_name'
 MAJOR = 'major_requirements'
-SCHOOL_YEAR = 'school_year'
+SCHOOL_YEAR = 'school_year_requirments'
 GPA = 'GPA'
 DURATION = 'work_duration'
 SKILL = 'skill requirements'
