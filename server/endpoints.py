@@ -120,7 +120,7 @@ project_fields = api.model('NewProject1', {
     pj.MAJOR: fields.String,
     pj.SCHOOL_YEAR: fields.String,
     pj.GPA: fields.Float,
-    pj.DURATION: fields.String,
+    pj.LENGTH: fields.String,
     pj.SKILL: fields.String
 })
 
