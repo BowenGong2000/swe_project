@@ -14,7 +14,7 @@ SKILL = 'skill requirements'
 
 # We expect the project database to change frequently:
 # This list contains our mandatory fields
-REQUIRED_FLDS = [NUM_MEMBERS, DEPARTMENT, MAJOR, SCHOOL_YEAR, SKILL]
+REQUIRED_FLDS = [NUM_MEMBERS, MAJOR, SCHOOL_YEAR, SKILL]
 projects = {TEST_PROJECT_NAME:
             {NUM_MEMBERS: 7,
                 DEPARTMENT: 'computer_engineering',
@@ -42,6 +42,17 @@ def get_project_details(project):
     return projects.get(project, None)
 
 
+def del_project(name):
+    del projects[name]
+
+
+def check_if_exist(name):
+    """
+    check whether or not a project exists.
+    """
+    return name in projects
+
+
 def add_project(name, details):
     if not isinstance(name, str):
         raise TypeError(f'Wrong type for name: {type(name)=}')
@@ -50,7 +61,9 @@ def add_project(name, details):
         raise TypeError(f'Wrong type for details: {type(details)=}')
 
     for field in REQUIRED_FLDS:
-        # check if missing any data for mandatory fields; if not, raise error
+        """
+        check if missing any data for mandatory fields; if not, raise error
+        """
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
     projects[name] = details

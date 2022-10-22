@@ -2,9 +2,12 @@
 import pytest
 
 import server.endpoints as ep
+import db.projects as pj
 
 TEST_CLIENT = ep.app.test_client()
 TEST_DATA_TYPE = 'Student'
+TEST_PROJECT_NAME = 'Test project'
+TEST_PROJECT  = pj.projects[TEST_PROJECT_NAME]
 
 def test_hello():
     """
@@ -12,6 +15,14 @@ def test_hello():
     """
     resp_json = TEST_CLIENT.get(ep.HELLO).get_json()
     assert isinstance(resp_json[ep.MESSAGE], str)
+
+def test_add_project():
+    """
+    see if adding project works properly.
+    """
+    resp = TEST_CLIENT.post(ep.PROJECT_ADD, json=TEST_PROJECT)
+    assert pj.check_if_exist(TEST_PROJECT_NAME)
+    pj.del_project(TEST_PROJECT_NAME)
 
 def test_get_DataList():
     """
