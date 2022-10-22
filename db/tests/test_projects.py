@@ -1,3 +1,4 @@
+import pytest
 
 import db.projects as pj
 
@@ -20,3 +21,18 @@ def test_add_project():
     pj.add_project(pj.TEST_PROJECT_NAME, details)
     assert pj.check_if_exist(pj.TEST_PROJECT_NAME)
     pj.del_project(pj.TEST_PROJECT_NAME)
+
+
+def test_add_wrong_name_type():
+    with pytest.raises(TypeError):
+        pj.add_project(7, {})
+
+
+def test_add_wrong_details_type():
+    with pytest.raises(TypeError):
+        pj.add_project('a new project', [])
+
+
+def test_add_missing_field():
+    with pytest.raises(ValueError):
+        pj.add_project('a new project', {'foo': 'bar'})
