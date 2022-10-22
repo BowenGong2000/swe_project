@@ -9,7 +9,7 @@ DEPARTMENT = 'department_name'
 MAJOR = 'major_requirements'
 SCHOOL_YEAR = 'school_year'
 GPA = 'GPA'
-DURATION = 'work_duration'
+LENGTH = 'project_duration'
 SKILL = 'skill requirements'
 
 # We expect the project database to change frequently:
@@ -21,7 +21,7 @@ projects = {TEST_PROJECT_NAME:
                 MAJOR: 'computer_science',
                 SCHOOL_YEAR: 'sophomore and beyond',
                 GPA: 3.5,
-                DURATION: '4 months',
+                LENGTH: '4 months',
                 SKILL: 'C++, python'},
             'project2':
             {NUM_MEMBERS: 9,
@@ -29,7 +29,7 @@ projects = {TEST_PROJECT_NAME:
                 MAJOR: 'mathematics',
                 SCHOOL_YEAR: 'sophomore and beyond',
                 GPA: 3.5,
-                DURATION: '6 months',
+                LENGTH: '6 months',
                 SKILL: 'advanced calculus, data modelling'},
             }
 

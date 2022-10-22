@@ -6,16 +6,28 @@ TEST_STUDENT_NAME = 'Test student'
 EMAIL = 'email'
 PHONE = 'phone'
 FULL_NAME = 'full_name'
+MAJOR = 'major'
+SCHOOL_YEAR = 'school_year'
+GPA = 'GPA'
+SKILL = 'skills'
 
 REQUIRED_FLDS = [EMAIL]
 students = {TEST_STUDENT_NAME:
             {EMAIL: 'a@nyu.com',
                 PHONE: '1111111111',
-                FULL_NAME: 'Farry Botter'},
-            'student2':
-            {EMAIL: 'b@nyu.com',
-                PHONE: '2222222222',
-                FULL_NAME: 'Pruce Rayne'}
+                FULL_NAME: 'Farry Botter',
+                MAJOR: 'Computer Science',
+                SCHOOL_YEAR: 'sophomore',
+                GPA: 3.5,
+                SKILL: 'C++, python'},
+            'student_2':
+            {EMAIL: 'a@nyu.com',
+                PHONE: '1111111111',
+                FULL_NAME: 'Farry Botter',
+                MAJOR: 'Computer Science',
+                SCHOOL_YEAR: 'sophomore',
+                GPA: 3.5,
+                SKILL: 'C++, python'},
             }
 
 
