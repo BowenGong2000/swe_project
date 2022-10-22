@@ -42,7 +42,7 @@ def check_if_exist(name):
 def main():
     sponsors = get_sponsors()
     print(f'{sponsors=}')
-    print(f'{get_sponsor_details(TEST_sponsor_NAME)=}')
+    print(f'{get_sponsor_details(TEST_SPONSOR_NAME)=}')
 
 
 if __name__ == '__main__':
