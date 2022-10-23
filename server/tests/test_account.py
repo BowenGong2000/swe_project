@@ -1,5 +1,5 @@
 
-import server.models as md
+import validation_method as md
 
 
 def test_User_Validation():

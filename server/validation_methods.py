@@ -1,0 +1,31 @@
+import pytest
+
+
+def Username_Validation(Username):
+    if len(Username) > 5:
+        return True
+    return False
+
+
+def Phone_Validation(Phone):
+    if isinstance(Phone, int) and len(str(Phone)) == 9:
+        return True
+    return False
+
+
+def Password_Validation(Password):
+    if len(Password) > 8:
+        return True
+    return False
+
+
+def Postlength_Validataion(Postinfo):
+    if len(Postinfo) < 500:
+        return True
+    return False
+
+
+def User_Validation(User):
+    ret = Password_Validation(User["Password"])
+    ret = ret and Username_Validation(User["name"])
+    return ret and Phone_Validation(User["phone"])
