@@ -70,4 +70,3 @@ def User_Validation(User):
     ret = Password_Validation(User["Password"])
     ret = ret and Username_Validation(User["name"])
     return ret and Phone_Validation(User["phone"])
-    
