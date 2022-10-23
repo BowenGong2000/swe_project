@@ -1,0 +1,8 @@
+run web test on mac and pip3:
+pip3 install -r requirements-dev.txt
+make dev_env
+bash local.sh
+
+run local test on mac:
+cd server/
+echo $PYTHONPATH

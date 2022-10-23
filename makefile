@@ -17,6 +17,8 @@ all_tests: FORCE
 dev_env: FORCE
 	pip install -r $(REQ_DIR)/requirements-dev.txt
 
+#my computer have pip3
+
 docs: FORCE
 	cd $(API_DIR); make docs
 	cd $(DB_DIR); make docs
