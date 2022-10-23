@@ -1,5 +1,3 @@
-import pytest
-
 
 def Username_Validation(Username):
     if len(Username) > 5:
