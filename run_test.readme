@@ -3,6 +3,20 @@ pip3 install -r requirements-dev.txt
 make dev_env
 bash local.sh
 
+run web test on mac and pip:
+pip install -r requirements-dev.txt
+make dev_env
+bash local.sh
+
 run local test on mac:
-cd server/
 echo $PYTHONPATH
+cd ~
+ . ./.bash_profile     
+cd server
+pytest tests/test_endpoints.py    
+
+
+git push the update:
+git add .  
+git commit -am "our web-template"  
+git push  
