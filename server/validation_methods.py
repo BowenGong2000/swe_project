@@ -6,7 +6,7 @@ def Username_Validation(Username):
 
 
 def Phone_Validation(Phone):
-    if isinstance(Phone, int) and len(str(Phone)) == 9:
+    if isinstance(int(Phone), int) and len(str(Phone)) == 9:
         return True
     return False
 
