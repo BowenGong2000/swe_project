@@ -1,5 +1,5 @@
 
-import validation_methods as md
+import server.validation_methods as md
 
 
 def test_User_Validation():
@@ -13,7 +13,4 @@ def test_User_Validation():
     "password": "Mark0445!"
     }
     testres = md.User_Validation(test_user)
-    print(testres)
     assert testres
-
-test_User_Validation()
