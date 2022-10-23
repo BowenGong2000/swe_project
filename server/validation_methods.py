@@ -24,6 +24,6 @@ def Postlength_Validataion(Postinfo):
 
 
 def User_Validation(User):
-    ret = Password_Validation(User["Password"])
+    ret = Password_Validation(User["password"])
     ret = ret and Username_Validation(User["name"])
     return ret and Phone_Validation(User["phone"])
