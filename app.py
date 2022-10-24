@@ -18,7 +18,7 @@ def home():
 def homepage():
   return render_template('/homepage.html')
 
-@app.route('/homepage_search', method=['GET', 'POST'])
+@app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():
   name = session['name']
   email = session['phone']
