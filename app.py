@@ -16,7 +16,7 @@ def home():
 
 @app.route('/homepage')
 def homepage():
-  return render_template('/homepage.html')
+  return render_template('homepage.html')
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():

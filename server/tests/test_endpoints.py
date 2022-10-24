@@ -24,7 +24,7 @@ def test_add_project():
     assert pj.check_if_exist(TEST_PROJECT_NAME)
     pj.del_project(TEST_PROJECT_NAME)
 
-def test_get_DataList():
+def test_get_DataList(): 
     """
     see if we can get data list properly
     Return should look like:
