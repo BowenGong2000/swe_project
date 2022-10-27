@@ -143,7 +143,7 @@ class AddProject(Resource):
 
     def get(self):
         """
-        Return the message if a project is added successuflly. (new project page)
+        Return the message if a project is added successuflly.
         """
         return {MESSAGE: 'Successfully added a new project.'}
 
