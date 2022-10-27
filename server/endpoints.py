@@ -104,10 +104,10 @@ class ProjectDetails(Resource):
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     def get(self, project):
         """
-        Returns a list of projects.
+        Returns the details of a specific project (in dictionary)
         """
-        ct = pj.get_project_details(project)
-        if ct is not None:
+        pjd = pj.get_project_details(project)
+        if pjd is not None:
             return {project: pj.get_project_details(project)}
         else:
             raise wz.NotFound(f'{project} not found.')
@@ -142,6 +142,9 @@ class AddProject(Resource):
         return {MESSAGE: 'Project added.'}
 
     def get(self):
+        """
+        Return the message if a project is added successuflly. (new project page)
+        """
         return {MESSAGE: 'Successfully added a new project.'}
 
 

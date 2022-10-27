@@ -24,6 +24,28 @@ def test_add_project():
     assert pj.check_if_exist(TEST_PROJECT_NAME)
     pj.del_project(TEST_PROJECT_NAME)
 
+def test_get_ProjectList(): 
+    """
+    see if we can get project list properly
+    should be store in a list and return a list
+    """
+    resp_json = TEST_CLIENT.get(ep.PROJECT_LIST).get_json()
+    assert isinstance(resp_json[ep.PROJECT_LIST_NM], list) 
+
+def test_get_ProjectList_not_empty():
+    """
+    see if the project list has something in it
+    """
+    resp_json = TEST_CLIENT.get(ep.PROJECT_LIST).get_json()
+    assert len(resp_json[ep.PROJECT_LIST_NM]) > 0
+
+def test_get_project_type_details():
+    """
+    see if we can get project details properly
+    """
+    resp_json = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS}/{TEST_PROJECT}').get_json()
+    assert isinstance(resp_json, dict)
+
 def test_get_DataList(): 
     """
     see if we can get data list properly

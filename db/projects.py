@@ -30,7 +30,7 @@ projects = {TEST_PROJECT_NAME:
                 SCHOOL_YEAR: 'sophomore and beyond',
                 GPA: 3.5,
                 LENGTH: '6 months',
-                SKILL: 'advanced calculus, data modelling'},
+                SKILL: 'advanced calculus, data modelling'}
             }
 
 
@@ -41,6 +41,8 @@ def get_projects():
 def get_project_details(project):
     return projects.get(project, None)
 
+def get_projects_dict():
+    return projects
 
 def del_project(name):
     del projects[name]
@@ -70,9 +72,18 @@ def add_project(name, details):
 
 
 def main():
-    projects = get_projects()
     print(f'{projects=}')
     print(f'{get_project_details(TEST_PROJECT_NAME)=}')
+    print()
+    print(projects[TEST_PROJECT_NAME])
+    print(get_project_details(TEST_PROJECT_NAME))
+
+    """
+    print a list of project name
+    """
+    lst = get_projects()
+    print(lst)
+
 
 
 if __name__ == '__main__':

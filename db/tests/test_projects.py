@@ -14,6 +14,12 @@ def test_get_project_details():
     assert isinstance(pj_dets, dict)
 
 
+def test_get_projects_dict():
+    pjs = pj.get_projects_dict()
+    assert isinstance(pjs, dict)
+    assert len(pjs) > 1
+
+
 def test_add_project():
     details = {}
     for field in pj.REQUIRED_FLDS:
