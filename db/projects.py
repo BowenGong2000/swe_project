@@ -41,8 +41,10 @@ def get_projects():
 def get_project_details(project):
     return projects.get(project, None)
 
+
 def get_projects_dict():
     return projects
+
 
 def del_project(name):
     del projects[name]
@@ -77,13 +79,11 @@ def main():
     print()
     print(projects[TEST_PROJECT_NAME])
     print(get_project_details(TEST_PROJECT_NAME))
-
     """
-    print a list of project name
+    print a list of project names
     """
     lst = get_projects()
     print(lst)
-
 
 
 if __name__ == '__main__':
