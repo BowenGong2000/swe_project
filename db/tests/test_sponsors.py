@@ -10,3 +10,9 @@ def test_get_sponsors():
 def test_get_sponsor_details():
     sp_dets = sp.get_sponsor_details(sp.TEST_SPONSOR_NAME)
     assert isinstance(sp_dets, dict)
+
+
+def test_get_sponsors_dict():
+    sps = sp.get_sponsors_dict()
+    assert isinstance(sps, dict)
+    assert len(sps) > 1

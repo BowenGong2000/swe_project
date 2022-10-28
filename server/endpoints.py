@@ -5,7 +5,8 @@ The endpoint called `endpoints` will return all available endpoints.
 
 from http import HTTPStatus
 from flask import Flask, request
-from flask_restx import Resource, Api, fields
+from flask_restx import Resource, Api, fields, Namespace
+
 import db.data_type as dtyp
 import db.projects as pj
 import werkzeug.exceptions as wz
@@ -13,20 +14,34 @@ import werkzeug.exceptions as wz
 app = Flask(__name__)
 api = Api(app)
 
+DATA_NS = 'data'
+PROJECTS_NS = 'projects'
+
+data_types = Namespace(DATA_NS, 'Data Types')
+api.add_namespace(data_types)
+projects = Namespace(PROJECTS_NS, 'Projects')
+api.add_namespace(projects)
+
 LIST = 'list'
 HELLO = '/hello'
 MESSAGE = 'message'
 DETAILS = 'details'
-DATA_NS = 'data'
 ADD = 'add'
-DATA_LIST = f'/{DATA_NS}/{LIST}'
-DATA_LIST_NM = '{DATA_NS}_list'
-DATA_DETAILS = f'/{DATA_NS}/{DETAILS}'
 
-PROJECTS_NS = 'projects'
-PROJECT_LIST = f'/{PROJECTS_NS}/{LIST}'
-PROJECT_LIST_NM = '{PROJECTS_NS}_list'
-PROJECT_DETAILS = f'/{PROJECTS_NS}/{DETAILS}'
+MAIN_MENU = '/main_menu'
+MAIN_MENU_NM = 'Main Menu'
+
+DATA_LIST = f'/{LIST}'
+DATA_LIST_NM = f'{DATA_NS}_list'
+DATA_LIST_W_NS = f'{DATA_NS}/{LIST}'
+DATA_DETAILS = f'/{DETAILS}'
+DATA_DETAILS_W_NS = f'{DATA_NS}/{DETAILS}'
+
+PROJECT_LIST = f'/{LIST}'
+PROJECT_LIST_NM = f'{PROJECTS_NS}_list'
+PROJECT_LIST_W_NS = f'{PROJECTS_NS}/{LIST}'
+PROJECT_DETAILS = f'/{DETAILS}'
+PROJECT_DETAILS_W_NS = f'{PROJECTS_NS}/{DETAILS}'
 PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 
 STUDENTS_NS = 'students'
@@ -53,7 +68,21 @@ class HelloWorld(Resource):
         return {MESSAGE: 'hello world'}
 
 
-@api.route(DATA_LIST)
+@api.route(MAIN_MENU)
+class MainMenu(Resource):
+    """
+    This will deliver our main menu.
+    """
+    def get(self):
+        """
+        Gets the main menu.
+        """
+        return {'Title': MAIN_MENU_NM,
+                'Default': 0,
+                'Choices': {}}
+
+
+@data_types.route(DATA_LIST)
 class DataList(Resource):
     """
     This will get a list of data names
@@ -65,7 +94,7 @@ class DataList(Resource):
         return {DATA_LIST_NM: dtyp.get_data_types()}
 
 
-@api.route(f'{DATA_DETAILS}/<data_type>')
+@data_types.route(f'{DATA_DETAILS}/<data_type>')
 class DataTypeDetails(Resource):
     """
     This will return data details.
@@ -83,7 +112,7 @@ class DataTypeDetails(Resource):
             raise wz.NotFound(f'{data_type} not found.')
 
 
-@api.route(PROJECT_LIST)
+@projects.route(PROJECT_LIST)
 class ProjectList(Resource):
     """
     This will get a list of currrent projects.
@@ -95,7 +124,7 @@ class ProjectList(Resource):
         return {PROJECT_LIST_NM: pj.get_projects()}
 
 
-@api.route(f'{PROJECT_DETAILS}/<project>')
+@projects.route(f'{PROJECT_DETAILS}/<project>')
 class ProjectDetails(Resource):
     """
     This will get details on a project.
@@ -125,7 +154,7 @@ project_fields = api.model('NewProject1', {
 })
 
 
-@api.route(PROJECT_ADD)
+@projects.route(PROJECT_ADD)
 class AddProject(Resource):
     """
     Add a new project.
