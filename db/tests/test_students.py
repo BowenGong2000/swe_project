@@ -35,3 +35,9 @@ def test_add_wrong_details_type():
 def test_add_missing_field():
     with pytest.raises(ValueError):
         std.add_student('a new student', {'foo': 'bar'})
+
+
+def test_get_students_dict():
+    stds = std.get_students_dict()
+    assert isinstance(stds, dict)
+    assert len(stds) > 1

@@ -9,7 +9,7 @@ from flask_restx import Resource, Api, fields, Namespace
 
 import db.data_type as dtyp
 import db.projects as pj
-import db.students as st
+import db.students as std
 import werkzeug.exceptions as wz
 
 app = Flask(__name__)
@@ -24,8 +24,11 @@ data_types = Namespace(DATA_NS, 'Data Types')
 api.add_namespace(data_types)
 projects = Namespace(PROJECTS_NS, 'Projects')
 api.add_namespace(projects)
+students = Namespace(STUDENTS_NS, 'Students')
+api.add_namespace(students)
 
 LIST = 'list'
+DICT = 'dict'
 HELLO = '/hello'
 MESSAGE = 'message'
 DETAILS = 'details'
@@ -47,11 +50,10 @@ PROJECT_DETAILS = f'/{DETAILS}'
 PROJECT_DETAILS_W_NS = f'{PROJECTS_NS}/{DETAILS}'
 PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 
-STUDENT_LIST = f'/{LIST}'
 STUDENT_LIST = f'/{STUDENTS_NS}/{LIST}'
 STUDENT_LIST_NM = f'{STUDENTS_NS}_list'
+STUDENT_LIST_W_NS = f'{STUDENTS_NS}/{LIST}'
 
-SPONSOR_LIST = f'/{LIST}'
 SPONSOR_LIST = f'/{SPONSORS_NS}/{LIST}'
 SPONSOR_LIST_NM = f'{SPONSORS_NS}_list'
 
@@ -179,7 +181,7 @@ class AddProject(Resource):
         return {MESSAGE: 'Successfully added a new project.'}
 
 
-@api.route(STUDENT_LIST)
+@students.route(STUDENT_LIST)
 class StudentList(Resource):
     """
     This will get a list of participating students.
@@ -188,7 +190,7 @@ class StudentList(Resource):
         """
         Returns a list of participating students.
         """
-        return {STUDENT_LIST_NM: st.get_students()}
+        return {STUDENT_LIST_NM: std.get_students()}
 
 
 @api.route('/endpoints')

@@ -57,6 +57,14 @@ def add_student(name, details):
     students[name] = details
 
 
+def get_students_dict():
+    return students
+
+
+def del_students(name):
+    del students[name]
+
+
 def main():
     students = get_students()
     print(f'{students=}')
