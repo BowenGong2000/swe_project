@@ -46,7 +46,7 @@ def test_get_project_type_details():
     resp_json = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_PROJECT}').get_json()
     assert isinstance(resp_json, dict)
 
-def test_get_StudentList(): 
+def test_get_student_list(): 
     """
     see if we can get student list properly
     should be store in a list and return a list
