@@ -9,8 +9,6 @@ TEST_CLIENT = ep.app.test_client()
 TEST_DATA_TYPE = 'Student'
 TEST_PROJECT_NAME = 'Test project'
 TEST_PROJECT  = pj.projects[TEST_PROJECT_NAME]
-TEST_STUDENT_NAME = 'Test student'
-TEST_STUDENT  = st.students[TEST_STUDENT_NAME]
 
 def test_hello():
     """
@@ -49,17 +47,6 @@ def test_get_project_type_details():
     resp_json = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_PROJECT}').get_json()
     assert isinstance(resp_json, dict)
 
-SAMPLE_STUDENT_NM = 'SampleStudent'
-SAMPLE_STUDENT = {
-    st.FULL_NAME: 'Sample User',
-    st.PHONE: 11111111,
-    st.EMAIL: 'xx@nyu.com',
-    st.MAJOR: 'CE',
-    st.SCHOOL_YEAR: 'Junior',
-    st.GPA: 3.9,
-    st.SKILL: 'design'
-}
-
 def test_get_student_list():
     """
     See if we can get a student list properly.
@@ -69,13 +56,6 @@ def test_get_student_list():
     resp = TEST_CLIENT.get(ep.STUDENT_LIST)
     resp_json = resp.get_json()
     assert isinstance(resp_json[ep.STUDENT_LIST_NM], list)
-
-def test_get_student_type_details():
-    """
-    see if we can get student details properly
-    """
-    resp_json = TEST_CLIENT.get(f'{ep.STUDENT_DETAILS_W_NS}/{TEST_STUDENT}').get_json()
-    assert isinstance(resp_json, dict)
 
 def test_get_DataList(): 
     """
