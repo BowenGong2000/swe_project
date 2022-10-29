@@ -17,6 +17,8 @@ api = Api(app)
 
 DATA_NS = 'data'
 PROJECTS_NS = 'projects'
+STUDENTS_NS = 'students'
+SPONSORS_NS = 'sponsors'
 
 data_types = Namespace(DATA_NS, 'Data Types')
 api.add_namespace(data_types)
@@ -45,14 +47,13 @@ PROJECT_DETAILS = f'/{DETAILS}'
 PROJECT_DETAILS_W_NS = f'{PROJECTS_NS}/{DETAILS}'
 PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 
-STUDENTS_NS = 'students'
 STUDENT_LIST = f'/{STUDENTS_NS}/{LIST}'
 STUDENT_LIST_NM = f'{STUDENTS_NS}_list'
-STUDENT_DETAILS = f'/{STUDENTS_NS}/{DETAILS}'
-SPONSORS_NS = 'sponsors'
+STUDENT_DETAILS_W_NS = f'/{STUDENTS_NS}/{DETAILS}'
+
 SPONSOR_LIST = f'/{SPONSORS_NS}/{LIST}'
 SPONSOR_LIST_NM = '{SPONSORS_NS}_list'
-SPONSOR_DETAILS = f'/{SPONSORS_NS}/{DETAILS}'
+SPONSOR_DETAILS_W_NS = f'/{SPONSORS_NS}/{DETAILS}'
 
 
 @api.route('/hello')
