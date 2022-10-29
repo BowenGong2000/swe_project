@@ -209,7 +209,6 @@ class StudentDetails(Resource):
 
 
 student_fields = api.model('NewStudent1', {
-    st.NAME: fields.String,
     st.FULL_NAME: fields.String,
     st.PHONE: fields.Integer,
     st.EMAIL: fields.String,
