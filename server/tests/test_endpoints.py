@@ -49,7 +49,6 @@ def test_get_project_type_details():
 
 SAMPLE_STUDENT_NM = 'SampleStudent'
 SAMPLE_STUDENT = {
-    st.NAME: SAMPLE_STUDENT_NM,
     st.FULL_NAME: 'Sample User',
     st.PHONE: 11111111,
     st.EMAIL: 'xx@nyu.com',
