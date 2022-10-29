@@ -201,7 +201,7 @@ class StudentDetails(Resource):
         """
         Returns the details of a specific student (in dictionary)
         """
-        stde = st.get_student_details(student))
+        stde = st.get_student_details(student)
         if stde is not None:
             return {student: st.get_student_details(student)}
         else:
