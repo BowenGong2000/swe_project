@@ -9,6 +9,7 @@ from flask_restx import Resource, Api, fields, Namespace
 
 import db.data_type as dtyp
 import db.projects as pj
+import db.students as st
 import werkzeug.exceptions as wz
 
 app = Flask(__name__)
@@ -46,7 +47,7 @@ PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 
 STUDENTS_NS = 'students'
 STUDENT_LIST = f'/{STUDENTS_NS}/{LIST}'
-STUDENT_LIST_NM = '{STUDENTS_NS}_list'
+STUDENT_LIST_NM = f'{STUDENTS_NS}_list'
 STUDENT_DETAILS = f'/{STUDENTS_NS}/{DETAILS}'
 SPONSORS_NS = 'sponsors'
 SPONSOR_LIST = f'/{SPONSORS_NS}/{LIST}'
@@ -175,6 +176,48 @@ class AddProject(Resource):
         Return the message if a project is added successuflly.
         """
         return {MESSAGE: 'Successfully added a new project.'}
+
+
+@api.route(STUDENT_LIST)
+class StudentList(Resource):
+    """
+    This will get a list of participating students.
+    """
+    def get(self):
+        """
+        Returns a list of participating students.
+        """
+        return {STUDENT_LIST_NM: st.get_students()}
+
+
+@api.route(f'{STUDENT_DETAILS}/<student>')
+class StudentDetails(Resource):
+    """
+    This will get details on a project.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def get(self, student):
+        """
+        Returns the details of a specific student (in dictionary)
+        """
+        stde = st.get_student_details(student))
+        if stde is not None:
+            return {student: st.get_student_details(student)}
+        else:
+            raise wz.NotFound(f'{student} not found.')
+
+
+student_fields = api.model('NewStudent1', {
+    st.NAME: fields.String,
+    st.FULL_NAME: fields.String,
+    st.PHONE: fields.Integer,
+    st.EMAIL: fields.String,
+    st.MAJOR: fields.String,
+    st.SCHOOL_YEAR: fields.String,
+    st.GPA: fields.Float,
+    st.SKILL: fields.String
+})
 
 
 @api.route('/endpoints')

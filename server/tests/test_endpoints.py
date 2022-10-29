@@ -3,6 +3,7 @@ import pytest
 
 import server.endpoints as ep
 import db.projects as pj
+import db.students as st
 
 TEST_CLIENT = ep.app.test_client()
 TEST_DATA_TYPE = 'Student'
@@ -44,6 +45,35 @@ def test_get_project_type_details():
     see if we can get project details properly
     """
     resp_json = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_PROJECT}').get_json()
+    assert isinstance(resp_json, dict)
+
+SAMPLE_STUDENT_NM = 'SampleStudent'
+SAMPLE_STUDENT = {
+    st.NAME: SAMPLE_STUDENT_NM,
+    st.FULL_NAME: 'Sample User',
+    st.PHONE: 11111111,
+    st.EMAIL: 'xx@nyu.com',
+    st.MAJOR: 'CE',
+    st.SCHOOL_YEAR: 'Junior',
+    st.GPA: 3.9,
+    st.SKILL: 'design'
+}
+
+def test_get_student_list():
+    """
+    See if we can get a student list properly.
+    Return should look like:
+        {STUDENT_LIST_NM: [list of students...]}
+    """
+    resp = TEST_CLIENT.get(ep.STUDENT_LIST)
+    resp_json = resp.get_json()
+    assert isinstance(resp_json[ep.STUDENT_LIST_NM], list)
+
+def test_get_student_type_details():
+    """
+    see if we can get student details properly
+    """
+    resp_json = TEST_CLIENT.get(f'{ep.STUDENT_DETAILS_W_NS}/{TEST_STUDENT}').get_json()
     assert isinstance(resp_json, dict)
 
 def test_get_DataList(): 
