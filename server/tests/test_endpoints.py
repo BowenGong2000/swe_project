@@ -9,6 +9,8 @@ TEST_CLIENT = ep.app.test_client()
 TEST_DATA_TYPE = 'Student'
 TEST_PROJECT_NAME = 'Test project'
 TEST_PROJECT  = pj.projects[TEST_PROJECT_NAME]
+TEST_STUDENT_NAME = 'Test student'
+TEST_STUDENT  = st.students[TEST_STUDENT_NAME]
 
 def test_hello():
     """
