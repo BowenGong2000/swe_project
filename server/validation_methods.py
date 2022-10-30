@@ -28,6 +28,7 @@ def User_Validation(User):
     ret = ret and Username_Validation(User["name"])
     return ret and Phone_Validation(User["phone"])
 
+
 def User_type(User):
     ret  = User["type"]
     return ret == 1 or ret == 0
