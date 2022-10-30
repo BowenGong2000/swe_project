@@ -30,5 +30,5 @@ def User_Validation(User):
 
 
 def User_type(User):
-    ret  = User["type"]
+    ret = User["type"]
     return ret == 1 or ret == 0
