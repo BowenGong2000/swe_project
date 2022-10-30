@@ -17,12 +17,16 @@ class User:
         '''
         print(request.form)
 
+        '''
+        type of user should be 1 for normal user 2 for manager account
+        '''
         user = {
             "_id": uuid.uuid4().hex,
             "name": request.form.get('name'),
             "email": request.form.get('email'),
             "phone": request.form.get('phone'),
-            "password": request.form.get('password')
+            "password": request.form.get('password'),
+            "type": 0
         }
 
         """
