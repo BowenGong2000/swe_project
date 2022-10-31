@@ -17,6 +17,7 @@
   --secondary: #CFD8DC;
   --secondary-dark: #B0BEC5;
   --red: #EF4836;
+  --nyu-purple:#57068c;
 }
 
 * {
@@ -30,7 +31,7 @@ body {
   font-size: 18px;
   line-height: 28px;
   color: var(--black);
-  background: var(--grey-light);
+  background: var(--nyu-purple);
 }
 
 /* Typography */
