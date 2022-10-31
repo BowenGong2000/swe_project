@@ -22,3 +22,35 @@ def test_postlength_validataion():
     """
     test_case = "project discription"
     return md.Postlength_Validataion(test_case)
+
+
+def test_User_Type():
+    """
+    check if User_type correctly get valid output
+    """
+    test_user = {
+    "name": "Mark123",
+    "email": "yw4111@nyu.edu",
+    "phone": "6467248912",
+    "password": "Mark0445!",
+    "color": "3",
+    "setting":{"color":1, "subscription": 0}
+    }
+    return if md.User_type(test_user) in [0,1]
+
+
+def test_User_Type():
+    """
+    check if Setting_type correctly get valid output
+    """
+    test_user = {
+    "name": "Mark123",
+    "email": "yw4111@nyu.edu",
+    "phone": "6467248912",
+    "password": "Mark0445!",
+    "color": "3",
+    "setting":{"color":1, "subscription": 0}
+    }
+    color, subscription = md.Setting_type(test_user)
+    ret = color in [0,1,2,3,4] and subscription in [0,1]
+    return ret

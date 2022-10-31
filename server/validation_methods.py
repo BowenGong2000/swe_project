@@ -31,4 +31,11 @@ def User_Validation(User):
 
 def User_type(User):
     ret = User["type"]
-    return ret == 1 or ret == 0
+    return ret
+
+
+def Setting_type(User):
+    setting = User["setting"]
+    color = setting["color"]
+    subscription = setting['subscription']
+    return [color, subscription]
