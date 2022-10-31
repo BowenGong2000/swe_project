@@ -27,7 +27,7 @@ class User:
             "phone": request.form.get('phone'),
             "password": request.form.get('password'),
             "type": 0,
-            "setting":{"color":0, "subscription": 0}
+            "setting": {"color": 0, "subscription": 0}
         }
 
         """
