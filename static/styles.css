@@ -156,12 +156,15 @@ label {
   outline: none;
   cursor: pointer;
   display: inline-block;
-  background: var(--primary);
+  background: var(--nyu-purple);
   transition: color .15s ease, background-color .15s ease;
 }
 
 .btn:hover {
-  background: var(--primary-dark);
+  border: 1px solid var(--nyu-purple);
+  color: var(--nyu-purple);
+  background: var(--white);
+
 }
 
 .btn--secondary {
