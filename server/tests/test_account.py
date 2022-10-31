@@ -33,7 +33,7 @@ def test_user_type():
     "email": "yw4111@nyu.edu",
     "phone": "6467248912",
     "password": "Mark0445!",
-    "color": "3",
+    "type": "3",
     "setting": {"color":1, "subscription": 0}
     }
     return md.User_type(test_user) in [0,1]
@@ -48,7 +48,7 @@ def test_setting_type():
     "email": "yw4111@nyu.edu",
     "phone": "6467248912",
     "password": "Mark0445!",
-    "color": "3",
+    "type": "3",
     "setting": {"color":1, "subscription": 0}
     }
     color, subscription = md.Setting_type(test_user)
