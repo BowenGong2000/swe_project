@@ -14,7 +14,7 @@ from server import routes
 def home():
   return render_template('user_login.html')
 
-@app.route('/homepage')
+@app.route('/homepage', methods = ['GET', 'POST'])
 def homepage():
   return render_template('homepage.html')
 

@@ -38,4 +38,4 @@ def Setting_type(User):
     setting = User["setting"]
     color = setting["color"]
     subscription = setting['subscription']
-    return [color, subscription]
+    return color, subscription
