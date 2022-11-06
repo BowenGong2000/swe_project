@@ -18,7 +18,7 @@ def home():
 def homepage():
   email = request.form['email']
   password = request.form['password']
-  #todo 
+  #todo method of account validation
   account_validation = True
   if account_validation:
     return render_template('homepage.html')
