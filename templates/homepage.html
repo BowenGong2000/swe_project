@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<style html>
+<!-- <style html>
     @import url(style.css);
     @import url(form.css);
-</style>
-<html>
-  <head>
-      <title>homepage</title>
+</style> -->
 
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/form.css">
       <header>
-        <div id="header">
-          <p>Project Name</p>
-        </div>  
+      <div id="header" class="right">
+        <a href="/add_project" class="btn">Add Project</a>
+      </div>
       </header>
   </head>
-
   <body>
+    
     <div>
         <header>
             <h1>Project Finder</h1>
@@ -25,7 +29,6 @@
     <form action="/homepge_search" method="POST">
         <lable for="key_word">Search for key words</lable>
         <input type="text" name = "key_word" placeholder="input keyword to search" maxlength="50" required/> </br>
-
     </form>
 
 
