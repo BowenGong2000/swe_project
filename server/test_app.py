@@ -1,5 +1,3 @@
-import pytest
-
 from app import app
 import db.projects as pj
 
