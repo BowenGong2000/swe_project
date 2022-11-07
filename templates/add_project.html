@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add your project</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/normalize.css">
+    <link rel="stylesheet" href="/static/styles.css">
+      <header>
+      <div id="header" class="left">
+        <a href="{{url_for('homepage') }}" class="btn">Home</a>
+        <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+      </div>
+      </header>
+  </head>
+
+<body>
+    <div class="card-wrapper">
+
+        <div class="card">
+    
+          <h1 class="center">Create an Project</h1>
+    
+          <form name="signup_form">
+    
+            <label for="name">Name</label>
+            <input type="text" name="name" class="field" required>
+    
+            <label for="email">Email</label>
+            <input type="email" name="email" class="field" required>
+    
+            <label for="phone">Phone</label>
+            <input type="phone" name="phone" class="field" required>
+    
+            <label for="password">Password</label>
+            <input type="password" name="password" class="field" required>
+    
+            <p class="error error--hidden"></p>
+    
+            <input type="submit" value="Sign Up" class="btn">
+          
+          </form>
+          
+        </div>
+      
+      </div>
+
+</body>
+</html>

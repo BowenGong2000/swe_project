@@ -16,13 +16,17 @@ def home():
 
 @app.route('/homepage', methods = ['GET', 'POST'])
 def homepage():
-  email = request.form['email']
-  password = request.form['password']
-  #todo method of account validation
+  # email = request.form['email']
+  # password = request.form['password']
+  # todo method of account validation
   account_validation = True
   if account_validation:
     return render_template('homepage.html')
   return render_template('user_login.html')
+
+@app.route('/add_project')
+def add_project():
+  return render_template('add_project.html')
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():

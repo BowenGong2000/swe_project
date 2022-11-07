@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/form.css">
       <header>
-      <div id="header" class="right">
-        <a href="/add_project" class="btn">Add Project</a>
+      <div id="header" class="left">
+        <a href="{{url_for('homepage') }}" class="btn">Home</a>
+        <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
       </div>
       </header>
   </head>
