@@ -24,9 +24,24 @@ def homepage():
     return render_template('homepage.html')
   return render_template('user_login.html')
 
-@app.route('/add_project')
+@app.route('/add_project', methods=['GET', 'POST'])
 def add_project():
-  return render_template('add_project.html')
+  if request.method == 'GET':
+    return render_template('add_project.html')
+  else:
+    project_details = (
+      request.form['name'],
+      request.form['member number'],
+      request.form['department'],
+      request.form['major'],
+      request.form['school year'],
+      request.form['gpa'],
+      request.form['length'],
+      request.form['skill'],
+      request.form['information']
+    )
+    print(project_details)
+    return render_template('add_p_success.html')
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():
