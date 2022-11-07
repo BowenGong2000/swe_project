@@ -1,7 +1,7 @@
-from app import app
+from app import app as ap
 import db.projects as pj
 
-TEST_CLIENT = app.test_client()
+TEST_CLIENT = ap.test_client()
 TEST_PROJECT_NAME = 'Test project'
 TEST_PROJECT = pj.projects[TEST_PROJECT_NAME]
 
