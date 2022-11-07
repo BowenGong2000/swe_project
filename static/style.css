@@ -33,7 +33,7 @@
 
 h1 {
   margin-top: 9px;
-  text-align: center;
+  /* text-align: center; */
   color: black;
   font-family: 'Kdam Thmor Pro', sans-serif;
   font-size: 20px;
