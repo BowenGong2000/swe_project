@@ -1,3 +1,5 @@
+import pytest
+
 import db.sponsors as sp
 
 
@@ -24,3 +26,18 @@ def test_add_sponsor():
         details[field] = 2
     sp.add_sponsor(sp.TEST_SPONSOR_NAME, details)
     assert sp.sponsor_exists(sp.TEST_SPONSOR_NAME)
+
+    
+def test_add_wrong_name_type():
+    with pytest.raises(TypeError):
+        sp.add_sponsor(7, {})
+
+
+def test_add_wrong_details_type():
+    with pytest.raises(TypeError):
+        sp.add_sponsor('a new sponsor', [])
+
+
+def test_add_missing_field():
+    with pytest.raises(ValueError):
+        sp.add_sponsor('a new sponsor', {'foo': 'bar'})
