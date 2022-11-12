@@ -16,3 +16,11 @@ def test_get_sponsors_dict():
     sps = sp.get_sponsors_dict()
     assert isinstance(sps, dict)
     assert len(sps) > 1
+
+
+def test_add_sponsor():
+    details = {}
+    for field in sp.REQUIRED_FLDS:
+        details[field] = 2
+    sp.add_sponsor(sp.TEST_SPONSOR_NAME, details)
+    assert sp.sponsor_exists(sp.TEST_SPONSOR_NAME)

@@ -36,11 +36,22 @@ def get_sponsors_dict():
     return sponsors
 
 
-def check_if_exist(name):
+def sponsor_exists(name):
     """
     check whether or not a sponsor name exists.
     """
     return name in sponsors
+
+
+def add_sponsor(name, details):
+    if not isinstance(name, str):
+        raise TypeError(f'Wrong type for name: {type(name)=}')
+    if not isinstance(details, dict):
+        raise TypeError(f'Wrong type for details: {type(details)=}')
+    for field in REQUIRED_FLDS:
+        if field not in details:
+            raise ValueError(f'Required {field=} missing from details.')
+    sponsors[name] = details
 
 
 def main():
