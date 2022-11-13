@@ -42,7 +42,10 @@ DATA_LIST_NM = f'{DATA_NS}_list'
 DATA_LIST_W_NS = f'{DATA_NS}/{LIST}'
 DATA_DETAILS = f'/{DETAILS}'
 DATA_DETAILS_W_NS = f'{DATA_NS}/{DETAILS}'
+
 PROJECT_DICT = f'/{DICT}'
+PROJECT_DICT_NM = f'{PROJECTS_NS}_dict'
+PROJECT_DICT_W_NS = f'{PROJECTS_NS}/{DICT}'
 
 PROJECT_LIST = f'/{LIST}'
 PROJECT_LIST_NM = f'{PROJECTS_NS}_list'
@@ -84,7 +87,14 @@ class MainMenu(Resource):
         """
         return {'Title': MAIN_MENU_NM,
                 'Default': 0,
-                'Choices': {}}
+                'Choices': {
+                    '1': {'url' : '/projects/dict',
+                          'method' : 'get',
+                          'text' : 'List Current Projects.'},
+                    '2': {'text': 'List Students.'},
+                    '3': {'text': 'List Sponsors.'},
+                    'X': {'text': 'Exit'},
+                }}
 
 
 @data_types.route(DATA_LIST)
@@ -117,14 +127,27 @@ class DataTypeDetails(Resource):
             raise wz.NotFound(f'{data_type} not found.')
 
 
-@projects.route(PROJECT_LIST)
-class ProjectList(Resource):
+@projects.route(PROJECT_DICT)
+class ProjectDict(Resource):
     """
-    This will get a list of currrent projects.
+    This will get currrent projects.
     """
     def get(self):
         """
-        Returns a list of current projects.
+        Returns current projects in dictionary.
+        """
+        return {'Data': pj.get_projects_dict(),
+                'Type' : 'Data',
+                'Title': 'Current Projects'}
+
+@projects.route(PROJECT_LIST)
+class ProjectDict(Resource):
+    """
+    This will get currrent projects in list.
+    """
+    def get(self):
+        """
+        Returns current projects in list.
         """
         return {PROJECT_LIST_NM: pj.get_projects()}
 

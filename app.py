@@ -1,11 +1,13 @@
 from flask import Flask, render_template, session, request
 import pymongo
 import method
-from flask_restx import fields, Namespace
+from flask_restx import Resource
 
 import db.projects as pj
 
 app = Flask(__name__)
+MAIN_MENU = '/main_menu'
+MAIN_MENU_NM = 'Main Menu'
 
 client = pymongo.MongoClient('mongodb+srv://tracyzhu0608:1234@cluster0.8pa03kh.mongodb.net/?retryWrites=true&w=majority', 27017)
 db = client.user_login_system
@@ -46,6 +48,19 @@ def add_project():
 @app.route('/my_project')
 def my_project():
   return render_template('my_project.html')
+
+@app.route(MAIN_MENU)
+class MainMenu(Resource):
+    """
+    This will deliver our main menu.
+    """
+    def get(self):
+        """
+        Gets the main menu.
+        """
+        return {'Title': MAIN_MENU_NM,
+                'Default': 0,
+                'Choices': {}}
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():

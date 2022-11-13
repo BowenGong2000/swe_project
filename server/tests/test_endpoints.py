@@ -16,13 +16,21 @@ def test_hello():
     resp_json = TEST_CLIENT.get(ep.HELLO).get_json()
     assert isinstance(resp_json[ep.MESSAGE], str)
 
-# def test_add_project():
-#     """
-#     see if adding project works properly.
-#     """
-#     resp = TEST_CLIENT.post(ep.PROJECT_ADD, json=TEST_PROJECT)
-#     assert pj.check_if_exist(TEST_PROJECT_NAME)
-#     pj.del_project(TEST_PROJECT_NAME)
+def test_add_project():
+    """
+    see if adding project works properly.
+    """
+    resp = TEST_CLIENT.post(ep.PROJECT_ADD, json=TEST_PROJECT)
+    assert pj.check_if_exist(TEST_PROJECT_NAME)
+    pj.del_project(TEST_PROJECT_NAME)
+
+def test_get_projects_dict():
+    """
+    see if we can get project properly in a dictionary
+    """
+    projects = pj.get_projects_dict()
+    assert isinstance(projects, dict)
+    assert len(projects) > 0
 
 def test_get_ProjectList(): 
     """
