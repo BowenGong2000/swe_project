@@ -10,6 +10,7 @@ from flask_restx import Resource, Api, fields, Namespace
 import db.data_type as dtyp
 import db.projects as pj
 import db.students as std
+import db.sponsors as sps
 import werkzeug.exceptions as wz
 
 app = Flask(__name__)
@@ -26,6 +27,8 @@ projects = Namespace(PROJECTS_NS, 'Projects')
 api.add_namespace(projects)
 students = Namespace(STUDENTS_NS, 'Students')
 api.add_namespace(students)
+sponsors = Namespace(SPONSORS_NS, 'Sponsors')
+api.add_namespace(sponsors)
 
 LIST = 'list'
 DICT = 'dict'
@@ -54,12 +57,13 @@ PROJECT_DETAILS = f'/{DETAILS}'
 PROJECT_DETAILS_W_NS = f'{PROJECTS_NS}/{DETAILS}'
 PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 
-STUDENT_LIST = f'/{LIST}'
-STUDENT_LIST_NM = f'{STUDENTS_NS}_list'
-STUDENT_LIST_W_NS = f'/{STUDENTS_NS}/{LIST}'
+STUDENT_DICT = f'/{DICT}'
+STUDENT_DICT_NM = f'{STUDENTS_NS}_dict'
+STUDENT_DICT_W_NS = f'{STUDENTS_NS}/{DICT}'
 
-SPONSOR_LIST = f'/{SPONSORS_NS}/{LIST}'
-SPONSOR_LIST_NM = f'{SPONSORS_NS}_list'
+SPONSOR_DICT = f'/{DICT}'
+SPONSOR_DICT_NM = f'{SPONSORS_NS}_dict'
+SPONSOR_DICT_W_NS = f'{SPONSORS_NS}/{DICT}'
 
 
 @api.route('/hello')
@@ -91,8 +95,12 @@ class MainMenu(Resource):
                     '1': {'url': '/projects/dict',
                           'method': 'get',
                           'text': 'List Current Projects.'},
-                    '2': {'text': 'List Students.'},
-                    '3': {'text': 'List Sponsors.'},
+                    '2': {'url': '/students/dict',
+                          'method': 'get',
+                          'text': 'List Students.'},
+                    '3': {'url': '/sponsors/dict',
+                          'method': 'get',
+                          'text': 'List Sponsors.'},
                     'X': {'text': 'Exit'},
                 }}
 
@@ -206,8 +214,8 @@ class AddProject(Resource):
         return {MESSAGE: 'Successfully added a new project.'}
 
 
-@students.route(STUDENT_LIST)
-class StudentList(Resource):
+@students.route(STUDENT_DICT)
+class StudentDict(Resource):
     """
     This will get a list of participating students.
     """
@@ -215,7 +223,23 @@ class StudentList(Resource):
         """
         Returns a list of participating students.
         """
-        return {STUDENT_LIST_NM: std.get_students()}
+        return {'Data': std.get_students_dict(),
+                'Type': 'Data',
+                'Title': 'Paricipating Students'}
+
+
+@sponsors.route(SPONSOR_DICT)
+class SponsorDict(Resource):
+    """
+    This will get a list of participating sponsors.
+    """
+    def get(self):
+        """
+        Returns a list of participating sponsors.
+        """
+        return {'Data': sps.get_sponsors_dict(),
+                'Type': 'Data',
+                'Title': 'Paricipating Sponsors'}
 
 
 @api.route('/endpoints')

@@ -24,6 +24,10 @@ def get_sponsors():
     return list(sponsors.keys())
 
 
+def get_sponsors_dict():
+    return sponsors
+
+
 def get_sponsor_details(sponsor):
     return sponsors.get(sponsor, None)
 

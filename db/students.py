@@ -34,6 +34,9 @@ students = {TEST_STUDENT_NAME:
 def get_students():
     return list(students.keys())
 
+def get_students_dict():
+    return students
+
 
 def get_student_details(student):
     return students.get(student, None)
