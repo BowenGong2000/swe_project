@@ -49,6 +49,10 @@ def add_project():
 def my_project():
   return render_template('my_project.html')
 
+@app.route('/user_homepage')
+def user_homepage():
+  return render_template('user_homepage.html')
+
 @app.route(MAIN_MENU)
 class MainMenu(Resource):
     """

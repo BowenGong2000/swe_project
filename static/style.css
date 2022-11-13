@@ -87,3 +87,25 @@ body {
 .center {
   text-align: left;
 }
+
+
+.user-area .dropdown-toggle {
+  position: relative;
+  z-index: 0; }
+  .user-area .dropdown-toggle:before {
+    content: "";
+    position: absolute;
+    right: -3px;
+    bottom: 10px;
+    background: #868e96;
+    width: 11px;
+    height: 11px;
+    border-radius: 100%;
+    border: 2px  solid white;
+    z-index: 1; }
+  .user-area .dropdown-toggle.active:before {
+    background: #49a342; }
+
+.rounded-circle {
+  max-width: 60px;
+  margin-top: 8px; }
