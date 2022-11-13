@@ -34,6 +34,7 @@ students = {TEST_STUDENT_NAME:
 def get_students():
     return list(students.keys())
 
+
 def get_students_dict():
     return students
 
@@ -58,10 +59,6 @@ def add_student(name, details):
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
     students[name] = details
-
-
-def get_students_dict():
-    return students
 
 
 def del_students(name):

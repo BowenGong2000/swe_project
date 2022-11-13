@@ -36,10 +36,6 @@ def del_sponsor(name):
     del sponsors[name]
 
 
-def get_sponsors_dict():
-    return sponsors
-
-
 def sponsor_exists(name):
     """
     check whether or not a sponsor name exists.
