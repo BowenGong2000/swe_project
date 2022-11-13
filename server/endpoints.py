@@ -88,9 +88,9 @@ class MainMenu(Resource):
         return {'Title': MAIN_MENU_NM,
                 'Default': 0,
                 'Choices': {
-                    '1': {'url' : '/projects/dict',
-                          'method' : 'get',
-                          'text' : 'List Current Projects.'},
+                    '1': {'url': '/projects/dict',
+                          'method': 'get',
+                          'text': 'List Current Projects.'},
                     '2': {'text': 'List Students.'},
                     '3': {'text': 'List Sponsors.'},
                     'X': {'text': 'Exit'},
@@ -137,11 +137,12 @@ class ProjectDict(Resource):
         Returns current projects in dictionary.
         """
         return {'Data': pj.get_projects_dict(),
-                'Type' : 'Data',
+                'Type': 'Data',
                 'Title': 'Current Projects'}
 
+
 @projects.route(PROJECT_LIST)
-class ProjectDict(Resource):
+class ProjectList(Resource):
     """
     This will get currrent projects in list.
     """
