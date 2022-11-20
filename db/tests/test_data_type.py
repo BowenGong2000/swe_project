@@ -13,11 +13,6 @@ def new_data_type():
     dtyp.del_data_type(NEW_DATA_TYPE)
 
 
-def test_get_data_type_dict():
-    assert isinstance(dtyp.get_data_type_dict(), list)
-    assert len(dtyp.get_data_type_dict()) > 1
-
-
 def test_get_data_type_details(new_data_type):
     details = dtyp.get_data_type_details(NEW_DATA_TYPE)
     assert isinstance(details, dict)
