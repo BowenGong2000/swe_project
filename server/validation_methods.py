@@ -42,7 +42,7 @@ def Setting_type(User):
 
 
 def account_validation(email, password):
-    #todo check validation with data base
-    #1 user, 2 manager, 0 invalid
-    #todo data base validatin
+    # todo check validation with data base
+    # 1 user, 2 manager, 0 invalid
+    # todo data base validatin
     return 1
