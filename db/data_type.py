@@ -19,8 +19,17 @@ def add_data_type(type_name, traits):
     data_types[type_name] = traits
 
 
+def del_data_type(type_name):
+    if data_type_exists(type_name):
+        del data_types[type_name]
+
+
 def data_type_exists(type_name):
     return type_name in data_types
+
+
+def get_data_type_dict():
+    return data_types
 
 
 def get_data_types():
