@@ -72,7 +72,7 @@ def homepage_search():
   email = session['phone']
   phone = session['email']
   key_word = request.form['key_word']
-
+  
   # if key_word != None:
     # execute something that returns everything related to the keyword
     
