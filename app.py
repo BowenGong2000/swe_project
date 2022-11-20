@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request
 import pymongo
-import method
+import method as mth
 from flask_restx import Resource
 
 import db.projects as pj
@@ -21,17 +21,23 @@ def home():
 
 @app.route('/homepage', methods = ['GET', 'POST'])
 def homepage():
-  account_validation = True
+  #account_validation = 1 user, 2 manager, 0 invalid
   email = request.form['email']
   password = request.form['password']
-
   #todo password encode
-  
   #todo account validation
+  account_type = mth.account_validation(email, password)
 
-  if account_validation:
+  if account_type == 1:
     return render_template('homepage.html')
+  elif account_type == 2:
+    return render_template('manager_homepage.html')
   return render_template('user_login.html')
+
+@app.route('/homepage_local', methods=['GET', 'POST'])
+def homepage_local():
+  #todo return homepage base on account passed in through url
+  return render_template('homepage.html')
 
 @app.route('/add_project', methods=['GET', 'POST'])
 def add_project():

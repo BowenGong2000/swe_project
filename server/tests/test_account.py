@@ -54,3 +54,9 @@ def test_setting_type():
     color, subscription = md.Setting_type(test_user)
     ret = color in [0,1,2,3,4] and subscription in [0,1]
     return ret
+
+
+def account_validation():
+    test_user = ['yw4177@nyu.edu', '1806']
+    test_manager = ['sc7730@nyu.edu', '1806']
+    return md.account_validation(test_user[0], test_user[1]) == 1
