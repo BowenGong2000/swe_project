@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<style html>
+    @import url(style.css);
+    @import url(form.css);
+</style>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/form.css">
+      <header>
+      <div id="header" class="left">
+        <a href="{{url_for('homepage') }}" class="btn">Home</a>
+        <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+        <a href="{{url_for('my_project') }}" class="btn">My Project</a>
+        <a href="{{url_for('user_homepage') }}" class="btn">Account</a>
+      </div>
+      
+      </div>
+      </header>
+  </head>
+  <body>
+    
+    <div>
+        <header>
+            <h1>Project Finder</h1>
+        </header>
+    </div>
+    <br>
+    <h1>Search for you interests</h1>
+    <form action="/homepge_search" method="POST">
+        <lable for="key_word">Search for key words</lable>
+        <input type="text" name = "key_word" placeholder="input keyword to search" maxlength="50" required/> </br>
+    </form>
+
+
+    <h1>Recent Activities/Projects</h1>
+    {% if posts %}
+    <table >
+        <th>Topic</th>
+        <th>Leader of the project</th>
+        <th>Open until</th>
+        <th>Subject/Major</th>
+        <th>Number of person needed</th>
+        <th>phone number</th>
+        <th>email</th>
+    {% for line in posts %}
+        <tr>
+            <td>{{line['topic']}}</td>
+            <td>{{line['leader']}}</td>
+            <td>{{line['date']}}</td>
+            <td>{{line['subject']}}</td>
+            <td>{{line['need_person']}}</td>
+            <td>{{line['phone']}}</td>
+            <td>{{line['email']}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+  </body>
+</html>

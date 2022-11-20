@@ -22,6 +22,13 @@ def home():
 @app.route('/homepage', methods = ['GET', 'POST'])
 def homepage():
   account_validation = True
+  email = request.form['email']
+  password = request.form['password']
+
+  #todo password encode
+  
+  #todo account validation
+
   if account_validation:
     return render_template('homepage.html')
   return render_template('user_login.html')
