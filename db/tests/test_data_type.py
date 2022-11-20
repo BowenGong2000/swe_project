@@ -2,7 +2,7 @@ import pytest
 
 import db.data_type as dtyp
 
-NEW_DATA_TYPE = 'Student'
+NEW_DATA_TYPE = 'Student_in_waitlist'
 DEF_TRAITS = {'email': 'xxx@nyu.edu', 'phone': 'xxxxxxxx'}
 
 
@@ -11,6 +11,11 @@ def new_data_type():
     dtyp.add_data_type(NEW_DATA_TYPE, DEF_TRAITS)
     yield
     dtyp.del_data_type(NEW_DATA_TYPE)
+
+
+def test_get_data_type_dict():
+    assert isinstance(dtyp.get_data_type_dict(), list)
+    assert len(dtyp.get_data_type_dict()) > 1
 
 
 def test_get_data_type_details(new_data_type):

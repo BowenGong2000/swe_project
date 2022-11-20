@@ -28,6 +28,10 @@ def data_type_exists(type_name):
     return type_name in data_types
 
 
+def get_data_type_dict():
+    return data_types
+
+
 def get_data_types():
     return list(data_types.keys())
 
