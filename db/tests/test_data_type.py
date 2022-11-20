@@ -15,16 +15,16 @@ def test_get_data_type_details():
     assert isinstance(details, dict)
 
 
-def test_add_data_type(new_data_type):
+def test_add_data_type():
     assert dtyp.data_type_exists(NEW_DATA_TYPE)
 
 
-def test_add_data_type_dup(new_data_type):
+def test_add_data_type_dup():
     with pytest.raises(ValueError):
         dtyp.add_data_type(NEW_DATA_TYPE, DEF_TRAITS)
 
 
-def test_data_type_exists(new_data_type):
+def test_data_type_exists():
     assert dtyp.data_type_exists(NEW_DATA_TYPE)
 
 
