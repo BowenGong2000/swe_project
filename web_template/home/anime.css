@@ -54,7 +54,6 @@ body {
     width: 30px;
     height: 30px;
     background: #222;
-    /* left: calc(100% - 15px); */
     left: -100%;
     transform: translateY(-50%) rotate(45deg);
 }
