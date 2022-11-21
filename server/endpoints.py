@@ -60,6 +60,8 @@ PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 STUDENT_DICT = f'/{DICT}'
 STUDENT_DICT_NM = f'{STUDENTS_NS}_dict'
 STUDENT_DICT_W_NS = f'{STUDENTS_NS}/{DICT}'
+STUDENT_DETAILS = f'/{DETAILS}'
+STUDENT_DETAILS_W_NS = f'{STUDENTS_NS}/{DETAILS}'
 
 SPONSOR_DICT = f'/{DICT}'
 SPONSOR_DICT_NM = f'{SPONSORS_NS}_dict'
@@ -108,11 +110,11 @@ class MainMenu(Resource):
 @data_types.route(DATA_LIST)
 class DataList(Resource):
     """
-    This will get a list of data names
+    This will get a list of data types: e.g project, student...
     """
     def get(self):
         """
-        Return a list of data names
+        Return a list of data types
         """
         return {DATA_LIST_NM: dtyp.get_data_types()}
 
@@ -226,6 +228,24 @@ class StudentDict(Resource):
         return {'Data': std.get_students_dict(),
                 'Type': 'Data',
                 'Title': 'Paricipating Students'}
+
+
+@students.route(f'{STUDENT_DETAILS}/<student>')
+class StudentDetails(Resource):
+    """
+    This will get details on a student.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def get(self, student):
+        """
+        Returns the details of a specific student (in dictionary)
+        """
+        std_d = std.get_student_details(student)
+        if std_d is not None:
+            return {student: std.get_student_details(student)}
+        else:
+            raise wz.NotFound(f'{student} not found.')
 
 
 @sponsors.route(SPONSOR_DICT)
