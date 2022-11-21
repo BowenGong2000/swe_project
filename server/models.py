@@ -1,13 +1,19 @@
 """
 This file contain the functions and class for flask app.
 """
-import uuid
-from flask import jsonify, request
-from app import db
+from flask import jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
+from app import db
+import uuid
 
 
 class User:
+    def start_session(self, user):
+        del user['password']
+        session['logged_in'] = True
+        session['user'] = user
+        return jsonify(user), 200
+
     """
     info of user
     """
@@ -24,10 +30,7 @@ class User:
             "_id": uuid.uuid4().hex,
             "name": request.form.get('name'),
             "email": request.form.get('email'),
-            "phone": request.form.get('phone'),
-            "password": request.form.get('password'),
-            "type": 0,
-            "setting": {"color": 0, "subscription": 0}
+            "password": request.form.get('password')
         }
 
         """
@@ -42,6 +45,24 @@ class User:
             return jsonify({"error": "Email address already existed"}), 400
 
         if db.users.insert_one(user):
-            return jsonify(user), 200
+            return self.start_session(user)
 
         return jsonify({"error": "Signup failed"}), 400
+
+    def signout(self):
+        session.clear()
+        return redirect('/')
+
+    def login(self):
+
+        user = db.users.find_one({
+            "email": request.form.get('email')
+        })
+
+        pwd_db = user['password']
+        pwd_ipt = request.form.get('password')
+        check = pbkdf2_sha256.verify(pwd_ipt, pwd_db)
+
+        if user and check:
+            return self.start_session(user)
+        return jsonify({"error": "Invalid login credentials"}), 401
