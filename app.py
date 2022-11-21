@@ -1,16 +1,27 @@
-from flask import Flask, render_template, session, request
+from flask import Flask, render_template, session, request, redirect
 import pymongo
 import method as mth
 from flask_restx import Resource
+from functools import wraps
 
 import db.projects as pj
 
 app = Flask(__name__)
-MAIN_MENU = '/main_menu'
-MAIN_MENU_NM = 'Main Menu'
+app.secret_key = 'hskfakgkajgalg' #random key
 
+#Database
 client = pymongo.MongoClient('mongodb+srv://tracyzhu0608:1234@cluster0.8pa03kh.mongodb.net/?retryWrites=true&w=majority', 27017)
 db = client.user_login_system
+
+# Decorators
+def login_required(f):
+  @wraps(f)
+  def wrap(*args, **kwargs):
+    if 'logged_in' in session:
+      return f(*args, **kwargs)
+    else:
+      return redirect('/')
+  return wrap
 
 # Routes
 from server import routes
@@ -20,11 +31,14 @@ def home():
   return render_template('user_login.html')
 
 @app.route('/homepage', methods = ['GET', 'POST'])
+@login_required
 def homepage():
+  return render_template('homepage.html')
+
   #account_validation = 1 user, 2 manager, 0 invalid
   email = request.form['email']
   password = request.form['password']
-  #todo password encode
+  #todo password encode (i think it is done in 'model.py')
   #todo account validation
   account_type = mth.account_validation(email, password)
 
@@ -65,19 +79,6 @@ def my_project():
 @app.route('/user_homepage')
 def user_homepage():
   return render_template('user_homepage.html')
-
-@app.route(MAIN_MENU)
-class MainMenu(Resource):
-    """
-    This will deliver our main menu.
-    """
-    def get(self):
-        """
-        Gets the main menu.
-        """
-        return {'Title': MAIN_MENU_NM,
-                'Default': 0,
-                'Choices': {}}
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():
