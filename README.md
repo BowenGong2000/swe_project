@@ -28,6 +28,7 @@ Project Setup Update:
     sed -i -e 's/\r$//' run.sh
 5. run command
     ./run.sh
+Go to http://127.0.0.1:5000
 The login and register page should appears. 
 
 
