@@ -1,7 +1,7 @@
 """
 This file contain the functions and class for flask app.
 """
-from flask import Flask, jsonify, request, session, redirect
+from flask import jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
 from app import db
 import uuid
@@ -13,7 +13,7 @@ class User:
         session['logged_in'] = True
         session['user'] = user
         return jsonify(user), 200
-    
+
     """
     info of user
     """
@@ -47,19 +47,19 @@ class User:
         if db.users.insert_one(user):
             return self.start_session(user)
 
-        return jsonify({ "error": "Signup failed" }), 400
+        return jsonify({"error": "Signup failed"}), 400
 
     def signout(self):
         session.clear()
         return redirect('/')
-    
+
     def login(self):
 
         user = db.users.find_one({
             "email": request.form.get('email')
         })
 
-        if user and pbkdf2_sha256.verify(request.form.get('password'), user['password']):
+        info = pbkdf2_sha256.verify(request.form.get('password'), user['password'])
+        if user and info:
             return self.start_session(user)
-        
-        return jsonify({ "error": "Invalid login credentials" }), 401
+        return jsonify({"error": "Invalid login credentials"}), 401
