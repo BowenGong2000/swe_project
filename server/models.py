@@ -59,7 +59,10 @@ class User:
             "email": request.form.get('email')
         })
 
-        info = pbkdf2_sha256.verify(request.form.get('password'), user['password'])
-        if user and info:
+        pwd_db = user['password']
+        pwd_ipt = request.form.get('password')
+        check = pbkdf2_sha256.verify(pwd_ipt, pwd_db)
+
+        if user and check:
             return self.start_session(user)
         return jsonify({"error": "Invalid login credentials"}), 401
