@@ -180,3 +180,8 @@ input[type=submit] {
   margin: 34px auto 24px;
   display: block;
 }
+
+.highlight {
+  background: var(--nyu-purple);
+  transition: color .15s ease, background-color .15s ease;
+}
