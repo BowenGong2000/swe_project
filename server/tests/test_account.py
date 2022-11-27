@@ -60,3 +60,14 @@ def account_validation():
     test_user = ['yw4177@nyu.edu', '1806']
     test_manager = ['sc7730@nyu.edu', '1806']
     return md.account_validation(test_user[0], test_user[1]) == 1
+
+
+def manager_info_validation():
+    lst = ['account', 'application_title', 
+    'application_content', 'application_email', 
+    'application_major', 'application_school']
+    test_info = md.manager_info("yw4177@nyu.edu")
+    for ele in lst:
+        if ele not in test_info:
+            return False
+    return True

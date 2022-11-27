@@ -46,3 +46,15 @@ def account_validation(email, password):
     # 1 user, 2 manager, 0 invalid
     # todo data base validatin
     return 1
+
+
+def manager_info(email):
+    #todo return manager info from db to view
+    infos = {}
+    infos['account']=""
+    infos['application_title'] = ""
+    infos['application_content'] = ""
+    infos['application_email'] = ""
+    infos['application_major'] = ""
+    infos['application_school'] = ""
+    return infos

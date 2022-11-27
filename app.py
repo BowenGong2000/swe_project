@@ -33,19 +33,19 @@ def home():
 @app.route('/homepage', methods = ['GET', 'POST'])
 @login_required
 def homepage():
-  return render_template('homepage.html')
-
   #account_validation = 1 user, 2 manager, 0 invalid
   email = request.form['email']
   password = request.form['password']
   #todo password encode (i think it is done in 'model.py')
   #todo account validation
   account_type = mth.account_validation(email, password)
-
+  
   if account_type == 1:
     return render_template('homepage.html')
   elif account_type == 2:
-    return render_template('manager_homepage.html')
+    #todo function that inplement info for manager count into dict_manager
+    dict_manager = mth.manager_info(email)
+    return render_template('manager_homepage.html', info = dict_manager)
   return render_template('user_login.html')
 
 @app.route('/homepage_local', methods=['GET', 'POST'])
