@@ -49,7 +49,7 @@ def account_validation(email, password):
 
 
 def manager_info(email):
-    #todo return manager info from db to view
+    # todo return manager info from db to view
     infos = {}
     infos['account']=""
     infos['application_title'] = ""
