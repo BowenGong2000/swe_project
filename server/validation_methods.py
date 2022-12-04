@@ -62,7 +62,7 @@ def manager_info(email):
 
 def manager_acent(email, password, project_name):
     if account_validation(email, password):
-    # todo email sending 
-    # todo add accent info to database
+        # todo email sending 
+        # todo add accent info to database
         return True
     return False
