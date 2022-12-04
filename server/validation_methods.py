@@ -58,3 +58,10 @@ def manager_info(email):
     infos['application_major'] = ""
     infos['application_school'] = ""
     return infos
+
+def manager_acent(email, password, project_name):
+    if account_validation(email, password):
+    #todo email sending 
+    #todo add accent info to database
+        return True
+    return False
