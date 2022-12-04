@@ -59,6 +59,7 @@ def manager_info(email):
     infos['application_school'] = ""
     return infos
 
+
 def manager_acent(email, password, project_name):
     if account_validation(email, password):
     # todo email sending 
