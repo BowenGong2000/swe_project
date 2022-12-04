@@ -1,6 +1,6 @@
 # This is a workflow to test and deploy our demo app.
 
-name: Demo CI/CD
+name: CI/CD
 
 # Controls when the workflow will run
 on:
@@ -31,7 +31,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install Python packages.
-        run: pip install -r requirements-dev.txt
+        run: make dev_env
 
       - name: Run Python tests.
         run: make all_tests

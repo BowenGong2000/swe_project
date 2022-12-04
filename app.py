@@ -33,6 +33,7 @@ def home():
 @app.route('/homepage', methods = ['GET', 'POST'])
 @login_required
 def homepage():
+  return render_template('homepage.html')
   #account_validation = 1 user, 2 manager, 0 invalid
   email = request.form['email']
   password = request.form['password']
