@@ -365,16 +365,7 @@ for (let i = 0; i < tabHeaders.length; i++) {
 
 //catation: https://www.youtube.com/watch?v=M6jT6Mg-fgA&ab_channel=Codegrid
 
-var blocks = document.getElementsByClassName("block");
-var container = document.getElementsByClassName("container");
-var hs = new HorizontalScroll.default({
-    blocks: blocks,
-    container: container,
-    isAnimated: true,
-    springEffect: 0.9,
-});
 
-let head = 0;
 
 
 document.getElementById("head1").onclick = function() {
@@ -418,7 +409,16 @@ function sethead4() {
 
 }
 
+var blocks = document.getElementsByClassName("block");
+var container = document.getElementsByClassName("container");
+var hs = new HorizontalScroll.default({
+    blocks: blocks,
+    container: container,
+    isAnimated: true,
+    springEffect: 0.9,
+});
 
+let head = 0;
 
 
 var blocks = document.getElementsByClassName("blocksecond");
@@ -445,79 +445,3 @@ var hs = new HorizontalScroll.default({
 
 
 
-
-let weapon = 0
-
-document.getElementById("weapon1").onclick = function() {
-    setweapon1()
-};
-
-
-function setweapon1() {
-    weapon = 1;
-
-}
-
-
-document.getElementById("weapon2").onclick = function() {
-    setweapon2()
-};
-
-
-function setweapon2() {
-    weapon = 2;
-
-}
-
-document.getElementById("weapon3").onclick = function() {
-    setweapon3()
-};
-
-
-function setweapon3() {
-    weapon = 3;
-
-}
-
-document.getElementById("weapon4").onclick = function() {
-    setweapon4()
-};
-
-
-function setweapon4() {
-    weapon = 4;
-
-}
-
-
-function myFunction() {
-    if (head == 1 && weapon == 1) {
-        document.getElementById("myImg").src = "result11.png";
-    }
-    if (head == 1 && weapon == 2) {
-        document.getElementById("myImg").src = "result12.png";
-    }
-    if (head == 1 && weapon == 3) {
-        document.getElementById("myImg").src = "result13.png";
-    }
-
-    if (head == 2 && weapon == 1) {
-        document.getElementById("myImg").src = "result21.png";
-    }
-    if (head == 2 && weapon == 2) {
-        document.getElementById("myImg").src = "result22.png";
-    }
-    if (head == 2 && weapon == 3) {
-        document.getElementById("myImg").src = "result23.png";
-    }
-
-    if (head == 3 && weapon == 1) {
-        document.getElementById("myImg").src = "result31.png";
-    }
-    if (head == 3 && weapon == 2) {
-        document.getElementById("myImg").src = "result32.png";
-    }
-    if (head == 3 && weapon == 3) {
-        document.getElementById("myImg").src = "result33.png";
-    }
-}
