@@ -82,6 +82,7 @@ def add_project(name, details):
     doc[PROJECT_KEY] = name
     return dbc.insert_one(PROJECTS_COLLECT, doc)
 
+
 def main():
     print('Getting projects as a list:')
     projects = get_projects()
