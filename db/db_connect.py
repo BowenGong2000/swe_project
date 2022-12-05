@@ -8,7 +8,9 @@ LOCAL = "1"
 PROJECT_DB = 'projectdb'
 
 client = None
-
+"""
+This module contains all methods to interact with the PROJECT_DB.
+"""
 
 def connect_db():
     """
@@ -23,6 +25,9 @@ def connect_db():
 
 
 def fetch_all(collection, db=PROJECT_DB):
+    """
+    Find all docs within the DB and reuturn in list
+    """
     ret = []
     for doc in client[db][collection].find():
         ret.append(doc)
@@ -30,8 +35,26 @@ def fetch_all(collection, db=PROJECT_DB):
 
 
 def fetch_all_as_dict(key, collection, db=PROJECT_DB):
+    """
+    Find all docs and reuturn in dict {key : name}
+    """
     ret = {}
     for doc in client[db][collection].find():
         del doc['_id']
         ret[doc[key]] = doc
     return ret
+
+
+def insert_one(collection, doc, db=PROJECT_DB):
+    """
+    Insert a single doc into collection.
+    """
+    client[db][collection].insert_one(doc)
+
+
+def fetch_one(collection, filt, db=PROJECT_DB):
+    """
+    Find with a filter and return on the first doc found.
+    """
+    for doc in client[db][collection].find(filt):
+        return doc
