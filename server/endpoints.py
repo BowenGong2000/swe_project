@@ -122,7 +122,7 @@ class DataList(Resource):
         """
         Return a list of data types
         """
-        return {DATA_LIST_NM: dtyp.get_char_types()}
+        return {DATA_LIST_NM: dtyp.get_data_types()}
 
 
 @data_types.route(f'{DATA_DETAILS}/<data_type>')
@@ -143,6 +143,18 @@ class DataTypeDetails(Resource):
             raise wz.NotFound(f'{data_type} not found.')
 
 
+@projects.route(PROJECT_LIST)
+class ProjectList(Resource):
+    """
+    This will get currrent projects in list.
+    """
+    def get(self):
+        """
+        Returns current projects in list.
+        """
+        return {PROJECT_LIST_NM: pj.get_projects()}
+
+
 @projects.route(PROJECT_DICT)
 class ProjectDict(Resource):
     """
@@ -155,18 +167,6 @@ class ProjectDict(Resource):
         return {'Data': pj.get_projects_dict(),
                 'Type': 'Data',
                 'Title': 'Current Projects'}
-
-
-@projects.route(PROJECT_LIST)
-class ProjectList(Resource):
-    """
-    This will get currrent projects in list.
-    """
-    def get(self):
-        """
-        Returns current projects in list.
-        """
-        return {PROJECT_LIST_NM: pj.get_projects()}
 
 
 @projects.route(f'{PROJECT_DETAILS}/<project>')
@@ -220,6 +220,12 @@ class AddProject(Resource):
         Return the message if a project is added successuflly.
         """
         return {MESSAGE: 'Successfully added a new project.'}
+
+
+@students.route(STUDENT_LIST)
+class StudentList(Resource):
+    def get(self):
+        return {STUDENT_LIST_NM: std.get_students()}
 
 
 @students.route(STUDENT_DICT)
