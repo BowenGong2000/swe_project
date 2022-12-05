@@ -1,5 +1,3 @@
-import db.db_connect as dbc
-
 """
 This module contains details about projects.
 """

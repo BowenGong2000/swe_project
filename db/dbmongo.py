@@ -1,5 +1,5 @@
 """
-#todo 
+#todo
 This module includes some of the prelimilary testing operations
 """
 from pymongo import MongoClient
