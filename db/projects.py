@@ -65,6 +65,7 @@ def check_if_exist(name):
 
 
 def add_project(name, details):
+    doc = details
     if not isinstance(name, str):
         raise TypeError(f'Wrong type for name: {type(name)=}')
 
@@ -77,7 +78,9 @@ def add_project(name, details):
         """
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
-    projects[name] = details
+    dbc.connect_db()
+    doc[PROJECT_KEY] = name
+    return dbc.insert_one(PROJECTS_COLLECT, doc)
 
 
 def main():

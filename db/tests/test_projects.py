@@ -41,12 +41,7 @@ def test_get_projects_dict():
 
 
 def test_add_project():
-    details = {}
-    for field in pj.REQUIRED_FLDS:
-        details[field] = 'TEST'
-    pj.add_project(pj.TEST_PROJECT_NAME, details)
-    assert pj.check_if_exist(pj.TEST_PROJECT_NAME)
-    pj.del_project(pj.TEST_PROJECT_NAME)
+    pj.add_project(pj.TEST_PROJECT_NAME, create_project_details())
 
 
 def test_add_wrong_name_type():
