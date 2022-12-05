@@ -37,6 +37,7 @@ projects = {TEST_PROJECT_NAME:
 PROJECT_KEY = 'name'
 PROJECTS_COLLECT = 'projects'
 
+
 def get_projects():
     dbc.connect_db()
     return dbc.fetch_all(PROJECTS_COLLECT)
