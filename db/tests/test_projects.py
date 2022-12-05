@@ -18,7 +18,10 @@ def temp_project():
     if not RUNNING_ON_CICD_SERVER:
         pj.add_project(pj.TEST_PROJECT_NAME, create_project_details())
         yield
-
+        return True
+    else:
+        yield
+        return True
 
 def test_get_projects():
     if not RUNNING_ON_CICD_SERVER:
@@ -41,7 +44,8 @@ def test_get_projects_dict():
 
 
 def test_add_project():
-    pj.add_project(pj.TEST_PROJECT_NAME, create_project_details())
+    if not RUNNING_ON_CICD_SERVER:
+        pj.add_project(pj.TEST_PROJECT_NAME, create_project_details())
 
 
 def test_add_wrong_name_type():
