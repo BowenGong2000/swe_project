@@ -119,6 +119,7 @@ class DataList(Resource):
                 'Type': 'Data',
                 'Title': 'Data Types'}
 
+
 @data_types.route(f'{DATA_DETAILS}/<data_type>')
 class DataTypeDetails(Resource):
     """
