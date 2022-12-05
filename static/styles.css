@@ -75,6 +75,15 @@ p {
   background: var(--white);
 }
 
+.card2 {
+  margin: 0 30px 60px;
+  padding: 20px 40px;
+  width: 700px;
+  box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
+  border-radius: 5px;
+  background: var(--white);
+}
+
 @media only screen and (max-width: 520px) {
   .card-wrapper {
     padding: 30px 0 0;

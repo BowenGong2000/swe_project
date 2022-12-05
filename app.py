@@ -3,7 +3,6 @@ import pymongo
 import method as mth
 from flask_restx import Resource
 from functools import wraps
-
 import db.projects as pj
 
 app = Flask(__name__)
@@ -62,7 +61,7 @@ def add_project():
     project_details = (
       request.form['name'],
       request.form['member number'],
-      request.form['department'],
+      request.form['depart'],
       request.form['major'],
       request.form['school year'],
       request.form['gpa'],
