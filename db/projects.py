@@ -1,6 +1,7 @@
 """
 This module contains details about projects.
 """
+import db.db_connect as dbc
 
 TEST_PROJECT_NAME = 'Test project'
 NAME = 'name'
@@ -33,9 +34,12 @@ projects = {TEST_PROJECT_NAME:
                 SKILL: 'advanced calculus, data modelling'}
             }
 
+PROJECT_KEY = 'name'
+PROJECTS_COLLECT = 'projects'
 
 def get_projects():
-    return list(projects.keys())
+    dbc.connect_db()
+    return dbc.fetch_all(PROJECTS_COLLECT)
 
 
 def get_project_details(project):
@@ -43,7 +47,8 @@ def get_project_details(project):
 
 
 def get_projects_dict():
-    return projects
+    dbc.connect_db()
+    return dbc.fetch_all_as_dict(PROJECT_KEY, PROJECTS_COLLECT)
 
 
 def del_project(name):
@@ -74,16 +79,13 @@ def add_project(name, details):
 
 
 def main():
+    print('Getting projects as a list:')
+    projects = get_projects()
+    print(f'{projects=}')
+    print('Getting projects as a dict:')
+    projects = get_projects_dict()
     print(f'{projects=}')
     print(f'{get_project_details(TEST_PROJECT_NAME)=}')
-    print()
-    print(projects[TEST_PROJECT_NAME])
-    print(get_project_details(TEST_PROJECT_NAME))
-    """
-    print a list of project names
-    """
-    lst = get_projects()
-    print(lst)
 
 
 if __name__ == '__main__':

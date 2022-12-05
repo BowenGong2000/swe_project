@@ -47,7 +47,6 @@ DATA_DETAILS = f'/{DETAILS}'
 DATA_DETAILS_W_NS = f'{DATA_NS}/{DETAILS}'
 
 PROJECT_DICT = f'/{DICT}'
-PROJECT_DICT_NM = f'{PROJECTS_NS}_dict'
 PROJECT_DICT_W_NS = f'{PROJECTS_NS}/{DICT}'
 
 PROJECT_LIST = f'/{LIST}'
@@ -92,15 +91,15 @@ class MainMenu(Resource):
         Gets the main menu.
         """
         return {'Title': MAIN_MENU_NM,
-                'Default': 0,
+                'Default': 1,
                 'Choices': {
-                    '1': {'url': '/projects/dict',
+                    '1': {'url': f'/{PROJECT_DICT_W_NS}',
                           'method': 'get',
                           'text': 'List Current Projects.'},
-                    '2': {'url': '/students/dict',
+                    '2': {'url': f'/{STUDENT_DICT_W_NS}',
                           'method': 'get',
                           'text': 'List Students.'},
-                    '3': {'url': '/sponsors/dict',
+                    '3': {'url': f'/{SPONSOR_DICT_W_NS}',
                           'method': 'get',
                           'text': 'List Sponsors.'},
                     'X': {'text': 'Exit'},
@@ -116,8 +115,9 @@ class DataList(Resource):
         """
         Return a list of data types
         """
-        return {DATA_LIST_NM: dtyp.get_data_types()}
-
+        return {'Data': dtyp.get_data_type_dict(),
+                'Type': 'Data',
+                'Title': 'Data Types'}
 
 @data_types.route(f'{DATA_DETAILS}/<data_type>')
 class DataTypeDetails(Resource):
