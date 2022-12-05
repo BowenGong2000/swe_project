@@ -20,9 +20,13 @@ def test_hello():
 
 SAMPLE_STUDENT_NM = 'SampleStudent'
 SAMPLE_STUDENT = {
-    std.TEST_STUDENT_NAME: SAMPLE_STUDENT_NM,
-    std.EMAIL: 'x@y.com',
+    std.EMAIL: 'email',
+    std.PHONE: 'phone',
     std.FULL_NAME: 'Sample Student',
+    std.MAJOR: 'major',
+    std.SCHOOL_YEAR: 'school_year',
+    std.GPA: 'GPA',
+    std.SKILL: 'skills'
 }
 
 
@@ -37,7 +41,7 @@ def test_add_student():
 def test_get_students_list():
     resp = TEST_CLIENT.get(ep.STUDENT_LIST_W_NS)
     resp_json = resp.get_json()
-    assert isinstance(resp_json[ep.USER_LIST_NM], list)
+    assert isinstance(resp_json[ep.STUDENT_LIST_NM], list)
 
 def test_get_DataList(): 
     """

@@ -122,9 +122,7 @@ class DataList(Resource):
         """
         Return a list of data types
         """
-        return {'Data': dtyp.get_data_type_dict(),
-                'Type': 'Data',
-                'Title': 'Data Types'}
+        return {DATA_LIST_NM: dtyp.get_char_types()}
 
 
 @data_types.route(f'{DATA_DETAILS}/<data_type>')
