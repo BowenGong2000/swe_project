@@ -1,16 +1,14 @@
+"""
+This module contains all methods to interact with the PROJECT_DB.
+"""
 import os
-
 import pymongo as pm
 
 REMOTE = "0"
 LOCAL = "1"
-
 PROJECT_DB = 'projectdb'
-
 client = None
-"""
-This module contains all methods to interact with the PROJECT_DB.
-"""
+
 
 def connect_db():
     """
