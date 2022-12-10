@@ -365,50 +365,6 @@ for (let i = 0; i < tabHeaders.length; i++) {
 
 //catation: https://www.youtube.com/watch?v=M6jT6Mg-fgA&ab_channel=Codegrid
 
-
-
-
-document.getElementById("head1").onclick = function() {
-    sethead1()
-};
-
-
-function sethead1() {
-    head = 1;
-
-}
-
-
-document.getElementById("head2").onclick = function() {
-    sethead2()
-};
-
-
-function sethead2() {
-    head = 2;
-
-}
-
-document.getElementById("head3").onclick = function() {
-    sethead3()
-};
-
-
-function sethead3() {
-    head = 3;
-
-}
-
-document.getElementById("head4").onclick = function() {
-    sethead4()
-};
-
-
-function sethead4() {
-    head = 4;
-
-}
-
 var blocks = document.getElementsByClassName("block");
 var container = document.getElementsByClassName("container");
 var hs = new HorizontalScroll.default({
@@ -418,10 +374,11 @@ var hs = new HorizontalScroll.default({
     springEffect: 0.9,
 });
 
-let head = 0;
 
 
-var blocks = document.getElementsByClassName("blocksecond");
+
+
+var blocks = document.getElementsByClassName("block2");
 var container = document.getElementsByClassName("container2");
 var hs = new HorizontalScroll.default({
     blocks: blocks,
@@ -429,9 +386,6 @@ var hs = new HorizontalScroll.default({
     isAnimated: true,
     springEffect: 0.9,
 });
-
-
-
 
 
 
