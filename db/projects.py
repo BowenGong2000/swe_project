@@ -61,7 +61,7 @@ def check_if_exist(name):
     """
     check whether or not a project exists.
     """
-    return get_project_details(name) is not None
+    return name in projects
 
 
 def add_project(name, details):
