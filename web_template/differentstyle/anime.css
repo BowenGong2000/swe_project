@@ -207,3 +207,68 @@ button {
 
 
 
+.block3 {
+    position: relative;
+    width: 1050px;
+    height: 700px;
+    margin: 0px 300px 20px 80px;
+    border-radius: 25px;
+    z-index: 1;
+}
+
+
+.block-9 {
+    
+    width: 1050px;
+    height: 700px;
+    background: url(project2.png) no-repeat 50% 50%;
+    background-size: 500px;
+    /* background-size: cover; */
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.block-10 {
+    background: url(project3.png) no-repeat 50% 50%;
+    background-size: 600px;
+    background-color: black;
+}
+
+.block-11 {
+    background: url(project4.png) no-repeat 50% 50%;
+    background-size: cover;
+}
+
+.block-12 {
+    background: url(project4.png) no-repeat 50% 50%;
+    background-size: cover;
+}
+
+.container3 {
+    margin-top: 50px;
+    margin-left: 200px;
+}
+
+
+
+.block_all {
+    position: relative;
+    width: 1050px;
+    height: 700px;
+    /* margin: 0px 300px 20px 80px; */
+    border-radius: 25px;
+    z-index: 2;
+    word-break: break-all;
+
+}
+
+.square {
+    position: fixed;
+    width: 1050px;
+    height: 700px;
+    border-radius: 25px;
+    background-color: rgb(221,207,255);
+    white-space: normal;
+
+  }
