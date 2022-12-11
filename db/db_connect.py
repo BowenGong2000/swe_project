@@ -22,6 +22,21 @@ def connect_db():
             client = pm.MongoClient()
 
 
+def insert_one(collection, doc, db=PROJECT_DB):
+    """
+    Insert a single doc into collection.
+    """
+    client[db][collection].insert_one(doc)
+
+
+def fetch_one(collection, filt, db=PROJECT_DB):
+    """
+    Find with a filter and return on the first doc found.
+    """
+    for doc in client[db][collection].find(filt):
+        return doc
+
+
 def fetch_all(collection, db=PROJECT_DB):
     """
     Find all docs within the DB and reuturn in list
@@ -41,18 +56,3 @@ def fetch_all_as_dict(key, collection, db=PROJECT_DB):
         del doc['_id']
         ret[doc[key]] = doc
     return ret
-
-
-def insert_one(collection, doc, db=PROJECT_DB):
-    """
-    Insert a single doc into collection.
-    """
-    client[db][collection].insert_one(doc)
-
-
-def fetch_one(collection, filt, db=PROJECT_DB):
-    """
-    Find with a filter and return on the first doc found.
-    """
-    for doc in client[db][collection].find(filt):
-        return doc

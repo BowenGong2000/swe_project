@@ -21,3 +21,16 @@ def temp_rec():
     else:
         yield
         return True
+
+
+def test_fetch_one(temp_rec):
+    if not RUNNING_ON_CICD_SERVER:
+        ret = dbc.fetch_one(TEST_COLLECT, {TEST_NAME: TEST_NAME})
+        assert ret is not None
+
+
+def test_fetch_one_not_there(temp_rec):
+    if not RUNNING_ON_CICD_SERVER:
+        ret = dbc.fetch_one(TEST_COLLECT, {TEST_NAME: 'not a field value in db!'})
+        assert ret is None
+    
