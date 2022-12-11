@@ -60,10 +60,11 @@ def del_project(name):
     return dbc.del_one(PROJECTS_COLLECT, {PROJECT_KEY: name})
 
 
+def del_one(name):
+    del projects[name]
+
+
 def exist(name):
-    """
-    check whether or not a project exists.
-    """
     return name in projects
 
 
