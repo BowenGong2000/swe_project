@@ -4,8 +4,8 @@ This module contains all methods to interact with the PROJECT_DB.
 import os
 import pymongo as pm
 
-REMOTE = "0"
-LOCAL = "1"
+CLOUD = "1"
+LOCAL = "0"
 PROJECT_DB = 'projectdb'
 client = None
 
@@ -17,7 +17,19 @@ def connect_db():
     global client
     if client is None:  # not connected yet!
         print("Setting client because it is None.")
-        if os.environ.get("LOCAL_MONGO", LOCAL) == LOCAL:
+        if os.environ.get("CLOUD_MONGO", CLOUD) == CLOUD:
+            password = '1234'
+            if not password:
+                raise ValueError('You must set your password '
+                                 + 'to use Mongo in the cloud.')
+                   
+            client = pm.MongoClient(f'mongodb+srv://tracyzhu0608:{password}'
+                                    + '@cluster0.8pa03kh.mongodb.net/'
+                                    + '?retryWrites=true&w=majority')
+
+            print("Connecting to Mongo in the cloud.")
+
+        else:
             print("Connecting to Mongo locally.")
             client = pm.MongoClient()
 
@@ -26,7 +38,8 @@ def insert_one(collection, doc, db=PROJECT_DB):
     """
     Insert a single doc into collection.
     """
-    client[db][collection].insert_one(doc)
+    print(f'{db=}')
+    return client[db][collection].insert_one(doc)
 
 
 def del_one(collection, filt, db=PROJECT_DB):
@@ -63,3 +76,11 @@ def fetch_all_as_dict(key, collection, db=PROJECT_DB):
         del doc['_id']
         ret[doc[key]] = doc
     return ret
+
+
+def main():
+    connect_db()
+
+
+if __name__ == '__main__':
+    main()

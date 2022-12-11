@@ -42,4 +42,4 @@ def test_data_type_not_exists():
 
 @pytest.mark.skip("Can't run this test until the delete function is written.")
 def test_del_data_type():
-    assert False
+    pass
