@@ -54,7 +54,10 @@ def get_projects_dict():
 
 
 def del_project(name):
-    del projects[name]
+    """
+    Delete a doc from db collection by its name.
+    """
+    return dbc.del_one(PROJECTS_COLLECT, {PROJECT_KEY: name})
 
 
 def exist(name):

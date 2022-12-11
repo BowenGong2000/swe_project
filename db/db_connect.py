@@ -29,6 +29,13 @@ def insert_one(collection, doc, db=PROJECT_DB):
     client[db][collection].insert_one(doc)
 
 
+def del_one(collection, filt, db=PROJECT_DB):
+    """
+    Delete a single doc from collection with a filter.
+    """
+    client[db][collection].delete_one(filt)
+
+
 def fetch_one(collection, filt, db=PROJECT_DB):
     """
     Find with a filter and return on the first doc found.

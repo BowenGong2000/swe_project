@@ -1,9 +1,7 @@
 import pytest
-# import os
 import db.projects as pj
 
-
-# RUNNING_ON_CICD_SERVER = os.environ.get('CI', False)
+TEST_DEL_NAME = 'Test Project Del'
 
 
 def create_project_details():
@@ -14,10 +12,20 @@ def create_project_details():
 
 
 @pytest.fixture(scope='function')
+def to_be_del_project():
+    return pj.add_project(TEST_DEL_NAME, create_project_details())
+
+
+def test_del_project(to_be_del_project):
+    pj.del_project(TEST_DEL_NAME)
+    assert not pj.check_if_exist(TEST_DEL_NAME)
+
+
+@pytest.fixture(scope='function')
 def temp_project():
     pj.add_project(pj.TEST_PROJECT_NAME, create_project_details())
-    yield
-    return True
+    yield    # to test functions 
+    pj.del_project(pj.TEST_PROJECT_NAME)
 
 
 def test_get_projects(temp_project):
