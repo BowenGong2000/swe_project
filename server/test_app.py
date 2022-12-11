@@ -25,5 +25,5 @@ def test_add_project():
     """
     response_get = TEST_CLIENT.get('/add_project')
     assert response_get.status_code == 200
-    assert pj.check_if_exist(TEST_PROJECT_NAME)
+    assert pj.exist(TEST_PROJECT_NAME)
     pj.del_project(TEST_PROJECT_NAME)
