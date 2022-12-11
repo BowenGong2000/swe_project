@@ -56,3 +56,4 @@ def fetch_all_as_dict(key, collection, db=PROJECT_DB):
         del doc['_id']
         ret[doc[key]] = doc
     return ret
+    
