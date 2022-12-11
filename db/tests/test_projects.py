@@ -48,16 +48,29 @@ def test_add_project():
         pj.add_project(pj.TEST_PROJECT_NAME, create_project_details())
 
 
+def test_project_exists(temp_project):
+    if not RUNNING_ON_CICD_SERVER:
+        assert pj.project_exists(pj.TEST_PROJECT_NAME)
+
+
+def test_project_not_exists():
+    if not RUNNING_ON_CICD_SERVER:
+        assert not pj.project_exists('Surely this is not a project name!')
+
+
 def test_add_wrong_name_type():
-    with pytest.raises(TypeError):
-        pj.add_project(7, {})
+    if not RUNNING_ON_CICD_SERVER:
+        with pytest.raises(TypeError):
+            pj.add_project(7, {})
 
 
 def test_add_wrong_details_type():
-    with pytest.raises(TypeError):
-        pj.add_project('a new project', [])
+     if not RUNNING_ON_CICD_SERVER:
+        with pytest.raises(TypeError):
+            pj.add_project('a new project', [])
 
 
 def test_add_missing_field():
-    with pytest.raises(ValueError):
-        pj.add_project('a new project', {'foo': 'bar'})
+     if not RUNNING_ON_CICD_SERVER:
+        with pytest.raises(ValueError):
+            pj.add_project('a new project', {'foo': 'bar'})
