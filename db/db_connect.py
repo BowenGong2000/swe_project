@@ -22,7 +22,7 @@ def connect_db():
             if not password:
                 raise ValueError('You must set your password '
                                  + 'to use Mongo in the cloud.')
-                   
+      
             client = pm.MongoClient(f'mongodb+srv://tracyzhu0608:{password}'
                                     + '@cluster0.8pa03kh.mongodb.net/'
                                     + '?retryWrites=true&w=majority')
