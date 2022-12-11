@@ -64,5 +64,5 @@ def test_add_missing_field():
         pj.add_project('a new project', {'foo': 'bar'})
 
 def test_add_project():
-    pj.add_project(pj.TEST_PROEJCT_NAME, create_project_details())
+    pj.add_project(pj.TEST_PROJECT_NAME, create_project_details())
     assert pj.check_if_exist(pj.TEST_PROJECT_NAME)
