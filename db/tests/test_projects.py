@@ -42,11 +42,11 @@ def test_add_project():
 
 
 def test_project_exists(temp_project):
-    assert pj.project_exists(pj.TEST_PROJECT_NAME)
+    assert pj.check_if_exist(pj.TEST_PROJECT_NAME)
 
 
 def test_project_not_exists():
-    assert not pj.project_exists('Surely this is not a project name!')
+    assert not pj.check_if_exist('Surely this is not a project name!')
 
 
 def test_add_wrong_name_type():
@@ -64,4 +64,5 @@ def test_add_missing_field():
         pj.add_project('a new project', {'foo': 'bar'})
 
 def test_add_project():
-    pj.add_project(name, details)(pj.TEST_PROJECT_NAME, create_project_details())
+    pj.add_project(pj.TEST_PROEJCT_NAME, create_project_details())
+    assert pj.check_if_exist(pj.TEST_PROJECT_NAME)
