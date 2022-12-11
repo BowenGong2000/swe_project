@@ -71,6 +71,11 @@ STUDENT_ADD = f'/{STUDENTS_NS}/{ADD}'
 SPONSOR_DICT = f'/{DICT}'
 SPONSOR_DICT_NM = f'{SPONSORS_NS}_dict'
 SPONSOR_DICT_W_NS = f'{SPONSORS_NS}/{DICT}'
+SPONSOR_DETAILS = f'/{DETAILS}'
+SPONSOR_DETAILS_W_NS = f'{SPONSORS_NS}/{DETAILS}'
+SPONSOR_LIST = f'/{LIST}'
+SPONSOR_LIST_NM = f'{SPONSORS_NS}_list'
+SPONSOR_LIST_W_NS = f'{SPONSORS_NS}/{LIST}'
 SPONSOR_ADD = f'/{SPONSORS_NS}/{ADD}'
 
 
@@ -260,6 +265,12 @@ class StudentDetails(Resource):
             raise wz.NotFound(f'{student} not found.')
 
 
+@sponsors.route(SPONSOR_LIST)
+class SponsorList(Resource):
+    def get(self):
+        return {SPONSOR_LIST_NM: sps.get_sponsors()}
+
+
 @sponsors.route(SPONSOR_DICT)
 class SponsorDict(Resource):
     """
@@ -272,6 +283,24 @@ class SponsorDict(Resource):
         return {'Data': sps.get_sponsors_dict(),
                 'Type': 'Data',
                 'Title': 'Paricipating Sponsors'}
+
+
+@sponsors.route(f'{SPONSOR_DETAILS}/<sponsor>')
+class SponsorDetails(Resource):
+    """
+    This will get details on a sponsor.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def get(self, sponsor):
+        """
+        Returns the details of a specific sponsor (in dictionary)
+        """
+        sps_d = sps.get_sponsor_details(sponsor)
+        if sps_d is not None:
+            return {sponsor: sps.get_sponsor_details(sponsor)}
+        else:
+            raise wz.NotFound(f'{sponsor} not found.')
 
 
 @api.route('/endpoints')

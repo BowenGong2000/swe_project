@@ -15,6 +15,9 @@ TEST_PROJECT  = pj.projects[TEST_PROJECT_NAME]
 TEST_STUDENT_NAME = 'Test student'
 TEST_STUDENT = std.students[TEST_STUDENT_NAME]
 
+TEST_SPONSOR_NAME = 'Test sponsor'
+TEST_SPONSOR = sps.sponsors[TEST_SPONSOR_NAME]
+
 def test_hello():
     """
     see if Hello works
@@ -53,6 +56,10 @@ def test_get_student_details():
     resp_json = TEST_CLIENT.get(f'{ep.STUDENT_DETAILS_W_NS}/{TEST_STUDENT}').get_json()
     assert isinstance(resp_json, dict)
 
+def test_get_sponsors_list():
+    resp_json = TEST_CLIENT.get(ep.SPONSOR_LIST_W_NS).get_json()
+    assert isinstance(resp_json[ep.SPONSOR_LIST_NM], list)
+
 def test_get_sponsors_dict():
     """
     see if we can get sponsors properly in a dictionary
@@ -60,6 +67,13 @@ def test_get_sponsors_dict():
     sponsors = sps.get_sponsors_dict()
     assert isinstance(sponsors, dict)
     assert len(sponsors) > 0
+
+def test_get_sponsor_details():
+    """
+    see if we can get sponsor details properly
+    """
+    resp_json = TEST_CLIENT.get(f'{ep.SPONSOR_DETAILS_W_NS}/{TEST_SPONSOR}').get_json()
+    assert isinstance(resp_json, dict)
 
 def test_get_DataList(): 
     """
