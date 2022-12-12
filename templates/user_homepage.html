@@ -19,12 +19,25 @@
   </head>
 
 <body>
-  <ul>
-    <li>User Name</li>
-    <li>email</li>
-    <li>password</li>
-    <li>Project History</li>
-    <li>...</li>
-  </ul>
+  {% if posts %}
+    <table >
+        <th>Topic</th>
+        <th>Leader of the project</th>
+        <th>Open until</th>
+        <th>Subject/Major</th>
+        <th>Number of person needed</th>
+        <th>phone number</th>
+        <th>email</th>
+    {% for line in posts %}
+        <tr>
+            <td>{{line['topic']}}</td>
+            <td>{{line['leader']}}</td>
+            <td>{{line['date']}}</td>
+            <td>{{line['subject']}}</td>
+            <td>{{line['need_person']}}</td>
+            <td>{{line['phone']}}</td>
+            <td>{{line['email']}}</td>
+        </tr>
+    {% endfor %}
 </body>
 </html>
