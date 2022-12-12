@@ -16,15 +16,15 @@ contents = {TEST_CONTENT_NAME:
                 PHONE: '1111111111',
                 FULL_NAME: 'Farry Botter',
                 TAG: 'Computer Science',
-                PROJ_NAME:'Simple Web Design',
-                CONTENT:'This project is design for web design'},
+                PROJ_NAME: 'Simple Web Design',
+                CONTENT: 'This project is design for web design'},
             'content_2':
             {EMAIL: 'a@nyu.com',
                 PHONE: '1111111111',
                 FULL_NAME: 'Farry Botter',
                 TAG: 'Civil Engineering',
-                PROJ_NAME:'Torrnado Destruction Prediction',
-                CONTENT:'Project will predict destruction rate of torrnado'}
+                PROJ_NAME: 'Torrnado Destruction Prediction',
+                CONTENT: 'Project will predict destruction rate of torrnado'}
             }
 
 
