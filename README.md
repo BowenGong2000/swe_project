@@ -25,12 +25,13 @@ Project Setup Update:
 3. install passlib for password encyption
     pip install passlib
 4. run command
-    sed -i -e 's/\r$//' run.sh
+    sed -i -e 's/\r$//' server.sh
 5. run command
-    ./run.sh
+    ./server.sh
 Go to http://127.0.0.1:5000
 The login and register page should appears. 
 
+To login to home page user should register a new account, and use that account to login to homepage. 
 
 Brainstorming:
 
