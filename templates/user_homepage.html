@@ -19,7 +19,6 @@
   </head>
 
 <body>
-  {% if posts %}
     <table >
         <th>Topic</th>
         <th>Leader of the project</th>
@@ -28,6 +27,7 @@
         <th>Number of person needed</th>
         <th>phone number</th>
         <th>email</th>
+    {% if posts%}
     {% for line in posts %}
         <tr>
             <td>{{line['topic']}}</td>
@@ -39,5 +39,7 @@
             <td>{{line['email']}}</td>
         </tr>
     {% endfor %}
+    {% endif %}
+    </table>
 </body>
 </html>
