@@ -37,5 +37,7 @@ Goals:
     -Make the transition from page to page smoother
     -Consummate animations like button hovering, transitions, etc. 
     -Consummate the logic of each page and function 
+    I will try my best to integrate all the functions and content into a complete web page, so that users can quickly find the content they want, and I will do a good job of categorizing the interface, which is more in line with the intuition of user interaction.
+
     -Add some substantial interface content
 
