@@ -100,7 +100,6 @@ def homepage_search():
 @app.route('/images/<file_name>', methods = ['GET'])
 def get_file(file_name):
   file_name = os.path.join("templates\images",file_name)
-  #print(file_name)
   return send_file(file_name)
 
 if __name__ == '__main__':    

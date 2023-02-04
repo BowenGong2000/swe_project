@@ -14,17 +14,19 @@ body {
     min-height: 100vh;
     justify-content: center;
     align-items: center;
+    text-align:center;
 }
 
 main.table {
     width: 82vw;
     height: 90vh;
+    margin-left: 10%;
     background-color: #fff5;
 
     backdrop-filter: blur(7px);
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
-
+    
     overflow: hidden;
 }
 
