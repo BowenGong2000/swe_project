@@ -70,3 +70,7 @@ Delete a user
 ### In-project actions:
 - Allow user to view
 - Allow user to manage
+
+resources of code for UI:
+head protray https://www.deviantart.com/karmaanddestiny/art/Default-user-icon-4-858661084
+form comtribution: https://github.com/JeetSaru/Responsive-HTML-Table-With-Pure-CSS---Web-Design-UI-Design
