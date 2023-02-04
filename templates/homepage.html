@@ -1,63 +1,144 @@
 <!DOCTYPE html>
-<style html>
-    @import url(style.css);
-    @import url(form.css);
-</style>
-
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="/static/form.css">
-      <header> 
-      <div id="header" class="left">
-        <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-        <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
-        <a href="{{url_for('my_project') }}" class="btn">My Project</a>
-        <a href="{{url_for('user_homepage') }}" class="btn">Account</a>
-        <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
-      </div>
-      </header>
-  </head>
-  <body>
-    
-    <div>
-        <header>
-            <h1>Project Finder</h1>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" href="/static/forms.css">
+        <link rel="stylesheet" href="/static/normalize.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <header> 
+            <div id="header" class="left">
+                <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+                <a href="{{url_for('my_project') }}" class="btn">My Project</a>
+                <a href="{{url_for('user_homepage') }}" class="btn">Account</a>
+                <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
+            </div>
         </header>
-    </div>
-    <br>
-    <h1>Search for you interests</h1>
-    <form action="/homepge_search" method="POST">
-        <lable for="key_word">Search for key words</lable>
-        <input type="text" name = "key_word" placeholder="input keyword to search" maxlength="50" required/> </br>
-    </form>
+    </head>
 
-
-    <h1>Recent Activities/Projects</h1>
-    {% if posts %}
-    <table >
-        <th>Topic</th>
-        <th>Leader of the project</th>
-        <th>Open until</th>
-        <th>Subject/Major</th>
-        <th>Number of person needed</th>
-        <th>phone number</th>
-        <th>email</th>
-    {% for line in posts %}
-        <tr>
-            <td>{{line['topic']}}</td>
-            <td>{{line['leader']}}</td>
-            <td>{{line['date']}}</td>
-            <td>{{line['subject']}}</td>
-            <td>{{line['need_person']}}</td>
-            <td>{{line['phone']}}</td>
-            <td>{{line['email']}}</td>
-        </tr>
-    {% endfor %}
-    </table>
-    {% endif %}
+    <body>  
+        <div>
+            <header>
+                <h1>Project Finder</h1>
+            </header>
+        </div>
+        <br>
+        <h1>Search for you interests</h1>
+        <form action="/homepge_search" method="POST">
+            <lable for="key_word">Search for key words</lable>
+            <input type="text" name = "key_word" placeholder="input keyword to search" maxlength="50" required/> </br>
+        </form>
+    </body>
+    
+    <body>
+      <main class="table">
+          <section class="table__header">
+              <h1>Projects Available</h1>
+              <div class="input-group">
+                  <input type="search" placeholder="Search Data...">
+                  <img src="images/search.png" alt="">
+              </div>
+              <div class="export__file">
+                  <label for="export-file" class="export__file-btn" title="Export File"></label>
+                  <input type="checkbox" id="export-file">
+                  <div class="export__file-options">
+                      <label>Export As &nbsp; &#10140;</label>
+                      <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
+                      <label for="export-file" id="toJSON">JSON <img src="images/json.png" alt=""></label>
+                      <label for="export-file" id="toCSV">CSV <img src="images/csv.png" alt=""></label>
+                      <label for="export-file" id="toEXCEL">EXCEL <img src="images/excel.png" alt=""></label>
+                  </div>
+              </div>
+          </section>
+          <section class="table__body">
+              <table>
+                  <thead>
+                      <tr>
+                          <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+                          <th> Proj Owner <span class="icon-arrow">&UpArrow;</span></th>
+                          <th> Professions <span class="icon-arrow">&UpArrow;</span></th>
+                          <th> Project Name <span class="icon-arrow">&UpArrow;</span></th>
+                          <th> Application status <span class="icon-arrow">&UpArrow;</span></th>
+                          <th> detail <span class="icon-arrow">&UpArrow;</span></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td> 1 </td>
+                          <td> <img src="images/steven.jpg" alt="">Zinzu Chan Lee</td>
+                          <td> Seoul </td>
+                          <td> 17 Dec, 2022 </td>
+                          <td>
+                              <p class="status delivered">Delivered</p>
+                          </td>
+                          <td> <strong> $128.90 </strong></td>
+                      </tr>
+                      <tr>
+                          <td> 2 </td>
+                          <td><img src="images/steven.jpg" alt=""> Jeet Saru </td>
+                          <td> Kathmandu </td>
+                          <td> 27 Aug, 2023 </td>
+                          <td>
+                              <p class="status cancelled">Cancelled</p>
+                          </td>
+                          <td> <strong>$5350.50</strong> </td>
+                      </tr>
+                      <tr>
+                          <td> 3</td>
+                          <td><img src="images/steven.jpg" alt=""> Sonal Gharti </td>
+                          <td> Tokyo </td>
+                          <td> 14 Mar, 2023 </td>
+                          <td>
+                              <p class="status shipped">Shipped</p>
+                          </td>
+                          <td> <strong>$210.40</strong> </td>
+                      </tr>
+                      <tr>
+                          <td> 4</td>
+                          <td><img src="images/steven.jpg" alt=""> Alson GC </td>
+                          <td> New Delhi </td>
+                          <td> 25 May, 2023 </td>
+                          <td>
+                              <p class="status delivered">Delivered</p>
+                          </td>
+                          <td> <strong>$149.70</strong> </td>
+                      </tr>
+                      <tr>
+                          <td> 5</td>
+                          <td><img src="images/steven.jpg" alt=""> Sarita Limbu </td>
+                          <td> Paris </td>
+                          <td> 23 Apr, 2023 </td>
+                          <td>
+                              <p class="status pending">Pending</p>
+                          </td>
+                          <td> <strong>$399.99</strong> </td>
+                      </tr>
+                      
+                      <tr>
+                          <td> 8</td>
+                          <td><img src="images/steven.jpg" alt=""> Aayat Ali Khan </td>
+                          <td> Islamabad </td>
+                          <td> 30 Feb, 2023 </td>
+                          <td>
+                              <p class="status pending">Pending</p>
+                          </td>
+                          <td> <strong>$149.70</strong> </td>
+                      </tr>
+                      <tr>
+                          <td> 9</td>
+                          <td><img src="images/steven.jpg" alt=""> Alson GC </td>
+                          <td> Dhaka </td>
+                          <td> 22 Dec, 2023 </td>
+                          <td>
+                              <p class="status cancelled">Cancelled</p>
+                          </td>
+                          <td> <strong>$249.99</strong> </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </section>
+      </main>
   </body>
 </html>
