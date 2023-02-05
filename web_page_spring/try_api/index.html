@@ -1,0 +1,55 @@
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+
+<!-- <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networking page</title>
+    <link rel="stylesheet" href="anime.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Aldrich" />
+</head> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function sendRequest() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://api.openai.com/v1/engines/davinci/jobs", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader("Authorization", "Bearer YOUR_API_KEY");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          console.log(xhr.responseText);
+        }
+      };
+      xhr.send(JSON.stringify({
+        "prompt": "What is your name?",
+        "max_tokens": 100,
+        "temperature": 0.5
+      }));
+    }
+  </script>
+</head>
+<body>
+  <button onclick="sendRequest()">Send Request</button>
+</body>
+</html>
+In this example, the sendRequest function uses the XMLHttpRequest object to send a POST request to the OpenAI API. The API key is passed in the Authorization header as Bearer YOUR_API_KEY. You should replace YOUR_API_KEY with the actual key provided by OpenAI. The request payload is a JSON object that contains the prompt to send to the API, the maximum number of tokens to generate, and the temperature to use.
+
+
+
+
+
+
+<!-- <body>
+    new page
+
+    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
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body> -->
+
+<!-- </html> -->
