@@ -1,5 +1,5 @@
-<!-- <!DOCTYPE html>
-<html lang="en"> -->
+<!DOCTYPE html>
+<html lang="en">
 
 <!-- <head>
     <meta charset="UTF-8">
@@ -9,38 +9,23 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Aldrich" />
 </head> -->
 
-<!DOCTYPE html>
-<html>
 <head>
-  <script>
-    function sendRequest() {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://api.openai.com/v1/engines/davinci/jobs", true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.setRequestHeader("Authorization", "Bearer YOUR_API_KEY");
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-          console.log(xhr.responseText);
-        }
-      };
-      xhr.send(JSON.stringify({
-        "prompt": "What is your name?",
-        "max_tokens": 100,
-        "temperature": 0.5
-      }));
-    }
-  </script>
-</head>
-<body>
-  <button onclick="sendRequest()">Send Request</button>
-</body>
-</html>
-In this example, the sendRequest function uses the XMLHttpRequest object to send a POST request to the OpenAI API. The API key is passed in the Authorization header as Bearer YOUR_API_KEY. You should replace YOUR_API_KEY with the actual key provided by OpenAI. The request payload is a JSON object that contains the prompt to send to the API, the maximum number of tokens to generate, and the temperature to use.
-
-
-
-
-
+    <script>
+      function sendRequest() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://example.com/api/data?api_key=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", true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            console.log(xhr.responseText);
+          }
+        };
+        xhr.send();
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="sendRequest()">Send Request</button>
+  </body>
 
 <!-- <body>
     new page
@@ -52,4 +37,4 @@ In this example, the sendRequest function uses the XMLHttpRequest object to send
     <script src="script.js"></script>
 </body> -->
 
-<!-- </html> -->
+</html>
