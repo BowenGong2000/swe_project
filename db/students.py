@@ -35,6 +35,7 @@ students = {TEST_STUDENT_NAME:
 STUDENT_KEY = 'name'
 STUDENTS_COLLECT = 'students'
 
+
 def get_students():
     dbc.connect_db()
     return dbc.fetch_all(STUDENTS_COLLECT)
@@ -60,17 +61,16 @@ def student_exists(name):
 def add_student(name, details):
     if not isinstance(name, str):
         raise TypeError(f'Wrong type for name: {type(name)=}')
-    
     if not isinstance(details, dict):
         raise TypeError(f'Wrong type for details: {type(details)=}')
-    
+
     """
     check if missing any data for mandatory fields; if not, raise error
     """
     for field in REQUIRED_FLDS:
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
-    
+
     doc = details
     """
     insert the student to db
