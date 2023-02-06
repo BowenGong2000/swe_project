@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+    <header> 
+        <div id="header" class="left">
+            <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+            <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+            <a href="{{url_for('my_project') }}" class="btn">My Project</a>
+            <a href="{{url_for('account') }}" class="btn">Account</a>
+            <a href="/user/signout" class="btn">Sign Out</a>
+        </div>
+        
+
+        <div class="card-wrapper">
+
+            <div class="card">
+                <div id="header" class="center">
+                    <img class="rounded-circle account-img" src="{{ image_file }}">
+ 
+                </div>
+              <h1 class="center">Hello!  {{ session['user']['name'] }}</h1>
+              <p class="center">You are currently logged in.</p>
+        
+              <div class="center">
+                <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
+              </div>
+            
+            </div>
+        
+            <div class="card">
+        
+              <h2 class="center">Your Info</h2>
+        
+              <p>
+                <strong>ID:</strong> {{ session['user']['_id'] }}<br>
+                <strong>Name:</strong> {{ session['user']['name'] }}<br>
+                <strong>Email:</strong> {{ session['user']['email'] }}
+              </p>
+
+              <h2 class="left">Here you can manage your account.</h2>
+                <div class="left">
+                    <a href="/user/signout" class="btn btn--secondary">My Current Projects</a>
+                    <a href="/user/signout" class="btn btn--secondary">My Applications</a>
+                    <a href="/user/signout" class="btn btn--secondary">Saved Projects</a>
+                    <a href="/user/signout" class="btn btn--secondary">Account Setting</a>
+                </div>
+            
+            </div>
+          
+          </div>
+
+        
+{% endblock %}
