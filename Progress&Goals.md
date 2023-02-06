@@ -12,7 +12,7 @@ Already Complete:
 
 -Designed a UI similar to NYU websites (Albert & Brightspace) (With a familiar UI, students can get on their hands easier)
 
--Completed the design of the interaction logic
+-Completed the design of the interaction logic, and several animation including hovering and page shifting
 
 -Completed the smooth switching of different web-level interfaces
 
