@@ -211,3 +211,10 @@ input[type=submit] {
 
 
 }
+
+.alter_highlight {
+  background: #263238;
+  transition: color .15s ease, background-color .15s ease;
+  font-weight: 600;
+  text-decoration: none;
+}
