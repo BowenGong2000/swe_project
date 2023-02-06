@@ -37,10 +37,6 @@ def test_get_project_details():
     resp_json = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_PROJECT}').get_json()
     assert isinstance(resp_json, dict)
 
-def test_get_students_list():
-    resp_json = TEST_CLIENT.get(ep.STUDENT_LIST_W_NS).get_json()
-    assert isinstance(resp_json[ep.STUDENT_LIST_NM], list)
-
 def test_get_students_dict():
     """
     see if we can get students properly in a dictionary

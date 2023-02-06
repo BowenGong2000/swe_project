@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, redirect, send_file, make_response
+from flask import Flask, url_for, render_template, session, request, redirect, send_file, make_response
 import pymongo
 import method as mth
 from flask_restx import Resource
@@ -77,10 +77,6 @@ def add_project():
 def my_project():
   return render_template('my_project.html')
 
-@app.route('/user_homepage')
-def user_homepage():
-  return render_template('user_homepage.html')
-
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():
   name = session['name']
@@ -101,6 +97,14 @@ def homepage_search():
 def get_file(file_name):
   file_name = os.path.join("templates\images",file_name)
   return send_file(file_name)
+
+
+@app.route("/account", methods=['GET', 'POST'])
+def account():
+    image_file = url_for('static', filename='images/' + 'steven.jpg')
+    return render_template('account.html', title='Account', image_file=image_file)
+
+
 
 if __name__ == '__main__':    
     app.run(debug=True)
