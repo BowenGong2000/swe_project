@@ -7,6 +7,7 @@ import db.projects as pj
 import os
 import datetime
 
+
 app = Flask(__name__)
 app.secret_key = 'hskfakgkajgalg' #random key
 
@@ -24,8 +25,20 @@ def login_required(f):
       return redirect('/')
   return wrap
 
+#export data from database
+#todo give top matches
+def homepage_form(info = None):
+  temp_project_lst = pj.get_projects_dict()
+  project_lst = []
+  for key in temp_project_lst:
+    if (datetime.datetime.today() - temp_project_lst[key]['post_date']).days < 90:
+      temp_project_lst[key]['post_date'] = temp_project_lst[key]['post_date'].strftime("%m-%d-%Y")
+      project_lst.append(temp_project_lst[key])
+  return project_lst
+
 # Routes
 from server import routes
+
 
 @app.route('/')
 def home():
@@ -34,12 +47,14 @@ def home():
 @app.route('/homepage', methods = ['GET', 'POST'])
 @login_required
 def homepage():
-  return render_template('homepage.html')
+  project_lst = homepage_form(info = None)
+  return render_template('homepage.html', project_lst = project_lst)
 
 @app.route('/homepage_local', methods=['GET', 'POST'])
 def homepage_local():
   #todo return homepage base on account passed in through url
-  return render_template('homepage.html')
+  project_lst = homepage_form(info = None)
+  return render_template('homepage.html', project_lst = project_lst)
 
 @app.route('/add_project', methods=['GET', 'POST'])
 def add_project():
