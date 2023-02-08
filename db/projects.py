@@ -5,6 +5,7 @@ import db.db_connect as dbc
 
 TEST_PROJECT_NAME = 'Test project'
 NAME = 'name'
+ACCOUNT = 'account'
 NUM_MEMBERS = 'num_members'
 DEPARTMENT = 'department_name'
 MAJOR = 'major_requirements'
@@ -12,10 +13,11 @@ SCHOOL_YEAR = 'school_year'
 GPA = 'GPA'
 LENGTH = 'project_duration'
 SKILL = 'skill requirements'
+POST_DATE = 'post_date'
 
 # We expect the project database to change frequently:
 # This list contains our mandatory fields
-REQUIRED_FLDS = [NUM_MEMBERS, MAJOR, SCHOOL_YEAR, SKILL]
+REQUIRED_FLDS = [ACCOUNT, NUM_MEMBERS, MAJOR, SCHOOL_YEAR, SKILL, POST_DATE]
 projects = {TEST_PROJECT_NAME:
             {NUM_MEMBERS: 7,
                 DEPARTMENT: 'computer_engineering',
@@ -90,7 +92,7 @@ def add_project(name, details):
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
     dbc.connect_db()
-    doc[PROJECT_KEY] = name
+    doc[PROJECT_KEY] = name 
     return dbc.insert_one(PROJECTS_COLLECT, doc)
 
 

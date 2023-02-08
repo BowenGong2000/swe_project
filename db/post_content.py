@@ -9,6 +9,7 @@ FULL_NAME = 'full_name'
 TAG = 'tag'
 PROJ_NAME = 'proj_name'
 CONTENT = 'content'
+POST_DATE = 'post_date'
 
 REQUIRED_FLDS = [EMAIL]
 contents = {TEST_CONTENT_NAME:

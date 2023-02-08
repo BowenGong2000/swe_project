@@ -5,6 +5,7 @@ from flask_restx import Resource
 from functools import wraps
 import db.projects as pj
 import os
+import datetime
 
 app = Flask(__name__)
 app.secret_key = 'hskfakgkajgalg' #random key
@@ -47,14 +48,16 @@ def add_project():
   else:
     proj_name  = request.form['name']
     project_details = {
-      'name' : request.form['name'],
-      'num_members' : request.form['member number'],
+      'name': request.form['name'],
+      'account': session['user'],
+      'num_members': request.form['member number'],
       'department_name': request.form['depart'],
-      'major_requirements' : request.form['major'],
+      'major_requirements': request.form['major'],
       'school_year': request.form['school year'],
       'GPA' :request.form['gpa'],
-      'project_duration' : request.form['length'],
-      'skill requirements' : request.form['skill'],
+      'project_duration': request.form['length'],
+      'skill requirements': request.form['skill'],
+      'post_date': datetime.datetime.today()
       #todo need request("FS")
     }
     pj.add_project(proj_name, project_details)
