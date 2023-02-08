@@ -34,20 +34,6 @@ def home():
 @login_required
 def homepage():
   return render_template('homepage.html')
-  #account_validation = 1 user, 2 manager, 0 invalid
-  email = request.form['email']
-  password = request.form['password']
-  #todo password encode (i think it is done in 'model.py')
-  #todo account validation
-  account_type = mth.account_validation(email, password)
-  
-  if account_type == 1:
-    return render_template('homepage.html')
-  elif account_type == 2:
-    #todo function that inplement info for manager count into dict_manager
-    dict_manager = mth.manager_info(email)
-    return render_template('manager_homepage.html', info = dict_manager)
-  return render_template('user_login.html')
 
 @app.route('/homepage_local', methods=['GET', 'POST'])
 def homepage_local():
@@ -59,18 +45,19 @@ def add_project():
   if request.method == 'GET':
     return render_template('add_project.html')
   else:
-    project_details = (
-      request.form['name'],
-      request.form['member number'],
-      request.form['depart'],
-      request.form['major'],
-      request.form['school year'],
-      request.form['gpa'],
-      request.form['length'],
-      request.form['skill'],
-      request.form['information']
-    )
-    print(project_details)
+    proj_name  = request.form['name']
+    project_details = {
+      'name' : request.form['name'],
+      'num_members' : request.form['member number'],
+      'department_name': request.form['depart'],
+      'major_requirements' : request.form['major'],
+      'school_year': request.form['school year'],
+      'GPA' :request.form['gpa'],
+      'project_duration' : request.form['length'],
+      'skill requirements' : request.form['skill'],
+      #todo need request("FS")
+    }
+    pj.add_project(proj_name, project_details)
     return render_template('add_p_success.html')
 
 @app.route('/my_project')

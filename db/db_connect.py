@@ -25,7 +25,7 @@ def connect_db():
 
             client = pm.MongoClient(f'mongodb+srv://tracyzhu0608:{password}'
                                     + '@cluster0.8pa03kh.mongodb.net/'
-                                    + '?retryWrites=true&w=majority')
+                                    + '?retryWrites=true&w=majority', 27017)
 
             print("Connecting to Mongo in the cloud.")
 
