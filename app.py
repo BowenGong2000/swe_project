@@ -47,6 +47,8 @@ def home():
 @app.route('/homepage', methods = ['GET', 'POST'])
 @login_required
 def homepage():
+  if session["user"]['email'].split('_')[0] == "Manager":
+    return render_template('manager_homepage.html')
   project_lst = homepage_form(info = None)
   return render_template('homepage.html', project_lst = project_lst)
 
@@ -109,7 +111,9 @@ def account():
     image_file = url_for('static', filename='images/' + 'steven.jpg')
     return render_template('account.html', title='Account', image_file=image_file)
 
-
+@app.route("/manager_homepage", methods=['GET', 'POST'])
+def manager_homepage():
+  return render_template("manager_homepage.html")
 
 if __name__ == '__main__':    
     app.run(debug=True)
