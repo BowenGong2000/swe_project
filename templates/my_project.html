@@ -18,11 +18,11 @@
         <title>Home</title>
         <header> 
             <div id="header" class="left">
-                <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-                <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
-                <a href="{{url_for('my_project') }}" class="btn">My Project</a>
-                <a href="{{url_for('account') }}" class="btn">Account</a>
-                <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
+              <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+              <a href="{{url_for('my_application') }}" class="btn">Applications</a>
+              <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+              <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
+              <a href="{{url_for('account') }}" class="btn">Account</a>
             </div>
         </header>
     </head>
@@ -46,7 +46,7 @@
         <br /> 
 
             <header>
-                <h1><strong>My Projects</strong></h1>
+                <h1><strong>My Own Projects</strong></h1>
             </header>
         </div>
     </body>
@@ -54,7 +54,11 @@
     <body>
       <main class="table">
           <section class="table__header">
-              <h1><strong>Projects List</strong></h1>
+              <h1><strong>(Sponsor Only)</strong></h1>
+              <div class="input-group">
+                <input type="search" placeholder="Search Id/Name...">
+                <img src="static/images/search.png" alt="">
+              </div>
           </section>
           <section class="table__body">
               <table>
@@ -62,32 +66,17 @@
                       <tr>
                           <th> Project Id
                           <th> Name
-                          <th> Sponsor
-                          <th> Members
-                          <th> Export
+                          <th> Applications
+                          <th> Status
                       </tr>
                   </thead>
                   <tbody>
                         <tr>
                             <td> 1001 </td>
-
                             <td> Project_name1 </td>
-
-                            
-                            <td> <img src="static/images/steven.jpg" alt=""> Sponsor1 </td>
-                            <td> s1, s2, s3 </td>
-                            <td> 
-                            <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
-                            <div class="export__file">
-                                <input type="checkbox" id="export-file">
-                                <div class="export__file-options">
-                                    <label>Export As &nbsp; &#10140;</label>
-                                    <label for="export-file" id="toPDF">PDF <img src="static/images/pdf.png" alt=""></label>
-                                    <label for="export-file" id="toJSON">JSON <img src="static/images/json.png" alt=""></label>
-                                    <label for="export-file" id="toCSV">CSV <img src="static/images/csv.png" alt=""></label>
-                                    <label for="export-file" id="toEXCEL">EXCEL <img src="static/images/excel.png" alt=""></label>
-                                </div>
-                            </div>
+                            <td> (Button) </td>
+                            <td>
+                              <p class="status delivered">Full</p>
                             </td>
                         </tr>
                   </tbody>

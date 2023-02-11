@@ -2,11 +2,11 @@
 {% block content %}
     <header> 
         <div id="header" class="left">
-            <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-            <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
-            <a href="{{url_for('my_project') }}" class="btn">My Project</a>
-            <a href="{{url_for('account') }}" class="btn">Account</a>
-            <a href="/user/signout" class="btn">Sign Out</a>
+          <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+          <a href="{{url_for('my_application') }}" class="btn">Applications</a>
+          <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+          <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
+          <a href="{{url_for('account') }}" class="btn">Account</a>
         </div>
         
 
@@ -38,9 +38,6 @@
 
               <h2 class="left">Here you can manage your account.</h2>
                 <div class="left">
-                    <a href="/user/signout" class="btn btn--secondary">My Current Projects</a>
-                    <a href="/user/signout" class="btn btn--secondary">My Applications</a>
-                    <a href="/user/signout" class="btn btn--secondary">Saved Projects</a>
                     <a href="/user/signout" class="btn btn--secondary">Account Setting</a>
                 </div>
             
@@ -48,5 +45,4 @@
           
           </div>
 
-        
 {% endblock %}

@@ -91,6 +91,10 @@ def single_post(project):
 def my_project():
   return render_template('my_project.html')
 
+@app.route('/my_application')
+def my_application():
+  return render_template('my_application.html')
+
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():
   name = session['name']

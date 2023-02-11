@@ -30,7 +30,7 @@
         <br /> 
 
             <header>
-                <h1><strong>Projects Finder</strong></h1>
+                <h1><strong>My Applications</strong></h1>
             </header>
         </div>
     </body>
@@ -38,10 +38,10 @@
     <body>
       <main class="table">
           <section class="table__header">
-              <h1><strong>Projects List</strong></h1>     
+              <h1><strong>Application List</strong></h1>
               <div class="input-group">
-                  <input type="search" placeholder="Search Id/Name/Owner/Profession...">
-                  <img src="static/images/search.png" alt="">
+                <input type="search" placeholder="Search Id/Name/Sponsor...">
+                <img src="static/images/search.png" alt="">
               </div>
           </section>
           <section class="table__body">
@@ -51,48 +51,23 @@
                           <th> Project Id
                           <th> Name
                           <th> Sponsor
-                          <th> Profession
-                          <th> Project Status
-                          <th> Posted Date
-                          <th> Export
+                          <th> Status(Link for edit/drop)
                       </tr>
                   </thead>
                   <tbody>
-                        {% for i in range(project_lst |length)%}
                         <tr>
-                            <td> {{i}} </td>
-
-                            <td><strong>
-                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" class="'btn">{{project_lst[i].name}}</a>
-                            </strong></td>
-                            
-
-                            <td> <img src="static/images/steven.jpg" alt=""> {{project_lst[i].account.name}} </td>
-                            <td> {{project_lst[i].department_name}} </td>
+                            <td> 1001 </td>
+                            <td> Project_name1 </td>                         
+                            <td> <img src="static/images/steven.jpg" alt=""> Sponsor1 </td>
                             <td>
-                            <p class="status delivered">Available</p>
+                            <p class="status delivered">Enrolled</p>
                             </td>
-                            <td> <strong>{{project_lst[i].post_date}}</strong></td>
-                            <td> 
-                            <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
-                            <div class="export__file">
-                                <input type="checkbox" id="export-file">
-                                <div class="export__file-options">
-                                    <label>Export As &nbsp; &#10140;</label>
-                                    <label for="export-file" id="toPDF">PDF <img src="static/images/pdf.png" alt=""></label>
-                                    <label for="export-file" id="toJSON">JSON <img src="static/images/json.png" alt=""></label>
-                                    <label for="export-file" id="toCSV">CSV <img src="static/images/csv.png" alt=""></label>
-                                    <label for="export-file" id="toEXCEL">EXCEL <img src="static/images/excel.png" alt=""></label>
-                                </div>
-                            </div>
-                            </td>
-                        {%endfor%}
                         </tr>
                   </tbody>
               </table>
           </section>
       </main>
-  </body>
+    </body>
   <br>
   <br>
   <br>
