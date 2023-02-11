@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home</title>
+
+        <!-- Our CSS -->
         <link rel="stylesheet" href="/static/forms.css">
         <link rel="stylesheet" href="/static/normalize.css">
         <link rel="stylesheet" href="/static/style.css">
         <link rel="stylesheet" href="/static/footer_style.css">
+
+        <title>Home</title>
         <header> 
             <div id="header" class="left">
                 <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+                <a href="{{url_for('my_application') }}" class="btn">Applications</a>
                 <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
-                <a href="{{url_for('my_project') }}" class="btn">My Project</a>
+                <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
                 <a href="{{url_for('account') }}" class="btn">Account</a>
-                <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
             </div>
         </header>
     </head>
 
     <body>  
         <div>
+
+        <br /> 
+        <br /> 
+
             <header>
-                <h1>Projects Finder</h1>
+                <h1><strong>Projects Finder</strong></h1>
             </header>
             <a href="/about_us" class="btn btn--secondary">About Us</a>
         </div>
@@ -31,7 +39,7 @@
     <body>
       <main class="table">
           <section class="table__header">
-              <h1>Projects List</h1>
+              <h1><strong>Projects List</strong></h1>     
               <div class="input-group">
                   <input type="search" placeholder="Search Id/Name/Owner/Profession...">
                   <img src="static/images/search.png" alt="">
@@ -42,19 +50,24 @@
                   <thead>
                       <tr>
                           <th> Project Id
-                          <th> Name
+                          <th> Project Name
                           <th> Sponsor
-                          <th> Profession
-                          <th> Application Status
-                          <th> Application Deadline
-                          <th> More Details
+                          <th> Department
+                          <th> Project Status
+                          <th> Posted Date
+                          <th> Export
                       </tr>
                   </thead>
                   <tbody>
                         {% for i in range(project_lst |length)%}
                         <tr>
                             <td> {{i}} </td>
-                            <td> {{project_lst[i].name}} </td>
+
+                            <td><strong>
+                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" class="'btn">{{project_lst[i].name}}</a>
+                            </strong></td>
+                            
+
                             <td> <img src="static/images/steven.jpg" alt=""> {{project_lst[i].account.name}} </td>
                             <td> {{project_lst[i].department_name}} </td>
                             <td>
@@ -62,8 +75,8 @@
                             </td>
                             <td> <strong>{{project_lst[i].post_date}}</strong></td>
                             <td> 
+                            <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
                             <div class="export__file">
-                                <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
                                 <input type="checkbox" id="export-file">
                                 <div class="export__file-options">
                                     <label>Export As &nbsp; &#10140;</label>

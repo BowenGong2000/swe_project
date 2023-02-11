@@ -5,10 +5,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-
         <!-- Our CSS -->
         <link rel="stylesheet" href="/static/forms.css">
         <link rel="stylesheet" href="/static/normalize.css">
@@ -18,26 +14,14 @@
         <title>Home</title>
         <header> 
             <div id="header" class="left">
-              <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
-              <a href="{{url_for('my_application') }}" class="btn">Applications</a>
-              <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
-              <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
-              <a href="{{url_for('account') }}" class="btn">Account</a>
+                <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+                <a href="{{url_for('my_application') }}" class="btn">Applications</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+                <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
+                <a href="{{url_for('account') }}" class="btn">Account</a>
             </div>
         </header>
     </head>
-
-  <body>
-    {% for message in get_flashed_messages() %}
-  
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
-    {% endfor %}
-
-  </body>
 
     <body>  
         <div>
@@ -46,40 +30,40 @@
         <br /> 
 
             <header>
-                <h1><strong>My Own Projects</strong></h1>
-                <small>Here are all the projects you have created</small>
+                <h1><strong>My Applications</strong></h1>
             </header>
-          </br>
         </div>
     </body>
 
     <body>
       <main class="table">
           <section class="table__header">
-              <h1><strong>(Sponsor Only)</strong></h1>
+              <h1><strong>Application List</strong></h1>
           </section>
           <section class="table__body">
               <table>
                   <thead>
                       <tr>
-                          <th> Project Status
                           <th> Project Id
-                          <th> Project Name
-                          <th> Current/Required
-                          <th> Manage Applicants
-                          <th> Manage Project information
+                          <th> Project Name                           
+                          <th> Sponsor
+                          <th> Department
+                          <th> Posted Date 
+                          <th> Application Status
+                          <th> Manage Application
                       </tr>
                   </thead>
                   <tbody>
                         <tr>
-                            <td>
-                              <p class="status cancelled">NOT FULL</p>
-                            </td>
                             <td> 1001 </td>
-                            <td> Project_name1 </td>
-                            <td> 11/19 </td>
-                            <td> (Button) </td>
-                            <td> (Button) </td>
+                            <td> Project_name1 </td>                         
+                            <td> <img src="static/images/steven.jpg" alt=""> Sponsor1 </td>
+                            <td> CS </td> 
+                            <td> 02-11-2023 </td> 
+                            <td>
+                            <p class="status delivered">Approved</p>
+                            </td>
+                            <td> (edit/drop) </td> 
                         </tr>
                   </tbody>
               </table>

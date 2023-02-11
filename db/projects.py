@@ -14,10 +14,11 @@ GPA = 'GPA'
 LENGTH = 'project_duration'
 SKILL = 'skill requirements'
 POST_DATE = 'post_date'
+DESCRIP = 'description'
 
 # We expect the project database to change frequently:
 # This list contains our mandatory fields
-REQUIRED_FLDS = [ACCOUNT, NUM_MEMBERS, MAJOR, SCHOOL_YEAR, SKILL, POST_DATE]
+REQUIRED_FLDS = [ACCOUNT, NUM_MEMBERS, MAJOR, SCHOOL_YEAR, POST_DATE]
 projects = {TEST_PROJECT_NAME:
             {NUM_MEMBERS: 7,
                 DEPARTMENT: 'computer_engineering',
@@ -25,7 +26,8 @@ projects = {TEST_PROJECT_NAME:
                 SCHOOL_YEAR: 'sophomore and beyond',
                 GPA: 3.5,
                 LENGTH: '4 months',
-                SKILL: 'C++, python'},
+                SKILL: 'C++, python',
+                DESCRIP: 'its a default message'},
             'project2':
             {NUM_MEMBERS: 9,
                 DEPARTMENT: 'mathematics',
@@ -33,7 +35,8 @@ projects = {TEST_PROJECT_NAME:
                 SCHOOL_YEAR: 'sophomore and beyond',
                 GPA: 3.5,
                 LENGTH: '6 months',
-                SKILL: 'advanced calculus, data modelling'}
+                SKILL: 'advanced calculus, data modelling',
+                DESCRIP: 'its a default message'}
             }
 
 PROJECT_KEY = 'name'

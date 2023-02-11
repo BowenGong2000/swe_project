@@ -1,4 +1,4 @@
-from flask import Flask, url_for, render_template, session, request, redirect, send_file, make_response
+from flask import Flask, url_for, render_template, session, request, redirect, send_file, make_response, flash
 import pymongo
 import method as mth
 from flask_restx import Resource
@@ -74,15 +74,26 @@ def add_project():
       'GPA' :request.form['gpa'],
       'project_duration': request.form['length'],
       'skill requirements': request.form['skill'],
-      'post_date': datetime.datetime.today()
+      'post_date': datetime.datetime.today(),
+      "description": request.form["description"]
       #todo need request("FS")
     }
     pj.add_project(proj_name, project_details)
-    return render_template('add_p_success.html')
+    flash("Your Project Created Successfully!")
+    return render_template('my_project.html')
+
+@app.route('/single_post/<project>', methods=['GET', 'POST'])
+def single_post(project):
+  project = pj.get_project_details(project)
+  return render_template('post.html', project = project)
 
 @app.route('/my_project')
 def my_project():
   return render_template('my_project.html')
+
+@app.route('/my_application')
+def my_application():
+  return render_template('my_application.html')
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():
