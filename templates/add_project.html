@@ -42,7 +42,7 @@
             <label for="member need">No. of Member Needed</label>
             <input type="number" name="member number" class="field" required >
     
-            <label for="major">Major Requirment</label>
+            <label for="major">Intended Majors</label>
             <input type="major" name="major" class="field" required>
             
             <label for="school year">School Year Requirement</label>
@@ -64,12 +64,14 @@
               <option value="Other">No restrictions</option>
             </select>
 
-
             <label for="length">Project Length (e.g. 3 months)</label>
             <input type="length" name="length" class="field" required>
 
             <label for="skill">Skill Requirment (Please list preferable skill sets)</label>
-            <input type="skill" name="skill" class="field" required>
+            <input type="skill" name="skill" class="field">
+
+            <label for="description">Describe your project</label>
+            <input id="textboxid" type="description" name="description" class="field"s>
 
             <label for="FS">Upload File (should be smaller than 75 kB) </label>
             <input type="file" id="FS" class="field"/>

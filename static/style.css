@@ -120,3 +120,9 @@ body {
   outline: 0;
   box-shadow: none;
 }
+
+#textboxid
+{
+    height:200px;
+    font-size:14pt;
+}

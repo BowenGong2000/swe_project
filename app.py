@@ -74,14 +74,15 @@ def add_project():
       'GPA' :request.form['gpa'],
       'project_duration': request.form['length'],
       'skill requirements': request.form['skill'],
-      'post_date': datetime.datetime.today()
+      'post_date': datetime.datetime.today(),
+      "description": request.form["description"]
       #todo need request("FS")
     }
     pj.add_project(proj_name, project_details)
     flash("Your Project Created Successfully!")
     return render_template('my_project.html')
 
-@app.route('/single_post/<project>')
+@app.route('/single_post/<project>', methods=['GET', 'POST'])
 def single_post(project):
   project = pj.get_project_details(project)
   return render_template('post.html', project = project)
