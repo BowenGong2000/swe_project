@@ -18,7 +18,7 @@ DESCRIP = 'description'
 
 # We expect the project database to change frequently:
 # This list contains our mandatory fields
-REQUIRED_FLDS = [ACCOUNT, NUM_MEMBERS, MAJOR, SCHOOL_YEAR, SKILL, POST_DATE, DESCRIP]
+REQUIRED_FLDS = [ACCOUNT, NUM_MEMBERS, MAJOR, SCHOOL_YEAR, POST_DATE]
 projects = {TEST_PROJECT_NAME:
             {NUM_MEMBERS: 7,
                 DEPARTMENT: 'computer_engineering',
