@@ -115,5 +115,9 @@ def account():
 def manager_homepage():
   return render_template("manager_homepage.html")
 
+@app.route('/about_us', methods = ['GET'])
+def about_us():
+  return render_template("about_us.html")
+
 if __name__ == '__main__':    
     app.run(debug=True)

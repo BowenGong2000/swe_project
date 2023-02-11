@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" href="/static/forms.css">
+        <link rel="stylesheet" href="/static/normalize.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="/static/footer_style.css">
+        <header> 
+            <div id="header" class="left">
+                <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+                <a href="{{url_for('my_project') }}" class="btn">My Project</a>
+                <a href="{{url_for('account') }}" class="btn">Account</a>
+                <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
+            </div>
+        </header>
+    </head>
+
+<section id="aboutus">
+    <h2>About Us</h2>
+        <p>Our community of students, faculty, and alumni is dedicated to innovation, entrepreneurship, and engineering for social impact.</p >
+            <div class="cards">
+        <div class="card">
+            <img src="static/images/study1.png" alt="img">
+            <h3>Our Goals</h3>
+        <p>Welcome to our project finder web page for college students! Our aim is to provide a centralized platform for students to discover and apply for research opportunities in their areas of interest. We understand that finding research projects can be a time-consuming and challenging process, especially for college students who are new to the research world or have limited connections in their field of study. Our project finder web page is designed to streamline this process and help students find research opportunities that align with their academic and career goals.</p >
+        </div>
+        <div class="card">
+            <img src="static/images/study1.png" alt="img">
+            <h3>Opportunities</h3>
+            <p>Our web page offers a user-friendly interface that enables students to search for projects by specifying the research area, academic level, project duration, and other relevant criteria. In addition, we provide detailed information about each project, including the research topic, project description, required skills, and contact information for the faculty member leading the project. Students can easily create a profile, save their favorite projects, and apply for projects directly through the platform.</p >
+        </div>
+        <div class="card">
+            <img src="static/images/study1.png" alt="img">
+            <h3>Our Expectations</h3>
+            <p>We believe that our project finder web page will enable students to explore their interests, gain valuable research experience, and develop meaningful connections with faculty members and other students in their research area. We are excited to offer this resource and support the research aspirations of college students.</p >
+        </div>
+</div>
+     </section>
+</html>
