@@ -16,6 +16,9 @@ Cloud deployment: Heroku
 Frontend: React
 ###################################
 
+Deployed to Heroku at
+https://project-finder.herokuapp.com/
+
 Project Setup Update: 
 
 1. install pymongo, 
