@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" href="/static/forms.css">
+        <link rel="stylesheet" href="/static/normalize.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="/static/contact.css">
+        <link rel="stylesheet" href="/static/footer_style.css">
+        <header> 
+            <div id="header" class="left">
+                <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
+                <a href="{{url_for('add_project') }}" class="btn">Add Project</a>
+                <a href="{{url_for('my_project') }}" class="btn">My Project</a>
+                <a href="{{url_for('account') }}" class="btn">Account</a>
+                <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
+            </div>
+        </header>
+    </head>
+
+<body>
+    <br>
+    <br>
+	<contact_h1>Contact Us</contact_h1>
+	<main>
+		<section class="contact">
+			<h2>Phone</h2>
+			<p>1-646-724-3912</p>
+		</section>
+		<section class="contact">
+			<h2>Email</h2>
+			<p><a href="mailto:support@mywebsite.com">support@mywebsite.com</a></p>
+		</section>
+		<section class="contact">
+			<h2>Address</h2>
+			<p>6 MetroTech Center<br>
+                Brooklyn, NY 11201</p>
+		</section>
+		<section class="map">
+			<h2>Map</h2>
+            <br>
+			<div id="map"></div>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaTeOLiJa_Ymy7yb-ovkdVhLJSMb7DarE"></script>
+			<script>
+				function initMap() {
+					var location = {lat: 40.6943, lng: -73.9867}; // Update with your latitude and longitude
+					var map = new google.maps.Map(document.getElementById("map"), {
+						zoom: 15,
+						center: location
+					});
+					var marker = new google.maps.Marker({
+						position: location,
+						map: map
+					});
+				}
+			</script>
+			<script async defer
+		        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaTeOLiJa_Ymy7yb-ovkdVhLJSMb7DarE&callback=initMap">
+		    </script>
+		</section>
+	</main>
+</body>
+</html>

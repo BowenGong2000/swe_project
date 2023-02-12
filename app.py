@@ -130,5 +130,9 @@ def manager_homepage():
 def about_us():
   return render_template("about_us.html")
 
+@app.route('/contact_us', methods = ['GET'])
+def contact_us():
+  return render_template("contact.html")
+
 if __name__ == '__main__':    
     app.run(debug=True)
