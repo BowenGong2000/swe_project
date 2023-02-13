@@ -40,10 +40,10 @@
       <main class="table">
           <section class="table__header">
               <h1><strong>Projects List</strong></h1>     
-              <div class="input-group">
-                  <input type="search" placeholder="Search Id/Name/Owner/Profession...">
+              <form class="input-group" method = "POST" action = "/homepage_search">
+                  <input type="search" name="key_word" placeholder="Search Id/Name/Owner/Profession..." onkeyup="if (event.key === 'Enter') { this.form.submit(); }">
                   <img src="static/images/search.png" alt="">
-              </div>
+              </form>
           </section>
           <section class="table__body">
               <table>

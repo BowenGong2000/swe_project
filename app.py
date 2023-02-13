@@ -6,6 +6,8 @@ from functools import wraps
 import db.projects as pj
 import os
 import datetime
+import difflib
+import heapq
 
 
 app = Flask(__name__)
@@ -27,14 +29,46 @@ def login_required(f):
 
 #export data from database
 #todo give top matches
-def homepage_form(info = None):
-  temp_project_lst = pj.get_projects_dict()
+def homepage_form(key_word = None):
+  temp_project_dict = pj.get_projects_dict()
   project_lst = []
-  for key in temp_project_lst:
-    if (datetime.datetime.today() - temp_project_lst[key]['post_date']).days < 90:
-      temp_project_lst[key]['post_date'] = temp_project_lst[key]['post_date'].strftime("%m-%d-%Y")
-      project_lst.append(temp_project_lst[key])
-  return project_lst
+  for key in temp_project_dict:
+    if (datetime.datetime.today() - temp_project_dict[key]['post_date']).days < 90:
+      temp_project_dict[key]['post_date'] = temp_project_dict[key]['post_date'].strftime("%m-%d-%Y")
+      project_lst.append(temp_project_dict[key])
+    else:
+      temp_project_dict.pop(key)
+  if not key_word or not temp_project_dict:
+    return project_lst
+  return rank_for_relation_to_key_work(temp_project_dict, key_word.lower())
+
+#transfer dict to list store with content as plain text and keys
+def dict_to_lst_of_string(project_dict):
+  ret_lst = []
+  for key in project_dict:
+    temp = ''
+    for sub_key in project_dict[key]:
+      if sub_key == 'account':
+        temp = temp + project_dict[key]["account"]['email'] + " " + project_dict[key]["account"]['name']
+      elif isinstance(project_dict[key][sub_key], str):
+        temp += " " + project_dict[key][sub_key]
+    ret_lst.append([key, temp.lower()])
+  return ret_lst
+
+#return ranked project based on relation to key_word
+def rank_for_relation_to_key_work(project_dict, key_word):
+  unrank_lst = dict_to_lst_of_string(project_dict)
+  heap = []
+  ret_project_lst = []
+  for ele in unrank_lst:
+    score = difflib.SequenceMatcher(None, key_word, ele[1]).ratio()
+    heapq.heappush(heap, (-score, ele[0]))
+  while len(heap) > 0:
+    curr_proj = project_dict[heapq.heappop(heap)[1]]
+    ret_project_lst.append(curr_proj)
+  return ret_project_lst
+  
+
 
 # Routes
 from server import routes
@@ -49,13 +83,13 @@ def home():
 def homepage():
   if session["user"]['email'].split('_')[0] == "Manager":
     return render_template('manager_homepage.html')
-  project_lst = homepage_form(info = None)
+  project_lst = homepage_form()
   return render_template('homepage.html', project_lst = project_lst)
 
 @app.route('/homepage_local', methods=['GET', 'POST'])
 def homepage_local():
   #todo return homepage base on account passed in through url
-  project_lst = homepage_form(info = None)
+  project_lst = homepage_form()
   return render_template('homepage.html', project_lst = project_lst)
 
 @app.route('/add_project', methods=['GET', 'POST'])
@@ -97,18 +131,9 @@ def my_application():
 
 @app.route('/homepage_search', methods=['GET', 'POST'])
 def homepage_search():
-  name = session['name']
-  email = session['phone']
-  phone = session['email']
   key_word = request.form['key_word']
-  
-  # if key_word != None:
-    # execute something that returns everything related to the keyword
-    
-
-  # unfinished
-
-  return render_template('/homepage.html')
+  project_lst = homepage_form(key_word)
+  return render_template('homepage.html', project_lst = project_lst)
 
 
 @app.route('/images/<file_name>', methods = ['GET'])
@@ -132,7 +157,7 @@ def about_us():
 
 @app.route('/contact_us', methods = ['GET'])
 def contact_us():
-  return render_template("contact.html")
+  return render_template("contact_us.html")
 
 if __name__ == '__main__':    
     app.run(debug=True)
