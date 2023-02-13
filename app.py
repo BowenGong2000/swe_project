@@ -32,15 +32,15 @@ def login_required(f):
 def homepage_form(key_word = None):
   temp_project_dict = pj.get_projects_dict()
   project_lst = []
+  project_dict = {}
   for key in temp_project_dict:
-    if (datetime.datetime.today() - temp_project_dict[key]['post_date']).days < 90:
+    if (datetime.datetime.today() - temp_project_dict[key]['post_date']).days < 90 and temp_project_dict[key]['if_approve']:
       temp_project_dict[key]['post_date'] = temp_project_dict[key]['post_date'].strftime("%m-%d-%Y")
       project_lst.append(temp_project_dict[key])
-    else:
-      temp_project_dict.pop(key)
+      project_dict[key] = temp_project_dict[key]
   if not key_word or not temp_project_dict:
     return project_lst
-  return rank_for_relation_to_key_work(temp_project_dict, key_word.lower())
+  return rank_for_relation_to_key_work(project_dict, key_word.lower())
 
 #transfer dict to list store with content as plain text and keys
 def dict_to_lst_of_string(project_dict):
@@ -109,7 +109,8 @@ def add_project():
       'project_duration': request.form['length'],
       'skill requirements': request.form['skill'],
       'post_date': datetime.datetime.today(),
-      "description": request.form["description"]
+      "description": request.form["description"],
+      "if_approve": True
       #todo need request("FS")
     }
     pj.add_project(proj_name, project_details)

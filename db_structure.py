@@ -1,4 +1,5 @@
 import pymongo
+import db.projects as pj
 
 """
 this file is used for checking currently available data.
@@ -23,5 +24,6 @@ def curr_data():
     var = db2.users.find()
     for doc in var:
         print(doc)
+    print(pj.get_projects_dict())
 
 curr_data()
