@@ -30,7 +30,12 @@ Project Setup Update:
 4. run command
     sed -i -e 's/\r$//' server.sh
 5. run command
-    ./server.sh
+    for Windows users: 
+        ./server.sh
+
+    for Mac users: 
+        ./run.sh-e
+        
 Go to http://127.0.0.1:5000
 The login and register page should appears. 
 
