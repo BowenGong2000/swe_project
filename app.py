@@ -157,7 +157,7 @@ def about_us():
 
 @app.route('/contact_us', methods = ['GET'])
 def contact_us():
-  return render_template("contact_us.html")
+  return render_template("contact.html")
 
 if __name__ == '__main__':    
     app.run(debug=True)
