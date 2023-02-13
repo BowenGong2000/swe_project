@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="/static/footer_style.css">
 
         <title>Home</title>
-        <header> 
             <div id="header" class="left">
                 <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
                 <a href="{{url_for('my_application') }}" class="btn">Applications</a>
@@ -20,17 +19,16 @@
                 <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
                 <a href="{{url_for('account') }}" class="btn">Account</a>
             </div>
-        </header>
     </head>
 
     <body>  
         <div>
-
-        <br /> 
-        <br /> 
-
             <header>
-                <h1><strong>Projects Finder</strong></h1>
+                <div class="header-container">
+                    <h3>Discover Project that align with your interests</h3>
+                    <br>
+                    <div class="square-window">A research project matcher connects college students with projects that match their interests and skills</div>
+                </div>
             </header>
             <a href="/about_us" class="btn btn--secondary">About Us</a>
         </div>
