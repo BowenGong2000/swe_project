@@ -19,6 +19,15 @@
                 </div>
               <h1 class="center">Hello!  {{ session['user']['name'] }}</h1>
               <p class="center">You are currently logged in.</p>
+              
+              <!-- a function to upload a profile image,incomplete yet -->
+              <!-- <input type="file"  accept="image/*" name="image" id="file" style="display: none;"> -->
+              <form action="/action_page.php">
+                <label for="img">Upload your profile</label>
+                <input type="file" id="img" name="img" accept="image/*">
+              </form>
+              
+              <br/>
         
               <div class="center">
                 <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
