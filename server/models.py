@@ -6,9 +6,13 @@ from passlib.hash import pbkdf2_sha256
 import pymongo
 import uuid
 
-#Database
-client = pymongo.MongoClient('mongodb+srv://tracyzhu0608:1234@cluster0.8pa03kh.mongodb.net/?retryWrites=true&w=majority', 27017)
+# Database
+name = 'mongodb+srv://tracyzhu0608:1234'
++ '@cluster0.8pa03kh.mongodb.net/'
++ '?retryWrites=true&w=majority'
+client = pymongo.MongoClient(name, 27017)
 db = client.user_login_system
+
 
 class User:
     def start_session(self, user):
