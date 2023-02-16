@@ -7,10 +7,9 @@ import pymongo
 import uuid
 
 # Database
-name = 'mongodb+srv://tracyzhu0608:1234'
-+ '@cluster0.8pa03kh.mongodb.net/'
-+ '?retryWrites=true&w=majority'
-client = pymongo.MongoClient(name, 27017)
+a = 'mongodb+srv://tracyzhu0608:1234'
+b = '@cluster0.8pa03kh.mongodb.net/?retryWrites=true&w=majority'
+client = pymongo.MongoClient(a+b, 27017)
 db = client.user_login_system
 
 
