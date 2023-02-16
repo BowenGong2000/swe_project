@@ -8,8 +8,8 @@
         <!-- Our CSS -->
         <link rel="stylesheet" href="/static/forms.css">
         <link rel="stylesheet" href="/static/normalize.css">
-        <link rel="stylesheet" href="/static/style.css">
         <link rel="stylesheet" href="/static/footer_style.css">
+        <link rel="stylesheet" href="/static/style.css">
 
         <title>Home</title>
             <div id="header" class="left">
@@ -20,7 +20,6 @@
                 <a href="{{url_for('account') }}" class="btn">Account</a>
             </div>
     </head>
-
     <body>  
         <div>
             <header>
@@ -28,10 +27,13 @@
                     <h3>Discover Project that align with your interests</h3>
                     <br>
                     <div class="square-window">A research project matcher connects college students with projects that match their interests and skills</div>
+                    <br>
+                    <h3><a href="/about_us" class="btn btn--secondary" style=" background-color:#57068c;">About Us</a></h3>
                 </div>
             </header>
-            <a href="/about_us" class="btn btn--secondary">About Us</a>
         </div>
+    </br>
+    </br>
       <main class="table">
           <section class="table__header">
               <h1><strong>Projects List</strong></h1>     
@@ -44,13 +46,13 @@
               <table>
                   <thead>
                       <tr>
-                          <th> Project Id
+                          <th> ID
                           <th> Project Name
                           <th> Sponsor
                           <th> Department
                           <th> Project Status
                           <th> Posted Date
-                          <th> Export
+                          <th> More
                       </tr>
                   </thead>
                   <tbody>
@@ -59,7 +61,8 @@
                             <td> {{i}} </td>
 
                             <td><strong>
-                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" class="'btn">{{project_lst[i].name}}</a>
+                            <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="color:#57068c;">
+                                {{project_lst[i].name}}</a>
                             </strong></td>
                             
 
@@ -69,19 +72,24 @@
                             <p class="status delivered">Available</p>
                             </td>
                             <td> <strong>{{project_lst[i].post_date}}</strong></td>
+
+
                             <td> 
                             <label for="export-file" class="export__file-btn"><img src="static/images/more_details.png" alt=""></label>
-                            <div class="export__file">
-                                <input type="checkbox" id="export-file">
+                            <div class="export__file" >
+                                <input type="checkbox" id="export-file" x>
                                 <div class="export__file-options">
-                                    <label>Export As &nbsp; &#10140;</label>
-                                    <label for="export-file" id="toPDF">PDF <img src="static/images/pdf.png" alt=""></label>
-                                    <label for="export-file" id="toJSON">JSON <img src="static/images/json.png" alt=""></label>
-                                    <label for="export-file" id="toCSV">CSV <img src="static/images/csv.png" alt=""></label>
-                                    <label for="export-file" id="toEXCEL">EXCEL <img src="static/images/excel.png" alt=""></label>
-                                </div>
+                                    <label for="export-file" id="toPDF" >
+                                        <a href="{{url_for('single_post', project = project_lst[i].name)}}" style="text-decoration: none;">
+                                        View Details &nbsp; &#10140;</a>
+                                    </label>
+
+                                    <label for="export-file" id="toJSON">Download &nbsp; &#10140;</label>
+
+                                    <label for="export-file" id="toJSON">Apply &nbsp; &#10140;</label>
                             </div>
                             </td>
+
                         {%endfor%}
                         </tr>
                   </tbody>

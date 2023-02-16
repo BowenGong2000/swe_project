@@ -59,7 +59,8 @@ body {
 /* Buttons */
 .btn {
   margin: 0 0 10px;
-  padding: 20px 30px 10px;
+  margin-right: 10px;
+  padding: 15px 20px 10px;
   font-size: 14px;
   line-height: 20px;
   text-transform: uppercase;
@@ -67,13 +68,19 @@ body {
   font-weight: 600;
   text-decoration: none;
   color: var(--white);
-  border: none;
-  border-radius: 4px;
-  outline: none;
   cursor: pointer;
   display: inline-block;
   background: var(#57068c);
   transition: color .15s ease, background-color .15s ease;
+}
+.btn-outline-dark{
+  color:#57068c;
+  font-size: 14px;
+}
+
+.btn-outline-dark:hover{
+  color:var(--white);
+  background-color: #57068c;
 }
 
 .right {
@@ -223,4 +230,15 @@ body {
     padding: 30px;
     box-sizing: border-box;
   }
+
+  .table-striped>tbody>tr:nth-child(odd)>th {
+      background-color: #f1e5fc;
+  }
+
+  .table-striped>tbody>tr:hover>th {
+      background-color: #57068c;
+      color:#fff;
+  }
+
+  
   

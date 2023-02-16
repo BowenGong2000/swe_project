@@ -232,6 +232,10 @@ thead th.active,tbody td.active {
     color: #6c00bd;
 }
 
+label:hover {
+    color: #6c00bd;
+}
+
 .export__file {
     position: relative;
 }
@@ -294,7 +298,7 @@ thead th.active,tbody td.active {
 
 .export__file .export__file-options label:first-of-type{
     padding: 1rem 0;
-    background-color: #86e49d !important;
+    background-color: #efe0f8 !important;
 }
 
 .export__file .export__file-options label:hover{
@@ -307,3 +311,4 @@ thead th.active,tbody td.active {
     width: 2rem;
     height: auto;
 }
+
