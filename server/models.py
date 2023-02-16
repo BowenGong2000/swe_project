@@ -3,9 +3,12 @@ This file contain the functions and class for flask app.
 """
 from flask import jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
-from app import db
+import pymongo
 import uuid
 
+#Database
+client = pymongo.MongoClient('mongodb+srv://tracyzhu0608:1234@cluster0.8pa03kh.mongodb.net/?retryWrites=true&w=majority', 27017)
+db = client.user_login_system
 
 class User:
     def start_session(self, user):

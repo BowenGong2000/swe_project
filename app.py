@@ -1,5 +1,4 @@
 from flask import Flask, url_for, render_template, session, request, redirect, send_file, make_response, flash
-import pymongo
 import method as mth
 from flask_restx import Resource
 from functools import wraps
@@ -12,10 +11,6 @@ import heapq
 
 app = Flask(__name__)
 app.secret_key = 'hskfakgkajgalg' #random key
-
-#Database
-client = pymongo.MongoClient('mongodb+srv://tracyzhu0608:1234@cluster0.8pa03kh.mongodb.net/?retryWrites=true&w=majority', 27017)
-db = client.user_login_system
 
 # Decorators
 def login_required(f):
@@ -54,6 +49,7 @@ def dict_to_lst_of_string(project_dict):
         temp += " " + project_dict[key][sub_key]
     ret_lst.append([key, temp.lower()])
   return ret_lst
+
 
 #return ranked project based on relation to key_word
 def rank_for_relation_to_key_work(project_dict, key_word):
@@ -113,9 +109,16 @@ def add_project():
       "if_approve": True
       #todo need request("FS")
     }
+
+  if pj.check_if_exist(request.form['name']):
+    flash("Error: Project name already existed.")
+    return render_template('add_project.html')
+
+  else:
     pj.add_project(proj_name, project_details)
-    flash("Your Project Created Successfully!")
+    flash("Thank you for sharing your project with us.")
     return render_template('my_project.html')
+  
 
 @app.route('/single_post/<project>', methods=['GET', 'POST'])
 def single_post(project):

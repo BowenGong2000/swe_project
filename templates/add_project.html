@@ -4,9 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add your project</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="/static/normalize.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="/static/styles.css">
+
       <div id="header" class="left">
         <a href="{{url_for('homepage_local') }}" class="btn">Home</a>
         <a href="{{url_for('my_application') }}" class="btn">Applications</a>
@@ -14,14 +18,26 @@
         <a href="{{url_for('my_project') }}" class="btn">My Projects</a>
         <a href="{{url_for('account') }}" class="btn">Account</a>
       </div>
+
   </head>
+  {% for message in get_flashed_messages() %}
+    <div class="mx-auto" style="width: 1400px;" class = "mt-5">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" > 
+
+        <strong>{{message}}</strong> You should check in on the field below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+      </div>
+    </div>
+
+  {% endfor %}  
 
 <body>
     <div class="card-wrapper">
 
-        <div class="card2">
+        <div class="card2" style="width:800px;">
     
-          <h1 class="center">Create A New Project</h1>
+          <h1 class="center"> <strong>Create A New Project</strong></h1>
     
           <form action="http://127.0.0.1:5000/add_project" method="post">
 
@@ -69,7 +85,7 @@
             <input type="skill" name="skill" class="field">
 
             <label for="description">Describe your project</label>
-            <input id="textboxid" type="description" name="description" class="field"s>
+            <input style="height:200px;" type="description" name="description" class="field"s>
 
             <label for="FS">Upload File (should be smaller than 75 kB) </label>
             <input type="file" id="FS" class="field"/>
