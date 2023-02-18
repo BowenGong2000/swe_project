@@ -89,28 +89,65 @@ p {
     padding: 30px 0 0;
   }
 }
+/* ############################### */
 
-/* .sidebar {
-  position: sticky;
-  top: 60px;
-  max-height: max-content;
-  height: 100%;
-  margin-bottom: 0;
-  padding-top: 60px;
-  z-index: 1;
-}
+
 @media (min-width: 1250px){
   .sidebar {
-      position: sticky;
-      top: 60px;
-      max-height: max-content;
-      height: 100%;
-      margin-bottom: 0;
-      padding-top: 60px;
-      z-index: 1;
+    position: sticky;
+    margin: 10px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 10px 10px;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: center;
+    /* border-bottom-right-radius: 20px; */
   }
-} */
+}
 
+
+@media (min-width: 580px)
+{
+.avatar-box {
+    /* top: 0;
+    left: 0; */
+    width: 180px;
+    width: 180px;
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    border-radius: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+}
+
+
+@media (min-width: 1250px){
+  .main_content {
+    margin: 10px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 400px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 10px 10px;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: center;
+    /* border-bottom-right-radius: 20px; */
+  }
+}
+
+
+/* ############################### */
 @media only screen and (max-width: 520px) {
   .card {
     margin: 0 0 30px;
