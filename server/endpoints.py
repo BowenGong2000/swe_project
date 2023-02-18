@@ -7,7 +7,6 @@ from http import HTTPStatus
 from flask import Flask, request
 from flask_restx import Resource, Api, fields, Namespace
 from passlib.hash import pbkdf2_sha256
-import uuid
 
 import db.data_type as dtyp
 import db.projects as pj
@@ -328,9 +327,8 @@ class loginUser(Resource):
             check = pbkdf2_sha256.verify(pwd_ipt, pwd_db)
 
             if check:
-                user = usr.get_user_details(email)
                 return {"Auth-Key": pwd_db}
-        
+
         return ({MESSAGE: "Your login credentials are invalid"})
 
 
