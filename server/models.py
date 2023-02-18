@@ -58,16 +58,17 @@ class User:
     def login(self):
 
         user_email = request.form.get('email')
-
         user_exist = usr.user_exists(user_email)
 
-        """ Verify if input password match with db password """
+        if user_exist:
+            """ Verify if input password match with db password """
+            pwd_db = usr.get_user_password(user_email)
+            pwd_ipt = request.form.get('password')
 
-        pwd_db = usr.get_user_password(user_email)
-        pwd_ipt = request.form.get('password')
-        check = pbkdf2_sha256.verify(pwd_ipt, pwd_db)
+            check = pbkdf2_sha256.verify(pwd_ipt, pwd_db)
 
-        if user_exist and check:
-            user = usr.get_user_details(user_email)
-            return self.start_session(user)
+            if check:
+                user = usr.get_user_details(user_email)
+                return self.start_session(user)
+
         return jsonify({"error": "Invalid login credentials"}), 401

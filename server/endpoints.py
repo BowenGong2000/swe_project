@@ -6,6 +6,8 @@ The endpoint called `endpoints` will return all available endpoints.
 from http import HTTPStatus
 from flask import Flask, request
 from flask_restx import Resource, Api, fields, Namespace
+from passlib.hash import pbkdf2_sha256
+import uuid
 
 import db.data_type as dtyp
 import db.projects as pj
@@ -67,6 +69,8 @@ USER_LIST = f'/{LIST}'
 USER_LIST_NM = f'{USERS_NS}_list'
 USER_LIST_W_NS = f'{USERS_NS}/{LIST}'
 USER_ADD = f'/{USERS_NS}/{ADD}'
+USER_LOGIN = f'/{USERS_NS}/login'
+USER_SIGNUP = f'/{USERS_NS}/signup'
 
 SPONSOR_DICT = f'/{DICT}'
 SPONSOR_DICT_NM = f'{SPONSORS_NS}_dict'
@@ -275,6 +279,11 @@ user_fields = api.model('NewUser', {
     usr.PW: fields.String,
 })
 
+login_user_fields = api.model('CurrentUser', {
+    usr.EMAIL: fields.String,
+    usr.PW: fields.String,
+})
+
 
 @users.route(USER_ADD)
 class AddUser(Resource):
@@ -291,6 +300,69 @@ class AddUser(Resource):
         del request.json[usr.EMAIL]
         usr.add_user(email, request.json)
         return {MESSAGE: 'Project added.'}
+
+
+@users.route(USER_LOGIN)
+class loginUser(Resource):
+    """
+    Login in and retrun an auth key
+    """
+    @api.expect(login_user_fields)
+    def post(self):
+        """
+        Login in and retrun an auth key
+        """
+        print(f'{request.json=}')
+        email = request.json[usr.EMAIL]
+        del request.json[usr.EMAIL]
+
+        """ Check if the user exist """
+        user_exist = usr.user_exists(email)
+        if user_exist:
+
+            """ Verify if input password match with db password """
+            pwd_db = usr.get_user_password(email)
+            pwd_ipt = request.json[usr.PW]
+            del request.json[usr.PW]
+
+            check = pbkdf2_sha256.verify(pwd_ipt, pwd_db)
+
+            if check:
+                user = usr.get_user_details(email)
+                return {"Auth-Key": pwd_db}
+        
+        return ({MESSAGE: "Your login credentials are invalid"})
+
+
+@users.route(USER_SIGNUP)
+class signupUser(Resource):
+    """
+    Create user and retrun an auth key
+    """
+    @api.expect(user_fields)
+    def post(self):
+        """
+        Create user and retrun an auth key
+        """
+        print(f'{request.json=}')
+        email = request.json[usr.EMAIL]
+        del request.json[usr.EMAIL]
+
+        """
+        Check for same email address
+        """
+        if usr.user_exists(email):
+            return ({MESSAGE: "Email already existed"})
+
+        """ Encrypt password"""
+        pwd = request.json[usr.PW]
+        pwd_auth = pbkdf2_sha256.encrypt(pwd)
+        request.json[usr.PW] = pwd_auth
+
+        """ Add user """
+        usr.add_user(email, request.json)
+
+        return {"Auth-Key": pwd_auth}
 
 
 @sponsors.route(SPONSOR_LIST)
