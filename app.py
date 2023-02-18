@@ -1,12 +1,14 @@
+import os
 from flask import Flask, url_for, render_template, session, request, redirect, send_file, make_response, flash
-import method as mth
 from flask_restx import Resource
 from functools import wraps
-import db.projects as pj
-import os
 import datetime
 import difflib
 import heapq
+
+from user_login import User
+import db.projects as pj
+import method as mth
 
 
 app = Flask(__name__)
@@ -67,7 +69,6 @@ def login_required(f):
   return wrap
 
 # Routes
-from server.models import User
 
 @app.route('/user/signup', methods=['POST'])
 def signup():

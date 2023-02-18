@@ -6,10 +6,10 @@ data_types = {
     "Project": {'Name': 'info', 'Requirments': 'info',
                 'Start_time': 'time', 'Time_period': 'time',
                 'Salary': 'number'},
-    "Student": {'Name': 'info', 'Email_address': 'info',
+    "Application": {'Name': 'info', 'Email_address': 'info',
                 'Phone_number': 'info', 'Skills': 'info'},
-    "Sponsor": {'Name': 'info', 'Email_address': 'info',
-                'Phone_number': 'info'}
+    "User": {'Name': 'info', 'Email_address': 'info',
+                'Phone_number': 'info', 'Password': 'info'}
     }
 
 
