@@ -12,9 +12,6 @@ TEST_DATA_TYPE = 'Project'
 TEST_PROJECT_NAME = 'Test project'
 TEST_PROJECT  = pj.projects[TEST_PROJECT_NAME]
 
-TEST_USER_EMAIL = 'Test'
-TEST_USER = usr.users[TEST_USER_EMAIL]
-
 TEST_SPONSOR_NAME = 'Test sponsor'
 TEST_SPONSOR = sps.sponsors[TEST_SPONSOR_NAME]
 
@@ -42,23 +39,6 @@ def test_get_project_details():
     resp_json = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_PROJECT}').get_json()
     assert isinstance(resp_json, dict)
 
-
-
-# Tests for user login in
-def test_get_users_dict():
-    """
-    see if we can get users properly in a dictionary
-    """
-    users = usr.get_users_dict()
-    assert isinstance(users, dict)
-    assert len(users) > 0
-
-def test_get_user_details():
-    """
-    see if we can get a user login info properly
-    """
-    resp_json = TEST_CLIENT.get(f'{ep.USER_DETAILS_W_NS}/{TEST_USER}').get_json()
-    assert isinstance(resp_json, dict)
 
 # Tests for Sponsors
 def test_get_sponsors_list():

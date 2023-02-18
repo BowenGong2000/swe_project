@@ -12,17 +12,6 @@ PHONE = 'phone'
 PW = 'password'
 
 REQUIRED_FLDS = [EMAIL]
-users = {TEST_USER_EMAIL:
-        {NAME: 'Alive',
-            EMAIL: 'Test',
-            PHONE: '1111111',
-            PW: PW},
-        '12345@nyu.edu':
-        {NAME: 'Fred',
-            EMAIL: '12345@nyu.edu',
-            PHONE: '222222',
-            PW: PW},
-        }
 
 USER_KEY = 'email'
 USER_COLLECT = 'users'
