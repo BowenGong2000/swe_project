@@ -13,15 +13,15 @@ PW = 'password'
 
 REQUIRED_FLDS = [EMAIL]
 users = {TEST_USER_EMAIL:
-            {NAME: 'Alive',
-                EMAIL: 'Test',
-                PHONE: '1111111',
-                PW: PW},
-            '12345@nyu.edu':
-            {NAME: 'Fred',
-                EMAIL: '12345@nyu.edu',
-                PHONE: '222222',
-                PW: PW},
+        {NAME: 'Alive',
+            EMAIL: 'Test',
+            PHONE: '1111111',
+            PW: PW},
+        '12345@nyu.edu':
+        {NAME: 'Fred',
+            EMAIL: '12345@nyu.edu',
+            PHONE: '222222',
+            PW: PW},
         }
 
 USER_KEY = 'email'
@@ -68,11 +68,6 @@ def del_user(email):
 
 def add_user(email, usr_details):
     dbc.connect_db()
-
-    """
-    Check for same email address
-    """
-    
     return dbc.insert_one(USER_COLLECT, usr_details)
 
 
