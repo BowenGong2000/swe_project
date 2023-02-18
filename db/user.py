@@ -1,7 +1,6 @@
 """
 This module contains details about users.
 """
-import uuid
 import db.db_connect as dbc
 
 TEST_USER_EMAIL = 'Test'
@@ -14,18 +13,16 @@ PW = 'password'
 
 REQUIRED_FLDS = [EMAIL]
 users = {TEST_USER_EMAIL:
-            {
-                NAME: 'Alive',
+            {NAME: 'Alive',
                 EMAIL: 'Test',
                 PHONE: '1111111',
                 PW: PW},
             '12345@nyu.edu':
-            {
-                NAME: 'Fred',
+            {NAME: 'Fred',
                 EMAIL: '12345@nyu.edu',
                 PHONE: '222222',
                 PW: PW},
-            }
+        }
 
 USER_KEY = 'email'
 USER_COLLECT = 'users'
@@ -52,6 +49,7 @@ def user_exists(email):
     """
     return get_user_details(email) is not None
 
+
 def get_user_password(email):
     """
     return user registered passwrod in db
@@ -59,6 +57,7 @@ def get_user_password(email):
     user = get_user_details(email)
     pw = user['password']
     return pw
+
 
 def del_user(email):
     """
@@ -77,12 +76,10 @@ def add_user(email, usr_details):
     return dbc.insert_one(USER_COLLECT, usr_details)
 
 
-
-
 def main():
     users = get_users()
     print(f'{users=}')
-    print(f'{get_user_details(TEST_USER_NAME)=}')
+    print(f'{get_user_details(TEST_USER_EMAIL)=}')
 
 
 if __name__ == '__main__':
