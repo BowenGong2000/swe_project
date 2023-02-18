@@ -28,7 +28,6 @@ class User:
         type of user should be 1 for normal user 2 for manager account
         '''
         user_email = request.form.get('email')
-        
         user = {
             "_id": uuid.uuid4().hex,
             "name": request.form.get('name'),
@@ -36,8 +35,6 @@ class User:
             "phone": request.form.get('phone'),
             "password": request.form.get('password')
         }
-
-
         """
         Encrypt the password
         """
@@ -48,7 +45,6 @@ class User:
         """
         if usr.user_exists(user_email):
             return jsonify({"error": "Email address already existed"}), 400
-
 
         if usr.add_user(user_email, user):
             return self.start_session(user)
@@ -70,7 +66,6 @@ class User:
         pwd_db = usr.get_user_password(user_email)
         pwd_ipt = request.form.get('password')
         check = pbkdf2_sha256.verify(pwd_ipt, pwd_db)
-
 
         if user_exist and check:
             user = usr.get_user_details(user_email)
