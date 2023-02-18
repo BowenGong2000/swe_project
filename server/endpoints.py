@@ -9,8 +9,8 @@ from flask_restx import Resource, Api, fields, Namespace
 
 import db.data_type as dtyp
 import db.projects as pj
-import db.students as std
 import db.sponsors as sps
+import db.user as usr
 import werkzeug.exceptions as wz
 
 app = Flask(__name__)
@@ -18,15 +18,15 @@ api = Api(app)
 
 DATA_NS = 'data'
 PROJECTS_NS = 'projects'
-STUDENTS_NS = 'students'
+USERS_NS = 'users'
 SPONSORS_NS = 'sponsors'
 
 data_types = Namespace(DATA_NS, 'Data Types')
 api.add_namespace(data_types)
 projects = Namespace(PROJECTS_NS, 'Projects')
 api.add_namespace(projects)
-students = Namespace(STUDENTS_NS, 'Students')
-api.add_namespace(students)
+users = Namespace(USERS_NS, 'Users')
+api.add_namespace(users)
 sponsors = Namespace(SPONSORS_NS, 'Sponsors')
 api.add_namespace(sponsors)
 
@@ -58,15 +58,15 @@ PROJECT_LIST_NM = f'{PROJECTS_NS}_list'
 PROJECT_LIST_W_NS = f'{PROJECTS_NS}/{LIST}'
 PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
 
-STUDENT_DICT = f'/{DICT}'
-STUDENT_DICT_NM = f'{STUDENTS_NS}_dict'
-STUDENT_DICT_W_NS = f'{STUDENTS_NS}/{DICT}'
-STUDENT_DETAILS = f'/{DETAILS}'
-STUDENT_DETAILS_W_NS = f'{STUDENTS_NS}/{DETAILS}'
-STUDENT_LIST = f'/{LIST}'
-STUDENT_LIST_NM = f'{STUDENTS_NS}_list'
-STUDENT_LIST_W_NS = f'{STUDENTS_NS}/{LIST}'
-STUDENT_ADD = f'/{STUDENTS_NS}/{ADD}'
+USER_DICT = f'/{DICT}'
+USER_DICT_NM = f'{USERS_NS}_dict'
+USER_DICT_W_NS = f'{USERS_NS}/{DICT}'
+USER_DETAILS = f'/{DETAILS}'
+USER_DETAILS_W_NS = f'{USERS_NS}/{DETAILS}'
+USER_LIST = f'/{LIST}'
+USER_LIST_NM = f'{USERS_NS}_list'
+USER_LIST_W_NS = f'{USERS_NS}/{LIST}'
+USER_ADD = f'/{USERS_NS}/{ADD}'
 
 SPONSOR_DICT = f'/{DICT}'
 SPONSOR_DICT_NM = f'{SPONSORS_NS}_dict'
@@ -108,9 +108,9 @@ class MainMenu(Resource):
                     '1': {'url': f'/{PROJECT_DICT_W_NS}',
                           'method': 'get',
                           'text': 'List Current Projects.'},
-                    '2': {'url': f'/{STUDENT_DICT_W_NS}',
+                    '2': {'url': f'/{USER_DICT_W_NS}',
                           'method': 'get',
-                          'text': 'List Students.'},
+                          'text': 'List USERS.'},
                     '3': {'url': f'/{SPONSOR_DICT_W_NS}',
                           'method': 'get',
                           'text': 'List Sponsors.'},
@@ -121,7 +121,7 @@ class MainMenu(Resource):
 @data_types.route(DATA_LIST)
 class DataList(Resource):
     """
-    This will get a list of data types: e.g project, student...
+    This will get a list of data types
     """
     def get(self):
         """
@@ -187,20 +187,23 @@ class ProjectDetails(Resource):
         """
         pjd = pj.get_project_details(project)
         if pjd is not None:
-            return {project: pj.get_project_details(project)}
+            return {'project detail': pj.get_project_details(project)}
         else:
             raise wz.NotFound(f'{project} not found.')
 
 
 project_fields = api.model('NewProject1', {
+    pj.ACCOUNT: fields.String,
     pj.NAME: fields.String,
-    pj.NUM_MEMBERS: fields.Integer,
     pj.DEPARTMENT: fields.String,
     pj.MAJOR: fields.String,
     pj.SCHOOL_YEAR: fields.String,
+    pj.NUM_MEMBERS: fields.Integer,
     pj.GPA: fields.Float,
     pj.LENGTH: fields.String,
-    pj.SKILL: fields.String
+    pj.SKILL: fields.String,
+    pj.DESCRIP: fields.String,
+    pj.POST_DATE: fields.String,
 })
 
 
@@ -227,42 +230,67 @@ class AddProject(Resource):
         return {MESSAGE: 'Successfully added a new project.'}
 
 
-@students.route(STUDENT_LIST)
-class StudentList(Resource):
+@users.route(USER_LIST)
+class UserList(Resource):
     def get(self):
-        return {STUDENT_LIST_NM: std.get_students()}
+        return {USER_LIST_NM: usr.get_users()}
 
 
-@students.route(STUDENT_DICT)
-class StudentDict(Resource):
+@users.route(USER_DICT)
+class UserDict(Resource):
     """
-    This will get a list of participating students.
+    This will get all registered users info in dict.
     """
     def get(self):
         """
-        Returns a list of participating students.
+        Returns all registered users login info in dict.
         """
-        return {'Data': std.get_students_dict(),
+        return {'Data': usr.get_users_dict(),
                 'Type': 'Data',
-                'Title': 'Paricipating Students'}
+                'Title': 'Paricipating USERS'}
 
 
-@students.route(f'{STUDENT_DETAILS}/<student>')
-class StudentDetails(Resource):
+@users.route(f'{USER_DETAILS}/<users>')
+class UserDetails(Resource):
     """
-    This will get details on a student.
+    This will get details on a registered users.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self, student):
+    def get(self, users):
         """
-        Returns the details of a specific student (in dictionary)
+        Returns the details of a specific users (in dictionary)
         """
-        std_d = std.get_student_details(student)
-        if std_d is not None:
-            return {student: std.get_student_details(student)}
+        usr_d = usr.get_user_details(users)
+        if usr_d is not None:
+            return {users: usr.get_user_details(users)}
         else:
-            raise wz.NotFound(f'{student} not found.')
+            raise wz.NotFound(f'{users} not found.')
+
+
+user_fields = api.model('NewUser', {
+    usr.NAME: fields.String,
+    usr.EMAIL: fields.String,
+    usr.PHONE: fields.String,
+    usr.PW: fields.String,
+})
+
+
+@users.route(USER_ADD)
+class AddUser(Resource):
+    """
+    Add a user.
+    """
+    @api.expect(user_fields)
+    def post(self):
+        """
+        Add a user.
+        """
+        print(f'{request.json=}')
+        email = request.json[usr.EMAIL]
+        del request.json[usr.EMAIL]
+        usr.add_user(email, request.json)
+        return {MESSAGE: 'Project added.'}
 
 
 @sponsors.route(SPONSOR_LIST)

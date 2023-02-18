@@ -1,16 +1,11 @@
 """
-This file contain the functions and class for flask app.
+This file contain the details for the user login system.
 """
 from flask import jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
-import pymongo
 import uuid
 
-# Database
-a = 'mongodb+srv://tracyzhu0608:1234'
-b = '@cluster0.8pa03kh.mongodb.net/?retryWrites=true&w=majority'
-client = pymongo.MongoClient(a+b, 27017)
-db = client.user_login_system
+import db.user as usr
 
 
 class User:
@@ -32,12 +27,16 @@ class User:
         '''
         type of user should be 1 for normal user 2 for manager account
         '''
+        user_email = request.form.get('email')
+        
         user = {
             "_id": uuid.uuid4().hex,
             "name": request.form.get('name'),
             "email": request.form.get('email'),
+            "phone": request.form.get('phone'),
             "password": request.form.get('password')
         }
+
 
         """
         Encrypt the password
@@ -47,10 +46,11 @@ class User:
         """
         Check for same email address
         """
-        if db.users.find_one({"email": user['email']}):
+        if usr.user_exists(user_email):
             return jsonify({"error": "Email address already existed"}), 400
 
-        if db.users.insert_one(user):
+
+        if usr.add_user(user_email, user):
             return self.start_session(user)
 
         return jsonify({"error": "Signup failed"}), 400
@@ -61,14 +61,18 @@ class User:
 
     def login(self):
 
-        user = db.users.find_one({
-            "email": request.form.get('email')
-        })
+        user_email = request.form.get('email')
 
-        pwd_db = user['password']
+        user_exist = usr.user_exists(user_email)
+
+        """ Verify if input password match with db password """
+
+        pwd_db = usr.get_user_password(user_email)
         pwd_ipt = request.form.get('password')
         check = pbkdf2_sha256.verify(pwd_ipt, pwd_db)
 
-        if user and check:
+
+        if user_exist and check:
+            user = usr.get_user_details(user_email)
             return self.start_session(user)
         return jsonify({"error": "Invalid login credentials"}), 401

@@ -12,15 +12,6 @@ import heapq
 app = Flask(__name__)
 app.secret_key = 'hskfakgkajgalg' #random key
 
-# Decorators
-def login_required(f):
-  @wraps(f)
-  def wrap(*args, **kwargs):
-    if 'logged_in' in session:
-      return f(*args, **kwargs)
-    else:
-      return redirect('/')
-  return wrap
 
 #export data from database
 #todo give top matches
@@ -65,9 +56,36 @@ def rank_for_relation_to_key_work(project_dict, key_word):
   return ret_project_lst
   
 
+# Decorators
+def login_required(f):
+  @wraps(f)
+  def wrap(*args, **kwargs):
+    if 'logged_in' in session:
+      return f(*args, **kwargs)
+    else:
+      return redirect('/')
+  return wrap
 
 # Routes
-from server import routes
+from server.models import User
+
+@app.route('/user/signup', methods=['POST'])
+def signup():
+    """
+    User create account
+    """
+    user = User()
+    return user.signup()
+
+
+@app.route('/user/signout')
+def signout():
+    return User().signout()
+
+
+@app.route('/user/login', methods=['POST'])
+def login():
+    return User().login()
 
 
 @app.route('/')
@@ -142,7 +160,7 @@ def homepage_search():
 
 @app.route('/images/<file_name>', methods = ['GET'])
 def get_file(file_name):
-  file_name = os.path.join("templates\images",file_name)
+  file_name = os.path.join("templates/images",file_name)
   return send_file(file_name)
 
 

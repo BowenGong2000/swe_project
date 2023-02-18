@@ -54,6 +54,7 @@ def fetch_one(collection, filt, db=PROJECT_DB):
     Find with a filter and return on the first doc found.
     """
     for doc in client[db][collection].find(filt):
+        del doc['_id']
         return doc
 
 
@@ -63,6 +64,7 @@ def fetch_all(collection, db=PROJECT_DB):
     """
     ret = []
     for doc in client[db][collection].find():
+        del doc['_id']
         ret.append(doc)
     return ret
 
