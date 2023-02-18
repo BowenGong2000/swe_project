@@ -99,10 +99,10 @@ p {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 200px;
+    width: 300px;
     background-color: #333;
     color: #fff;
-    padding: 10px 10px 10px;
+    padding: 50px 50px 50px;
     border-radius: 20px;
     text-align: center;
     justify-content: center;
@@ -116,8 +116,7 @@ p {
 .avatar-box {
     /* top: 0;
     left: 0; */
-    width: 180px;
-    width: 180px;
+    width: 200px;
     background-color: white;
     padding: 20px;
     display: flex;
@@ -135,7 +134,7 @@ p {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 400px;
+    width: 600px;
     background-color: #333;
     color: #fff;
     padding: 10px 10px 10px;
