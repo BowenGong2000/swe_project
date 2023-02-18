@@ -28,7 +28,7 @@ https://project-finder.herokuapp.com/
 3. install passlib for password encyption
     pip install passlib
 4. run command
-    sed -i -e 's/\r$//' server.sh
+    sed -i -e 's/\r-$//' server.sh
 5. run command
     for Windows users: 
         ./server.sh
@@ -44,19 +44,19 @@ To login to home page user should register a new account, and use that account t
 ## Requirements
 
 ### User endpoints:
-Signup
-Login
-Get a description of a user
-List all registered users
-Delete a user
-Reset user password
+- Signup
+- Login
+- Get a description of a user
+- List all registered users
+- Delete a user
+- Reset user password
 
 ### Projects endpoints:
-List all available projects
-Get a description of a project
-Create a project
-Delete a project
-Approve a project (admin only)
+- List all available projects
+- Get a description of a project
+- Create a project
+- Delete a project
+- Approve a project (admin only)
 
 ### Application endpoints:
 List all applications of a user

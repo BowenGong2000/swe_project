@@ -9,7 +9,7 @@ data_types = {
     "Application": {'Name': 'info', 'Email_address': 'info',
                 'Phone_number': 'info', 'Skills': 'info'},
     "User": {'Name': 'info', 'Email_address': 'info',
-                'Phone_number': 'info', 'Password': 'info'}
+                'Phone_number': 'info', 'Password': 'info'},
     }
 
 
