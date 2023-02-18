@@ -29,8 +29,8 @@ def homepage_form(key_word = None):
   project_lst = []
   project_dict = {}
   for key in temp_project_dict:
-    if (datetime.datetime.today() - temp_project_dict[key]['post_date']).days < 90 and temp_project_dict[key]['if_approve']:
-      temp_project_dict[key]['post_date'] = temp_project_dict[key]['post_date'].strftime("%m-%d-%Y")
+    #todo add time limit functions like (datetime.datetime.today() - temp_project_dict[key]['post_date']).days < 90
+    if temp_project_dict[key]['if_approve']:
       project_lst.append(temp_project_dict[key])
       project_dict[key] = temp_project_dict[key]
   if not key_word or not temp_project_dict:
@@ -104,7 +104,7 @@ def add_project():
       'GPA' :request.form['gpa'],
       'project_duration': request.form['length'],
       'skill requirements': request.form['skill'],
-      'post_date': datetime.datetime.today(),
+      'post_date': datetime.datetime.today().strftime("%m-%d-%Y"),
       "description": request.form["description"],
       "if_approve": True
       #todo need request("FS")
