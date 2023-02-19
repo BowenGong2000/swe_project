@@ -4,8 +4,6 @@ This module contains details about users.
 import db.db_connect as dbc
 
 TEST_USER_EMAIL = 'Test'
-USERS_COLLECT = 'users'
-
 NAME = 'name'
 EMAIL = 'email'
 PHONE = 'phone'
@@ -19,17 +17,17 @@ USER_COLLECT = 'users'
 
 def get_users():
     dbc.connect_db()
-    return dbc.fetch_all(USERS_COLLECT)
+    return dbc.fetch_all(USER_COLLECT)
 
 
 def get_users_dict():
     dbc.connect_db()
-    return dbc.fetch_all_as_dict(USER_KEY, USERS_COLLECT)
+    return dbc.fetch_all_as_dict(USER_KEY, USER_COLLECT)
 
 
 def get_user_details(email):
     dbc.connect_db()
-    return dbc.fetch_one(USERS_COLLECT, {USER_KEY: email})
+    return dbc.fetch_one(USER_COLLECT, {USER_KEY: email})
 
 
 def user_exists(email):
@@ -52,7 +50,7 @@ def del_user(email):
     """
     Delete a doc from db collection by its name.
     """
-    return dbc.del_one(USERS_COLLECT, {USER_KEY: email})
+    return dbc.del_one(USER_COLLECT, {USER_KEY: email})
 
 
 def add_user(email, usr_details):
