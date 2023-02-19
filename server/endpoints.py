@@ -256,7 +256,7 @@ class ChangeProject(Resource):
         Return the message if a project is added successuflly.
         """
         return {MESSAGE: 'Successfully changed a new project.'}
-    
+
 
 @users.route(USER_LIST)
 class UserList(Resource):
