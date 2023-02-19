@@ -108,7 +108,7 @@ def change_project_single_field(name, field, val):
         raise TypeError(f'Wrong type for name: {type(name)=}')
 
     if not isinstance(field, str):
-        raise TypeError(f'Wrong type for details: {type(status)=}')
+        raise TypeError(f'Wrong type for details: {type(field)=}')
     dbc.connect_db()
     return dbc.change_one(NAME, name, APPROVE, val, PROJECTS_COLLECT)
 
