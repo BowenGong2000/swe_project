@@ -59,7 +59,7 @@ PROJECT_LIST = f'/{LIST}'
 PROJECT_LIST_NM = f'{PROJECTS_NS}_list'
 PROJECT_LIST_W_NS = f'{PROJECTS_NS}/{LIST}'
 PROJECT_ADD = f'/{ADD}'
-PROJECT_CHANGE_FIELD = f'/{CHANGE}' 
+PROJECT_CHANGE_FIELD = f'/{CHANGE}'
 
 USER_DICT = f'/{DICT}'
 USER_DICT_NM = f'{USERS_NS}_dict'
@@ -236,7 +236,7 @@ class AddProject(Resource):
 
 
 @projects.route(PROJECT_CHANGE_FIELD)
-class AddProject(Resource):
+class ChangeProject(Resource):
     """
     Add a new project.
     """
