@@ -2,6 +2,7 @@ import pymongo
 import db.projects as pj
 import requests
 import datetime
+import db.db_connect as connect
 
 """
 this file is used for checking currently available data.
@@ -28,8 +29,7 @@ def curr_data():
         print(doc)
     print(pj.get_projects_dict())
 
-time = datetime.datetime.today().strftime("%Y-%m-%d")
-print(isinstance(time,str))
-print(time)
+connect.connect_db()
+print(connect.change_one("name", "Test Project", "if_approve", False, "projects"))
 #data = requests.get("https://project-finder.herokuapp.com/projects/dict")
 #print(data.json())

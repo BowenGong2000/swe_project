@@ -15,10 +15,11 @@ LENGTH = 'project_duration'
 SKILL = 'skill requirements'
 POST_DATE = 'post_date'
 DESCRIP = 'description'
+APPROVE = "if_approve"
 
 # We expect the project database to change frequently:
 # This list contains our mandatory fields
-REQUIRED_FLDS = [ACCOUNT, NUM_MEMBERS, MAJOR, SCHOOL_YEAR, POST_DATE]
+REQUIRED_FLDS = [ACCOUNT, NUM_MEMBERS, MAJOR, SCHOOL_YEAR, POST_DATE, APPROVE]
 projects = {TEST_PROJECT_NAME:
             {NUM_MEMBERS: 7,
                 DEPARTMENT: 'computer_engineering',
@@ -27,7 +28,8 @@ projects = {TEST_PROJECT_NAME:
                 GPA: 3.5,
                 LENGTH: '4 months',
                 SKILL: 'C++, python',
-                DESCRIP: 'its a default message'},
+                DESCRIP: 'its a default message',
+                APPROVE: False},
             'project2':
             {NUM_MEMBERS: 9,
                 DEPARTMENT: 'mathematics',
@@ -36,7 +38,8 @@ projects = {TEST_PROJECT_NAME:
                 GPA: 3.5,
                 LENGTH: '6 months',
                 SKILL: 'advanced calculus, data modelling',
-                DESCRIP: 'its a default message'}
+                DESCRIP: 'its a default message',
+                APPROVE: True}
             }
 
 PROJECT_KEY = 'name'
@@ -97,6 +100,16 @@ def add_project(name, details):
     dbc.connect_db()
     doc[PROJECT_KEY] = name
     return dbc.insert_one(PROJECTS_COLLECT, doc)
+
+
+def change_project_approve_status(name, status):
+    if not isinstance(name, str):
+        raise TypeError(f'Wrong type for name: {type(name)=}')
+
+    if not isinstance(status, bool):
+        raise TypeError(f'Wrong type for details: {type(status)=}')
+    dbc.connect_db()
+    return dbc.change_one(NAME, name, APPROVE, status, PROJECTS_COLLECT)
 
 
 def main():
