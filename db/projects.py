@@ -16,6 +16,7 @@ SKILL = 'skill requirements'
 POST_DATE = 'post_date'
 DESCRIP = 'description'
 APPROVE = "if_approve"
+FIELD = 'field'
 
 # We expect the project database to change frequently:
 # This list contains our mandatory fields
@@ -102,14 +103,14 @@ def add_project(name, details):
     return dbc.insert_one(PROJECTS_COLLECT, doc)
 
 
-def change_project_approve_status(name, status):
+def change_project_single_field(name, field, val):
     if not isinstance(name, str):
         raise TypeError(f'Wrong type for name: {type(name)=}')
 
-    if not isinstance(status, bool):
+    if not isinstance(field, str):
         raise TypeError(f'Wrong type for details: {type(status)=}')
     dbc.connect_db()
-    return dbc.change_one(NAME, name, APPROVE, status, PROJECTS_COLLECT)
+    return dbc.change_one(NAME, name, APPROVE, val, PROJECTS_COLLECT)
 
 
 def main():

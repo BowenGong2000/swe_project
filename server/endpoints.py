@@ -37,6 +37,7 @@ HELLO = '/hello'
 MESSAGE = 'message'
 DETAILS = 'details'
 ADD = 'add'
+CHANGE = 'change'
 
 MAIN_MENU = '/main_menu'
 MAIN_MENU_NM = 'Main Menu'
@@ -57,7 +58,8 @@ PROJECT_DETAILS_W_NS = f'{PROJECTS_NS}/{DETAILS}'
 PROJECT_LIST = f'/{LIST}'
 PROJECT_LIST_NM = f'{PROJECTS_NS}_list'
 PROJECT_LIST_W_NS = f'{PROJECTS_NS}/{LIST}'
-PROJECT_ADD = f'/{PROJECTS_NS}/{ADD}'
+PROJECT_ADD = f'/{ADD}'
+PROJECT_CHANGE_FIELD = f'/{CHANGE}' 
 
 USER_DICT = f'/{DICT}'
 USER_DICT_NM = f'{USERS_NS}_dict'
@@ -232,6 +234,29 @@ class AddProject(Resource):
         """
         return {MESSAGE: 'Successfully added a new project.'}
 
+
+@projects.route(PROJECT_CHANGE_FIELD)
+class AddProject(Resource):
+    """
+    Add a new project.
+    """
+    def post(self):
+        """
+        Add a new project.
+        """
+        print(f'{request.json=}')
+        name = request.json[pj.NAME]
+        field = request.json[pj.FIELD]
+        val = request.json["val"]
+        pj.change_project_single_field(name, field, val)
+        return {MESSAGE: 'Project changed.'}
+
+    def get(self):
+        """
+        Return the message if a project is added successuflly.
+        """
+        return {MESSAGE: 'Successfully changed a new project.'}
+    
 
 @users.route(USER_LIST)
 class UserList(Resource):
