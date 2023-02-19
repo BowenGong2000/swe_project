@@ -80,17 +80,17 @@ def fetch_all_as_dict(key, collection, db=PROJECT_DB):
     return ret
 
 
-def change_one(key_feild, key, feild, val, collection, db=PROJECT_DB):
+def change_one(key_field, key, field, val, collection, db=PROJECT_DB):
     """
-    Change value in a feild
+    Change value in a field
     """
     ret = None
-    mod_key = {key_feild: key}
+    mod_key = {key_field: key}
     for doc in client[db][collection].find():
         if doc['name'] == key:
             ret = doc
     if ret:
-        ret[feild] = val
+        ret[field] = val
         client[db][collection].replace_one(mod_key, ret)
     return ret
 
