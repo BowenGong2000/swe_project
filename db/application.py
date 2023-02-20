@@ -4,17 +4,19 @@ This module contains details about application.
 import db.db_connect as dbc
 
 TEST_APPLICATION_NAME = 'Test application'
-NAME = 'applicant name'
-EMAIL = 'email'
-PHONE = 'phone'
-SCHOOL_YEAR = 'school_year'
-GPA = 'GPA'
-SKILL = 'skills'
-MORE = 'more to say'
+NAME = 'applicant id'
+APPLICANT_NAME = 'applicant name'
+APPLICANT_EMAIL = 'applicant email'
+PROJECT = 'applied project'
+APP_DATE = 'application date'
+APP_STATUS = 'application status'
+RESUME = 'resume'
+TRANSCRIPT = 'transcript'
+COVER_LETTER = 'cover_leter'
 
-REQUIRED_FLDS = [NAME, EMAIL, GPA, SKILL]
+REQUIRED_FLDS = [NAME, PROJECT, APP_DATE, RESUME]
 
-APPLICATION_KEY = 'application name'
+APPLICATION_KEY = 'application id'
 APPLICATION_COLLECT = 'applicants'
 
 
