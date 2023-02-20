@@ -38,6 +38,7 @@ MESSAGE = 'message'
 DETAILS = 'details'
 ADD = 'add'
 CHANGE = 'change'
+DELETE = 'delete'
 
 MAIN_MENU = '/main_menu'
 MAIN_MENU_NM = 'Main Menu'
@@ -60,6 +61,7 @@ PROJECT_LIST_NM = f'{PROJECTS_NS}_list'
 PROJECT_LIST_W_NS = f'{PROJECTS_NS}/{LIST}'
 PROJECT_ADD = f'/{ADD}'
 PROJECT_CHANGE_FIELD = f'/{CHANGE}'
+PROJECT_DELETE = f'/{DELETE}'
 
 USER_DICT = f'/{DICT}'
 USER_DICT_NM = f'{USERS_NS}_dict'
@@ -209,7 +211,7 @@ project_fields = api.model('NewProject1', {
     pj.SKILL: fields.String,
     pj.DESCRIP: fields.String,
     pj.POST_DATE: fields.String,
-    pj.APPROVE: fields.Bool,
+    pj.APPROVE: fields.Boolean,
 })
 
 
@@ -254,7 +256,24 @@ class ChangeProject(Resource):
 
     def get(self):
         """
-        Return the message if a project is added successuflly.
+        Return the message if a project is mod successuflly.
+        """
+        return {MESSAGE: 'Successfully changed a new project.'}
+
+
+@projects.route(PROJECT_DELETE)
+class deleteProject(Resource):
+    """
+    Delete a Project
+    """
+    def post(self):
+        print(f'{request.json=}')
+        name = request.json[pj.NAME]
+        return {MESSAGE: pj.del_project(name)}
+
+    def get(self):
+        """
+        Return the message if a project is delete successuflly.
         """
         return {MESSAGE: 'Successfully changed a new project.'}
 
