@@ -209,6 +209,7 @@ project_fields = api.model('NewProject1', {
     pj.SKILL: fields.String,
     pj.DESCRIP: fields.String,
     pj.POST_DATE: fields.String,
+    pj.APPROVE: fields.Bool,
 })
 
 

@@ -19,6 +19,9 @@ Frontend: React
 Backend deployed to Heroku at
 https://project-finder.herokuapp.com/
 
+Backend Github Link: https://github.com/BowenGong2000/swe_project
+Frontend Github Link: https://github.com/FantasiA10/Project-matcher
+
 ## Project Setup Update: 
 
 1. install pymongo, 
