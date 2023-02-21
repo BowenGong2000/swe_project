@@ -311,7 +311,7 @@ class UserDetails(Resource):
         """
         usr_d = usr.get_user_details(users)
         if usr_d is not None:
-            return {users: usr.get_user_details(users)}
+            return {"user detail": usr.get_user_details(users)}
         else:
             raise wz.NotFound(f'{users} not found.')
 
