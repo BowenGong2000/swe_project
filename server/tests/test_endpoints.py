@@ -1,5 +1,7 @@
 
 import pytest
+from http import HTTPStatus
+from passlib.hash import pbkdf2_sha256
 
 import server.endpoints as ep
 import db.projects as pj
@@ -39,6 +41,13 @@ TEST_LOGIN_USER = {
     usr.EMAIL: TEST_USER_EMAIL,
     usr.PW: '1234',
 }
+TEST_NEW_USER = {
+    usr.NAME: 'new',
+    usr.EMAIL: TEST_USER_EMAIL,
+    usr.PHONE: 'new',
+    usr.PW: 'new',
+}
+TEST_BAD_USER_EMAIL = "bad"
 
 
 def test_hello():
@@ -67,6 +76,7 @@ def test_get_project_details():
     """
     resp_json = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_PROJECT}').get_json()
     assert isinstance(resp_json, dict)
+    assert len(resp_json) > 0
 
 def test_get_project_dict():
     """
@@ -107,6 +117,14 @@ def test_get_user_details():
     """
     resp_json = TEST_CLIENT.get(f'{ep.USER_DETAILS_W_NS}/{TEST_USER}').get_json()
     assert isinstance(resp_json, dict)
+    assert len(resp_json) > 0
+
+def test_get_missing_user_details():
+    """
+    See if we can get error message if a missing user is entered
+    """
+    resp = TEST_CLIENT.get(f'{ep.USER_DETAILS_W_NS}/{TEST_BAD_USER_EMAIL}')
+    assert resp.status_code == HTTPStatus.NOT_FOUND
 
 def test_add_user():
     """
@@ -128,10 +146,45 @@ def test_login_user():
     assert pwd_db == TEST_USER["password"]
     usr.del_user(TEST_USER_EMAIL)
 
+def test_signup_user():
+    """
+    Make sure the user is not existed in db before.
+    """
+    assert usr.user_exists(TEST_USER_EMAIL) == False
+    """
+    See if signup works properly.
+    """
+    resp = TEST_CLIENT.post(f'/{ep.USERS_NS}{ep.USER_SIGNUP}', json=TEST_USER)
+    assert usr.user_exists(TEST_USER_EMAIL) == True
+    assert len(usr.get_user_details(TEST_USER_EMAIL)) > 0
+    usr.del_user(TEST_USER_EMAIL)
+
+def test_delete_user():
+    """
+    Check if user can be deleted properly
+    """
+    usr.add_user(TEST_USER_EMAIL, TEST_USER)
+    resp = TEST_CLIENT.post(f'/{ep.USERS_NS}{ep.USER_DELETE}/{TEST_USER_EMAIL}')
+    assert usr.user_exists(TEST_USER_EMAIL) == False
+    
+def test_update_user():
+    """
+    Check if user info can be updated properly
+    """
+    usr.add_user(TEST_USER_EMAIL, TEST_USER)
+    resp = TEST_CLIENT.post(f'/{ep.USERS_NS}{ep.USER_UPDATE}', json=TEST_NEW_USER)
+    
+    db_name = usr.get_user_details(TEST_USER_EMAIL)["name"]
+    db_phone = usr.get_user_details(TEST_USER_EMAIL)["phone"]
+
+    assert db_name == TEST_NEW_USER['name']
+    assert db_phone == TEST_NEW_USER['phone']
+
+    usr.del_user(TEST_USER_EMAIL)
 
 
 """
-Tests for Datatypes
+Tests for Data Types
 """
 def test_get_DataList(): 
     """
@@ -157,4 +210,4 @@ def test_get_data_type_details():
     """
     resp_json = TEST_CLIENT.get(f'{ep.DATA_DETAILS_W_NS}/{TEST_DATA_TYPE}').get_json()
     assert TEST_DATA_TYPE in resp_json
-    assert isinstance(resp_json[TEST_DATA_TYPE], dict) #store as disctionary
+    assert isinstance(resp_json[TEST_DATA_TYPE], dict) 
