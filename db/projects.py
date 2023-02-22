@@ -21,27 +21,6 @@ FIELD = 'field'
 # We expect the project database to change frequently:
 # This list contains our mandatory fields
 REQUIRED_FLDS = [ACCOUNT, NUM_MEMBERS, MAJOR, SCHOOL_YEAR, POST_DATE, APPROVE]
-projects = {TEST_PROJECT_NAME:
-            {NUM_MEMBERS: 7,
-                DEPARTMENT: 'computer_engineering',
-                MAJOR: 'computer_science',
-                SCHOOL_YEAR: 'sophomore and beyond',
-                GPA: 3.5,
-                LENGTH: '4 months',
-                SKILL: 'C++, python',
-                DESCRIP: 'its a default message',
-                APPROVE: False},
-            'project2':
-            {NUM_MEMBERS: 9,
-                DEPARTMENT: 'mathematics',
-                MAJOR: 'mathematics',
-                SCHOOL_YEAR: 'sophomore and beyond',
-                GPA: 3.5,
-                LENGTH: '6 months',
-                SKILL: 'advanced calculus, data modelling',
-                DESCRIP: 'its a default message',
-                APPROVE: True}
-            }
 
 PROJECT_KEY = 'name'
 PROJECTS_COLLECT = 'projects'

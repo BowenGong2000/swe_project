@@ -7,12 +7,14 @@ from http import HTTPStatus
 from flask import Flask, request
 from flask_restx import Resource, Api, fields, Namespace
 from passlib.hash import pbkdf2_sha256
+import werkzeug.exceptions as wz
+import uuid
 
 import db.data_type as dtyp
 import db.projects as pj
 import db.sponsors as sps
 import db.user as usr
-import werkzeug.exceptions as wz
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -74,6 +76,7 @@ USER_LIST_W_NS = f'{USERS_NS}/{LIST}'
 USER_ADD = f'/{USERS_NS}/{ADD}'
 USER_LOGIN = f'/{USERS_NS}/login'
 USER_SIGNUP = f'/{USERS_NS}/signup'
+USER_UPDATE = f'/{USERS_NS}/update'
 
 SPONSOR_DICT = f'/{DICT}'
 SPONSOR_DICT_NM = f'{SPONSORS_NS}_dict'
@@ -245,7 +248,7 @@ class ChangeProject(Resource):
     """
     def post(self):
         """
-        Add a new project.
+        Change details of a project.
         """
         print(f'{request.json=}')
         name = request.json[pj.NAME]
@@ -267,13 +270,16 @@ class deleteProject(Resource):
     Delete a Project
     """
     def post(self):
+        """
+        Delete a Project
+        """
         print(f'{request.json=}')
         name = request.json[pj.NAME]
         return {MESSAGE: pj.del_project(name)}
 
     def get(self):
         """
-        Return the message if a project is delete successuflly.
+        Return the message if a project is deleted successuflly.
         """
         return {MESSAGE: 'Successfully changed a new project.'}
 
@@ -281,6 +287,9 @@ class deleteProject(Resource):
 @users.route(USER_LIST)
 class UserList(Resource):
     def get(self):
+        """
+        Return all registered users in a list.
+        """
         return {USER_LIST_NM: usr.get_users()}
 
 
@@ -295,7 +304,7 @@ class UserDict(Resource):
         """
         return {'Data': usr.get_users_dict(),
                 'Type': 'Data',
-                'Title': 'Paricipating USERS'}
+                'Title': 'Registered users'}
 
 
 @users.route(f'{USER_DETAILS}/<users>')
@@ -317,6 +326,7 @@ class UserDetails(Resource):
 
 
 user_fields = api.model('NewUser', {
+    "_id": uuid.uuid4().hex,
     usr.NAME: fields.String,
     usr.EMAIL: fields.String,
     usr.PHONE: fields.String,
@@ -324,6 +334,7 @@ user_fields = api.model('NewUser', {
 })
 
 login_user_fields = api.model('CurrentUser', {
+    "_id": uuid.uuid4().hex,
     usr.EMAIL: fields.String,
     usr.PW: fields.String,
 })
@@ -349,7 +360,7 @@ class AddUser(Resource):
 @users.route(USER_LOGIN)
 class loginUser(Resource):
     """
-    Login in and retrun an auth key
+    Log user in and retrun an auth key
     """
     @api.expect(login_user_fields)
     def post(self):
@@ -406,6 +417,39 @@ class signupUser(Resource):
         usr.add_user(email, request.json)
 
         return {"Auth-Key": pwd_auth}
+
+
+@users.route(f'{USER_UPDATE}')
+class UserUpdate(Resource):
+    """
+    This will replace the user details in db with the updated information
+    """
+    @api.expect(user_fields)
+    def post(self):
+        """
+        Replace the user details in db with the updated information
+        """
+        print(f'{request.json=}')
+        email = request.json[usr.EMAIL]
+        del request.json[usr.EMAIL]
+        
+        """
+        Check if the email address exist
+        """
+        user_exist = usr.user_exists(email)
+        if user_exist:
+            """ 
+            Delet current account info, and replace with new
+            """
+            usr.del_user(email)
+            pwd = request.json[usr.PW]
+            pwd_auth = pbkdf2_sha256.encrypt(pwd)
+            request.json[usr.PW] = pwd_auth
+
+            usr.add_user(email, request.json)
+            return {MESSAGE: 'User info updated.'}
+        else:
+            return ({MESSAGE: "Account not existed"})
 
 
 @sponsors.route(SPONSOR_LIST)
