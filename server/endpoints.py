@@ -74,9 +74,9 @@ USER_LIST = f'/{LIST}'
 USER_LIST_NM = f'{USERS_NS}_list'
 USER_LIST_W_NS = f'{USERS_NS}/{LIST}'
 USER_ADD = f'/{ADD}'
-USER_LOGIN = f'/login'
-USER_SIGNUP = f'/signup'
-USER_UPDATE = f'/update'
+USER_LOGIN = '/login'
+USER_SIGNUP = '/signup'
+USER_UPDATE = '/update'
 USER_DELETE = f'/{DELETE}'
 
 SPONSOR_DICT = f'/{DICT}'
@@ -162,6 +162,8 @@ class DataTypeDetails(Resource):
 """
 Project endpoints
 """
+
+
 @projects.route(PROJECT_LIST)
 class ProjectList(Resource):
     """
@@ -236,7 +238,7 @@ class AddProject(Resource):
         name = request.json[pj.NAME]
         del request.json[pj.NAME]
         pj.add_project(name, request.json)
-        return {MESSAGE: f'{project} is added.'}
+        return {MESSAGE: f'{name} is added.'}
 
 
 @projects.route(PROJECT_CHANGE_FIELD)
@@ -278,6 +280,8 @@ class DeleteProject(Resource):
 """
 User endpoints
 """
+
+
 @users.route(USER_LIST)
 class UserList(Resource):
     def get(self):
@@ -451,7 +455,7 @@ class UserDelete(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def post(self,user_email):
+    def post(self, user_email):
         """
         Delete a existing user from db
         """
@@ -464,6 +468,8 @@ class UserDelete(Resource):
 
 
 """Sponsor Endpoints"""
+
+
 @sponsors.route(SPONSOR_LIST)
 class SponsorList(Resource):
     def get(self):
