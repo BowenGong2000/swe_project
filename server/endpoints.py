@@ -432,13 +432,12 @@ class UserUpdate(Resource):
         print(f'{request.json=}')
         email = request.json[usr.EMAIL]
         del request.json[usr.EMAIL]
-        
         """
         Check if the email address exist
         """
         user_exist = usr.user_exists(email)
         if user_exist:
-            """ 
+            """
             Delet current account info, and replace with new
             """
             usr.del_user(email)
