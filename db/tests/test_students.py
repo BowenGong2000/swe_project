@@ -39,6 +39,7 @@ def test_add_student():
         details[field] = 2
     std.add_student(std.TEST_STUDENT_NAME, details)
     assert std.student_exists(std.TEST_STUDENT_NAME)
+    std.del_student(std.TEST_STUDENT_NAME)
 
 
 def test_add_wrong_name_type():

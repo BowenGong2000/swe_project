@@ -47,35 +47,29 @@ To login to home page user should register a new account, and use that account t
 ## Requirements
 
 ### User endpoints:
-- Signup
-- Login
-- Get a description of a user
+- Signup (add a user)
+- Login (verify credential)
+- Get info of a user
 - List all registered users
 - Delete a user
-- Reset user password
+- Edit/Update user info
+- Edit profile photo
 
 ### Projects endpoints:
 - List all available projects
-- Get a description of a project
+- Get info of a project
 - Create a project
 - Delete a project
 - Approve a project (admin only)
+- Upload and download project files
 
 ### Application endpoints:
 - List all applications of a user
-- Get a description of a application
-- Accept/reject an appliacations
+- Get info of a application
+- Create a application for a specific project
+- Send user email notifications
+- Cancel/Delete a application
 
-### In-project actions:
-- Allow user to view
-- Allow user to manage projects (add, delete)
-- Allow admin to approve a project
-
-### In-application actions:
-- Allow user to view
-- Allow user to create a application for a specific project
-- Allow user to cancel a applications
-- Allow user to accept/reject applications of a project
 
 
 resources of code for UI:
