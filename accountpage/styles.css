@@ -100,13 +100,13 @@ p {
     left: 0;
     bottom: 0;
     width: 300px;
-    background-color: #333;
+    background-color:#ab82c5;
     color: #fff;
     padding: 50px 50px 50px;
     border-radius: 20px;
     text-align: center;
     justify-content: center;
-    /* border-bottom-right-radius: 20px; */
+
   }
 }
 
@@ -117,7 +117,7 @@ p {
     /* top: 0;
     left: 0; */
     width: 200px;
-    background-color: white;
+    background-color:#eee6f3;
     padding: 20px;
     display: flex;
     border-radius: 20px;
@@ -135,7 +135,7 @@ p {
     left: 0;
     bottom: 0;
     width: 600px;
-    background-color: #333;
+    background-color: #ab82c5;
     color: #fff;
     padding: 10px 10px 10px;
     border-radius: 20px;
