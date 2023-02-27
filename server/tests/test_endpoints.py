@@ -28,6 +28,12 @@ TEST_PROJECT  = {
     pj.APPROVE: False
 }
 
+TEST_CHANGE_PROJECT = {
+    pj.NAME: "sample project",
+    pj.FIELD: "if_approve",
+    pj.VALUE: False
+}
+
 TEST_USER_EMAIL = 'test@nyu.edu'
 TEST_USER = {
     "_id": uuid.uuid4().hex,
@@ -69,6 +75,12 @@ def test_add_project():
     resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_ADD}', json=TEST_PROJECT)
     assert pj.check_if_exist(TEST_PROJECT_NAME)
     pj.del_project(TEST_PROJECT_NAME)
+
+def test_change_project():
+    """
+    check if change field work
+    """
+    resp = TEST_CLIENT.post(f'{ep.PROJECTS_NS}{ep.PROJECT_CHANGE_FIELD}', json=TEST_CHANGE_PROJECT)
 
 def test_get_project_details():
     """

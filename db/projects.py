@@ -17,6 +17,7 @@ POST_DATE = 'post_date'
 DESCRIP = 'description'
 APPROVE = "if_approve"
 FIELD = 'field'
+VALUE = "value"
 
 # We expect the project database to change frequently:
 # This list contains our mandatory fields

@@ -241,11 +241,19 @@ class AddProject(Resource):
         return {MESSAGE: f'{name} is added.'}
 
 
+change_field = api.model("ChangeProject",{
+    pj.NAME: fields.String,
+    pj.FIELD: fields.String,
+    pj.VALUE: fields.Raw(),
+})
+
+
 @projects.route(PROJECT_CHANGE_FIELD)
 class ChangeProject(Resource):
     """
-    Add a new project.
+    change a feild in a exist project.
     """
+    @api.expect(change_field)
     def post(self):
         """
         Change details of a project.
@@ -253,7 +261,7 @@ class ChangeProject(Resource):
         print(f'{request.json=}')
         name = request.json[pj.NAME]
         field = request.json[pj.FIELD]
-        val = request.json["val"]
+        val = request.json[pj.VALUE]
         pj.change_project_single_field(name, field, val)
         return {MESSAGE: 'Project changed.'}
 
