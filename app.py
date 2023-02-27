@@ -183,12 +183,12 @@ def about_us():
 def contact_us():
   return render_template("contact.html")
 
-@app.route('/upload')
-def upload_image():
-   return render_template('upload.html')
+# @app.route('/upload')
+# def upload_file():
+#    return render_template('upload.html')
 
 @app.route('/uploader', methods = ['GET', 'POST'])
-def upload_image():
+def upload_file():
    if request.method == 'POST':
       f = request.files['file']
       f.save(secure_filename(f.filename))
