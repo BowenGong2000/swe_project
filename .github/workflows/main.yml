@@ -15,7 +15,6 @@ on:
 env:
   DEMO_HOME: /home/runner/work/swe_project/swe_project/
   PYTHONPATH: /home/runner/work/swe_project/swe_project/
-    # MONGO_PASSWD: ${{secrets.MONGO_PASSWD}}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
