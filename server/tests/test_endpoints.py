@@ -13,7 +13,7 @@ TEST_CLIENT = ep.app.test_client()
 TEST_DATA_TYPE = 'Project'
 
 TEST_PROJECT_NAME = 'Test project'
-TEST_PROJECT  = {
+TEST_PROJECT = {
     pj.ACCOUNT: "test account",
     pj.NAME: 'Test project',
     pj.NUM_MEMBERS: 7,

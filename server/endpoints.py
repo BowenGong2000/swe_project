@@ -246,7 +246,7 @@ class AddProject(Resource):
         return {MESSAGE: f'{name} is added.'}
 
 
-change_field = api.model("ChangeProject",{
+change_field = api.model("ChangeProject", {
     pj.NAME: fields.String,
     pj.FIELD: fields.String,
     pj.VALUE: fields.Raw(),
@@ -289,9 +289,11 @@ class DeleteProject(Resource):
         else:
             raise wz.NotFound(f'{project} not found.')
 
+
 upload_parser = reqparse.RequestParser()
 upload_parser.add_argument('file', location='files',
                            type=FileStorage, required=True)
+
 
 @projects.route(f'{PROJECT_ADD_FILE}/<name>/<filename>')
 class ADDFILE(Resource):
@@ -300,14 +302,13 @@ class ADDFILE(Resource):
     """
     @api.expect(upload_parser)
     def post(self, name, filename):
-        #file = request.files[pj.FILE]
         args = upload_parser.parse_args()
         file = args['file']
         if file is not None:
             pj.add_file(name, filename, file)
-            return {MESSAGE: f'file added'}
+            return {MESSAGE: 'file added'}
         else:
-            raise wz.NotFound(f'file is None')
+            raise wz.NotFound('file is None')
 
 
 @projects.route(f'{PROJECT_DELETE_FILE}')
@@ -319,9 +320,10 @@ class DELETEFILE(Resource):
         name = request.json[pj.NAME]
         if pj.check_if_exist(name) and pj.check_file_if_exist(name):
             pj.delete_file(name)
-            return {MESSAGE: f'file deleted'}
+            return {MESSAGE: 'file deleted'}
         else:
-            return {MESSAGE: f'{name} not exist in projects or {name} not have file'}
+            return {MESSAGE: f'{name} not exist in projects or {name} not \
+                    have file'}
         
 
 """

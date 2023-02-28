@@ -3,7 +3,7 @@ This module contains all methods to interact with the PROJECT_DB.
 """
 import os
 import pymongo as pm
-import gridfs 
+import gridfs
 
 CLOUD = "1"
 LOCAL = "0"
