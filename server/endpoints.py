@@ -604,49 +604,8 @@ application_fields = api.model('NewApplication', {
     apl.APP_DATE: fields.String,
     apl.RESUME: fields.String,
     apl.TRANSCRIPT: fields.String,
-    apl.APP_STATUS: fields.Boolean,
+    apl.APP_STATUS: fields.String,
 })
-
-
-"""Sponsor Endpoints"""
-
-
-@sponsors.route(SPONSOR_LIST)
-class SponsorList(Resource):
-    def get(self):
-        return {SPONSOR_LIST_NM: sps.get_sponsors()}
-
-
-@sponsors.route(SPONSOR_DICT)
-class SponsorDict(Resource):
-    """
-    This will get a list of participating sponsors.
-    """
-    def get(self):
-        """
-        Returns a list of participating sponsors.
-        """
-        return {'Data': sps.get_sponsors_dict(),
-                'Type': 'Data',
-                'Title': 'Paricipating Sponsors'}
-
-
-@sponsors.route(f'{SPONSOR_DETAILS}/<sponsor>')
-class SponsorDetails(Resource):
-    """
-    This will get details on a sponsor.
-    """
-    @api.response(HTTPStatus.OK, 'Success')
-    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self, sponsor):
-        """
-        Returns the details of a specific sponsor (in dictionary)
-        """
-        sps_d = sps.get_sponsor_details(sponsor)
-        if sps_d is not None:
-            return {sponsor: sps.get_sponsor_details(sponsor)}
-        else:
-            raise wz.NotFound(f'{sponsor} not found.')
 
 
 @api.route('/endpoints')

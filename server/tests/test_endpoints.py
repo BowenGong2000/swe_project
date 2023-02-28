@@ -2,12 +2,14 @@
 import pytest
 from http import HTTPStatus
 from passlib.hash import pbkdf2_sha256
+import uuid
 
 import server.endpoints as ep
 import db.projects as pj
 import db.user as usr
 import db.sponsors as sps
-import uuid
+import db.application as apl
+
 
 TEST_CLIENT = ep.app.test_client()
 TEST_DATA_TYPE = 'Project'
@@ -54,6 +56,18 @@ TEST_NEW_USER = {
     usr.PW: 'new',
 }
 TEST_BAD_USER_EMAIL = "bad"
+
+TEST_APPLICATION_NAME = 'test app name'
+TEST_APPLICATION = {
+    apl.NAME: TEST_APPLICATION_NAME,
+    apl.APPLICANT_NAME: 'test name',
+    apl.APPLICANT_EMAIL: TEST_USER_EMAIL,
+    apl.PROJECT: TEST_PROJECT_NAME,
+    apl.APP_DATE: '2022-06-08',
+    apl.RESUME: '123',
+    apl.TRANSCRIPT: '123',
+    apl.APP_STATUS: 'Processing',
+}
 
 
 def test_hello():
@@ -111,7 +125,7 @@ Tests for Users
 
 def test_get_user_dict():
     """
-    See if we can get all projects info properly.
+    See if we can get all users info properly.
     Return should look like:
         {Data: {all existing user accounts...}}
     """
@@ -193,6 +207,52 @@ def test_update_user():
     assert db_phone == TEST_NEW_USER['phone']
 
     usr.del_user(TEST_USER_EMAIL)
+
+
+"""
+Tests for Applications
+"""
+def test_get_applications_list():
+    """
+    See if we can get all applications and return in a list.
+    """
+    resp = TEST_CLIENT.get(ep.APPLICATION_LIST_W_NS)
+    resp_json = resp.get_json()[ep.APPLICATION_LIST_NM]
+    assert isinstance(resp_json, list)
+    assert len(resp_json) > 0
+
+
+def test_get_applications_dict():
+    """
+    See if we can get all applications info properly.
+    Return should look like:
+        {Data: {all existing applications...}}
+    """
+    resp = TEST_CLIENT.get(ep.APPLICATION_DICT_W_NS)
+    resp_json = resp.get_json()
+    assert isinstance(resp_json['Data'], dict)
+    """
+    Test if the dict is not empty.
+    """
+    assert len(resp_json['Data']) > 0
+
+
+def test_get_application_details():
+    """
+    See if we can get application details by name
+    """
+    resp_json = TEST_CLIENT.get(f'{ep.APPLICATION_DETAILS_W_NS}/{TEST_APPLICATION_NAME}').get_json()
+    assert isinstance(resp_json, dict)
+    assert len(resp_json) > 0
+
+
+def test_get_user_application():
+    """
+    See if we can get applications by user
+    """
+    resp_json = TEST_CLIENT.get(f'{ep.APPLICATION_USER_W_NS}/{TEST_USER_EMAIL}').get_json()
+    assert isinstance(resp_json, dict)
+    assert len(resp_json) > 0
 
 
 """
