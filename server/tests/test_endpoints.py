@@ -7,7 +7,6 @@ import uuid
 import server.endpoints as ep
 import db.projects as pj
 import db.user as usr
-import db.sponsors as sps
 import db.application as apl
 
 
