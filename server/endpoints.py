@@ -580,7 +580,7 @@ class ApplicationUser(Resource):
 
 
 @applications.route(f'{APPLICATION_DETAILS}/<application_name>')
-class ApplicationUser(Resource):
+class ApplicationDetails(Resource):
     """
     This will get details of a specific application.
     """
@@ -594,7 +594,6 @@ class ApplicationUser(Resource):
             return {f'{application_name}': apl_d}
         else:
             return ({MESSAGE: f'{application_name} not found.'})
-
 
 
 application_fields = api.model('NewApplication', {
