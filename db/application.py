@@ -4,7 +4,7 @@ This module contains details about application.
 import db.db_connect as dbc
 
 TEST_APPLICATION_NAME = 'Test application'
-NAME = 'applicantion name'
+NAME = 'application name'
 APPLICANT_NAME = 'applicant name'
 APPLICANT_EMAIL = 'applicant email'
 PROJECT = 'applied project'
@@ -14,9 +14,10 @@ RESUME = 'resume'
 TRANSCRIPT = 'transcript'
 COVER_LETTER = 'cover_leter'
 
-REQUIRED_FLDS = [NAME, PROJECT, APP_DATE, RESUME]
+REQUIRED_FLDS = [NAME, APPLICANT_EMAIL, PROJECT, APP_DATE, RESUME]
 
 APPLICATION_COLLECT = 'applicantions'
+APPLICATION_KEY = 'application name'
 
 
 def get_applications():
