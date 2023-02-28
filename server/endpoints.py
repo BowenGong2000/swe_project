@@ -13,6 +13,7 @@ import db.data_type as dtyp
 import db.projects as pj
 import db.sponsors as sps
 import db.user as usr
+import db.application as apl
 
 import werkzeug.exceptions as wz
 
@@ -23,6 +24,7 @@ api = Api(app)
 DATA_NS = 'data'
 PROJECTS_NS = 'projects'
 USERS_NS = 'users'
+APPLICATION_NS = 'application'
 SPONSORS_NS = 'sponsors'
 
 data_types = Namespace(DATA_NS, 'Data Types')
@@ -31,6 +33,8 @@ projects = Namespace(PROJECTS_NS, 'Projects')
 api.add_namespace(projects)
 users = Namespace(USERS_NS, 'Users')
 api.add_namespace(users)
+applications = Namespace(APPLICATION_NS, 'Applications')
+api.add_namespace(applications)
 sponsors = Namespace(SPONSORS_NS, 'Sponsors')
 api.add_namespace(sponsors)
 
@@ -43,6 +47,7 @@ ADD = 'add'
 CHANGE = 'change'
 DELETE = 'delete'
 FILE = "file"
+USER = 'user'
 
 MAIN_MENU = '/main_menu'
 MAIN_MENU_NM = 'Main Menu'
@@ -83,6 +88,16 @@ USER_LOGIN = '/login'
 USER_SIGNUP = '/signup'
 USER_UPDATE = '/update'
 USER_DELETE = f'/{DELETE}'
+
+APPLICATION_DICT = f'/{DICT}'
+APPLICATION_DICT_W_NS = f'{APPLICATION_NS}/{DICT}'
+APPLICATION_DETAILS = f'/{DETAILS}'
+APPLICATION_DETAILS_W_NS = f'{APPLICATION_NS}/{DETAILS}'
+APPLICATION_USER = f'/{USER}'
+APPLICATION_USER_W_NS = f'{APPLICATION_NS}/{USER}'
+APPLICATION_LIST = f'/{LIST}'
+APPLICATION_LIST_W_NS = f'{APPLICATION_NS}/{LIST}'
+APPLICATION_LIST_NM = f'{APPLICATION_NS}_list'
 
 SPONSOR_DICT = f'/{DICT}'
 SPONSOR_DICT_NM = f'{SPONSORS_NS}_dict'
@@ -184,11 +199,11 @@ class ProjectList(Resource):
 @projects.route(PROJECT_DICT)
 class ProjectDict(Resource):
     """
-    This will get currrent projects.
+    This will get all projects.
     """
     def get(self):
         """
-        Returns current projects in dictionary.
+        Returns all projects in dictionary.
         """
         return {'Data': pj.get_projects_dict(),
                 'Type': 'Data',
@@ -513,7 +528,85 @@ class UserDelete(Resource):
             usr.del_user(user_email)
             return {MESSAGE: f'{user_email} is deleted.'}
         else:
-            raise wz.NotFound(f'{user_email} not found.')
+            raise wz.NotFound({MESSAGE: f'{user_email} not found.'})
+
+
+"""Application Endpoints"""
+
+
+@applications.route(APPLICATION_LIST)
+class ApplicationList(Resource):
+    def get(self):
+        """
+        Return all applications in a list.
+        """
+        return {APPLICATION_LIST_NM: apl.get_applications()}
+
+
+@applications.route(APPLICATION_DICT)
+class ApplicationDict(Resource):
+    """
+    This will get all applications and reuturn in dictionary.
+    """
+    def get(self):
+        """
+        Returns all applications stored in db.
+        """
+        all_apl = apl.get_applications()
+
+        if all_apl is not None:
+            return {'Data': apl.get_applications_dict(),
+                    'Type': 'Data',
+                    'Title': 'all applications'}
+        else:
+            return ({MESSAGE: "No application existed."})
+
+
+@applications.route(f'{APPLICATION_USER}/<user_email>')
+class ApplicationUser(Resource):
+    """
+    This will get a particular user's applications.
+    """
+    def get(self, user_email):
+        """
+        Returns the applications of a particular user.
+        """
+        user_apl = apl.get_user_application(user_email)
+
+        if user_apl is not None:
+            return {f'{user_email}': user_apl}
+        else:
+            return ({MESSAGE: f'{user_email} has no valid applications.'})
+
+
+@applications.route(f'{APPLICATION_DETAILS}/<application_name>')
+class ApplicationUser(Resource):
+    """
+    This will get details of a specific application.
+    """
+    def get(self, application_name):
+        """
+        Returns the details of a specific application.
+        """
+        apl_d = apl.get_application_details(application_name)
+
+        if apl_d is not None:
+            return {f'{application_name}': apl_d}
+        else:
+            return ({MESSAGE: f'{application_name} not found.'})
+
+
+
+application_fields = api.model('NewApplication', {
+    apl.NAME: fields.String,
+    apl.APPLICANT_NAME: fields.String,
+    apl.APPLICANT_EMAIL: fields.String,
+    apl.PROJECT: fields.String,
+    apl.APP_DATE: fields.String,
+    apl.RESUME: fields.String,
+    apl.TRANSCRIPT: fields.String,
+    apl.APP_STATUS: fields.Boolean,
+})
 
 
 """Sponsor Endpoints"""

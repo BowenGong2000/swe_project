@@ -4,7 +4,7 @@ This module contains details about application.
 import db.db_connect as dbc
 
 TEST_APPLICATION_NAME = 'Test application'
-NAME = 'applicant id'
+NAME = 'applicantion name'
 APPLICANT_NAME = 'applicant name'
 APPLICANT_EMAIL = 'applicant email'
 PROJECT = 'applied project'
@@ -16,8 +16,7 @@ COVER_LETTER = 'cover_leter'
 
 REQUIRED_FLDS = [NAME, PROJECT, APP_DATE, RESUME]
 
-APPLICATION_KEY = 'application id'
-APPLICATION_COLLECT = 'applicants'
+APPLICATION_COLLECT = 'applicantions'
 
 
 def get_applications():
@@ -27,12 +26,17 @@ def get_applications():
 
 def get_applications_dict():
     dbc.connect_db()
-    return dbc.fetch_all_as_dict(APPLICATION_KEY, APPLICATION_COLLECT)
+    return dbc.fetch_all_as_dict('applicant email', APPLICATION_COLLECT)
 
 
 def get_application_details(name):
     dbc.connect_db()
-    return dbc.fetch_one(APPLICATION_COLLECT, {APPLICATION_KEY: name})
+    return dbc.fetch_one(APPLICATION_COLLECT, {'application name': name})
+
+
+def get_user_application(user_email):
+    dbc.connect_db()
+    return dbc.fetch_one(APPLICATION_COLLECT, {'applicant email': user_email})
 
 
 def application_exists(name):
