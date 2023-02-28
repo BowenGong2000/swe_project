@@ -104,6 +104,7 @@ def check_file_if_exist(name):
     dbc.connect_db()
     return dbc.check_file(name)
 
+
 def delete_file(name):
     if not isinstance(name, str):
         raise TypeError(f'Wrong type for name: {type(name)=}')
