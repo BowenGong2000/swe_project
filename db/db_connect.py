@@ -102,7 +102,7 @@ def insert_file(name, filename, file, db=PROJECT_DB):
     """
     data = file.read()
     fs = gridfs.GridFS(client[db])
-    return fs.put(data, filename = filename, name = name)
+    return fs.put(data, filename=filename, name=name)
 
 
 def delete_file(name, db=PROJECT_DB):
