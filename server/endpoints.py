@@ -324,7 +324,7 @@ class DELETEFILE(Resource):
         else:
             return {MESSAGE: f'{name} not exist in projects or {name} not \
                     have file'}
-        
+
 
 """
 User endpoints
