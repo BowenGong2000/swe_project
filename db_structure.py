@@ -3,6 +3,7 @@ import db.projects as pj
 import requests
 import datetime
 import db.db_connect as connect
+import os
 
 """
 this file is used for checking currently available data.
@@ -29,7 +30,11 @@ def curr_data():
         print(doc)
     print(pj.get_projects_dict())
 
+file_path = "/mnt/c/Users/15801/OneDrive/桌面/try.docx"
+file_data = open(file_path, "rb")
 connect.connect_db()
-print(connect.change_one("name", "Test Project", "if_approve", False, "projects"))
+#print(connect.insert_file("lets do it", "try.doc", file_path))
+print(connect.delete_file("lets do it"))
+#print(connect.change_one("name", "Test Project", "if_approve", False, "projects"))
 #data = requests.get("https://project-finder.herokuapp.com/projects/dict")
 #print(data.json())

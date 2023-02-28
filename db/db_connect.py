@@ -3,6 +3,7 @@ This module contains all methods to interact with the PROJECT_DB.
 """
 import os
 import pymongo as pm
+import gridfs 
 
 CLOUD = "1"
 LOCAL = "0"
@@ -93,6 +94,34 @@ def change_one(key_field, key, field, val, collection, db=PROJECT_DB):
         ret[field] = val
         client[db][collection].replace_one(mod_key, ret)
     return ret
+
+
+def insert_file(name, filename, file, db=PROJECT_DB):
+    """
+    insert a file in to db
+    """
+    data = file.read()
+    fs = gridfs.GridFS(client[db])
+    return fs.put(data, filename = filename, name = name)
+
+
+def delete_file(name, db=PROJECT_DB):
+    """
+    delete a file in db
+    """
+    fs = gridfs.GridFS(client[db])
+    file_id = fs.find_one({'name': name})._id
+    return fs.delete(file_id)
+
+
+def check_file(name, db=PROJECT_DB):
+    """
+    check if file exist
+    """
+    fs = gridfs.GridFS(client[db])
+    if fs.find_one({'name': name}) is not None:
+        return True
+    return False
 
 
 def main():

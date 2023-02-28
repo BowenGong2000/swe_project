@@ -5,8 +5,9 @@ The endpoint called `endpoints` will return all available endpoints.
 
 from http import HTTPStatus
 from flask import Flask, request
-from flask_restx import Resource, Api, fields, Namespace
+from flask_restx import Resource, Api, fields, Namespace, reqparse
 from passlib.hash import pbkdf2_sha256
+from werkzeug.datastructures import FileStorage
 
 import db.data_type as dtyp
 import db.projects as pj
@@ -41,6 +42,7 @@ DETAILS = 'details'
 ADD = 'add'
 CHANGE = 'change'
 DELETE = 'delete'
+FILE = "file"
 
 MAIN_MENU = '/main_menu'
 MAIN_MENU_NM = 'Main Menu'
@@ -64,6 +66,9 @@ PROJECT_LIST_W_NS = f'{PROJECTS_NS}/{LIST}'
 PROJECT_ADD = f'/{ADD}'
 PROJECT_CHANGE_FIELD = f'/{CHANGE}'
 PROJECT_DELETE = f'/{DELETE}'
+PROJECT_ADD_FILE = f'/{FILE}/{ADD}'
+PROJECT_DELETE_FILE = f'/{FILE}/{DELETE}'
+PROJECT_CHANGE_FILE = f"/{FILE}/{CHANGE}"
 
 USER_DICT = f'/{DICT}'
 USER_DICT_NM = f'{USERS_NS}_dict'
@@ -284,6 +289,40 @@ class DeleteProject(Resource):
         else:
             raise wz.NotFound(f'{project} not found.')
 
+upload_parser = reqparse.RequestParser()
+upload_parser.add_argument('file', location='files',
+                           type=FileStorage, required=True)
+
+@projects.route(f'{PROJECT_ADD_FILE}/<name>/<filename>')
+class ADDFILE(Resource):
+    """
+    add a FILE
+    """
+    @api.expect(upload_parser)
+    def post(self, name, filename):
+        #file = request.files[pj.FILE]
+        args = upload_parser.parse_args()
+        file = args['file']
+        if file is not None:
+            pj.add_file(name, filename, file)
+            return {MESSAGE: f'file added'}
+        else:
+            raise wz.NotFound(f'file is None')
+
+
+@projects.route(f'{PROJECT_DELETE_FILE}')
+class DELETEFILE(Resource):
+    """
+    delete a FILE
+    """
+    def post(self):
+        name = request.json[pj.NAME]
+        if pj.check_if_exist(name) and pj.check_file_if_exist(name):
+            pj.delete_file(name)
+            return {MESSAGE: f'file deleted'}
+        else:
+            return {MESSAGE: f'{name} not exist in projects or {name} not have file'}
+        
 
 """
 User endpoints

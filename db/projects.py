@@ -17,7 +17,9 @@ POST_DATE = 'post_date'
 DESCRIP = 'description'
 APPROVE = "if_approve"
 FIELD = 'field'
-VALUE = "value"
+VALUE = 'value'
+FILE = 'file'
+FILENAME = 'filename'
 
 # We expect the project database to change frequently:
 # This list contains our mandatory fields
@@ -25,6 +27,7 @@ REQUIRED_FLDS = [ACCOUNT, NUM_MEMBERS, MAJOR, SCHOOL_YEAR, POST_DATE, APPROVE]
 
 PROJECT_KEY = 'name'
 PROJECTS_COLLECT = 'projects'
+PROJECT_FILE = 'project_file'
 
 
 def get_projects():
@@ -83,6 +86,29 @@ def change_project_single_field(name, field, val):
         raise TypeError(f'Wrong type for details: {type(field)=}')
     dbc.connect_db()
     return dbc.change_one(NAME, name, APPROVE, val, PROJECTS_COLLECT)
+
+
+def add_file(name, filename, file):
+    if not isinstance(name, str):
+        raise TypeError(f'Wrong type for name: {type(name)=}')
+
+    if not isinstance(filename, str):
+        raise TypeError(f'Wrong type for details: {type(filename)=}')
+    dbc.connect_db()
+    return dbc.insert_file(name, filename, file)
+
+
+def check_file_if_exist(name):
+    if not isinstance(name, str):
+        raise TypeError(f'Wrong type for name: {type(name)=}')
+    dbc.connect_db()
+    return dbc.check_file(name)
+
+def delete_file(name):
+    if not isinstance(name, str):
+        raise TypeError(f'Wrong type for name: {type(name)=}')
+    dbc.connect_db()
+    return dbc.delete_file(name)
 
 
 def main():
