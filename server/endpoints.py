@@ -11,7 +11,6 @@ from werkzeug.datastructures import FileStorage
 
 import db.data_type as dtyp
 import db.projects as pj
-import db.sponsors as sps
 import db.user as usr
 import db.application as apl
 
