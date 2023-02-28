@@ -97,6 +97,7 @@ APPLICATION_USER_W_NS = f'{APPLICATION_NS}/{USER}'
 APPLICATION_LIST = f'/{LIST}'
 APPLICATION_LIST_W_NS = f'{APPLICATION_NS}/{LIST}'
 APPLICATION_LIST_NM = f'{APPLICATION_NS}_list'
+APPLICATION_DELETE = f'/{DELETE}'
 
 SPONSOR_DICT = f'/{DICT}'
 SPONSOR_DICT_NM = f'{SPONSORS_NS}_dict'
@@ -605,6 +606,25 @@ application_fields = api.model('NewApplication', {
     apl.TRANSCRIPT: fields.String,
     apl.APP_STATUS: fields.String,
 })
+
+
+@applications.route(f'{APPLICATION_DELETE}/<application_name>')
+class ApplicationDelete(Resource):
+    """
+    This will delete a existing application.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def post(self, application_name):
+        """
+        Delete a existing application from db
+        """
+        apld = apl.get_application_details(application_name)
+        if apld is not None:
+            apl.del_application(application_name)
+            return {MESSAGE: f'{application_name} is deleted.'}
+        else:
+            raise wz.NotFound(f'{application_name} not found.')
 
 
 @api.route('/endpoints')
