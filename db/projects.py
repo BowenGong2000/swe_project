@@ -112,6 +112,17 @@ def delete_file(name):
     return dbc.delete_file(name)
 
 
+def get_file(name):
+    if not isinstance(name, str):
+        raise TypeError(f'Wrong type for name: {type(name)=}')
+    dbc.connect_db()
+    if dbc.check_file(name):
+        file, filename = dbc.get_file(name)
+        return file, filename
+    else:
+        return None, None
+
+
 def main():
     print('Getting projects as a list:')
     projects = get_projects()

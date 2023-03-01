@@ -124,6 +124,18 @@ def check_file(name, db=PROJECT_DB):
     return False
 
 
+def get_file(name, db=PROJECT_DB):
+    """
+    get a existing file
+    """
+    fs = gridfs.GridFS(client[db])
+    if fs.find_one({'name': name}) is not None:
+        file = fs.find_one({'name': name})
+        return file, file.filename
+    else:
+        return None, None
+
+
 def main():
     connect_db()
 

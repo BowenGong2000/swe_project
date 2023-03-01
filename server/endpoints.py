@@ -4,7 +4,7 @@ The endpoint called `endpoints` will return all available endpoints.
 """
 
 from http import HTTPStatus
-from flask import Flask, request
+from flask import Flask, request, send_file
 from flask_restx import Resource, Api, fields, Namespace, reqparse
 from passlib.hash import pbkdf2_sha256
 from werkzeug.datastructures import FileStorage
@@ -45,8 +45,9 @@ DETAILS = 'details'
 ADD = 'add'
 CHANGE = 'change'
 DELETE = 'delete'
-FILE = "file"
+FILE = 'file'
 USER = 'user'
+GET = 'get'
 
 MAIN_MENU = '/main_menu'
 MAIN_MENU_NM = 'Main Menu'
@@ -72,7 +73,8 @@ PROJECT_CHANGE_FIELD = f'/{CHANGE}'
 PROJECT_DELETE = f'/{DELETE}'
 PROJECT_ADD_FILE = f'/{FILE}/{ADD}'
 PROJECT_DELETE_FILE = f'/{FILE}/{DELETE}'
-PROJECT_CHANGE_FILE = f"/{FILE}/{CHANGE}"
+PROJECT_CHANGE_FILE = f'/{FILE}/{CHANGE}'
+PROJECT_GET_FILE = f'/{FILE}/{GET}'
 
 USER_DICT = f'/{DICT}'
 USER_DICT_NM = f'{USERS_NS}_dict'
@@ -339,6 +341,19 @@ class DELETEFILE(Resource):
         else:
             return {MESSAGE: f'{name} not exist in projects or {name} not \
                     have file'}
+
+
+@projects.route(f'{PROJECT_GET_FILE}/<project>')
+class GETFILE(Resource):
+    """
+    get existing file
+    """
+    def get(self, project):
+        file, filename = pj.get_file(project)
+        if file:
+            return send_file(file, attachment_filename=filename)
+        else:
+            return {MESSAGE: f'{project} not found'}
 
 
 """
