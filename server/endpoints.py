@@ -662,43 +662,42 @@ class Endpoints(Resource):
 ################################################################
 
 import smtplib
-from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 
-@applications.route(f'{APPLICATION_REGISTER}', methods=['POST'])
-class ApplicationRegister(Resource):
+# 定义常量
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
+SMTP_USERNAME = "sx2109@nyu.edu"
+SMTP_PASSWORD = "Xsy12061045"
+EMAIL_FROM = "sx2109@nyu.edu"
+EMAIL_SUBJECT = "You have successfully registered. "
+EMAIL_BODY = "You have successfully registered."
+
+@api.route('/register')
+class UserRegister(Resource):
     """
-    This will register a new application.
+    This class will register a new user
     """
-    @api.expect(application_fields)
     def post(self):
         """
-        Register a new application and send a notification email to the user.
+        Register a new user
         """
-        # code to register the application and retrieve user email
-        user_email = 'example@example.com' # replace with actual user email
+        # Register user
+        ...
 
-        # send email notification to the user
-        from_email = 'sx2109@nyu.edu' # replace with your email address
-        from_email_password = 'Xsy12061045' # replace with your email password
-
-        # set up email message
+        # Send email notification
+        user_email = request.json.get('email')
         msg = MIMEMultipart()
-        msg['From'] = from_email
+        msg['From'] = EMAIL_FROM
         msg['To'] = user_email
-        msg['Subject'] = 'You have successfully registered'
-        body = 'Dear user,\n\nYou have successfully registered.\n\nBest regards,\nYour Application Team'
-        msg.attach(MIMEText(body, 'plain'))
+        msg['Subject'] = EMAIL_SUBJECT
+        msg.attach(MIMEText(EMAIL_BODY))
+        mail = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        mail.starttls()
+        mail.login(SMTP_USERNAME, SMTP_PASSWORD)
+        mail.sendmail(EMAIL_FROM, user_email, msg.as_string())
+        mail.quit()
 
-        # connect to email server and send message
-        try:
-            server = smtplib.SMTP('smtp.gmail.com', 587) # replace with your email provider's SMTP server and port number
-            server.starttls()
-            server.login(from_email, from_email_password)
-            text = msg.as_string()
-            server.sendmail(from_email, user_email, text)
-            server.quit()
-            return {'message': 'Application registered and notification email sent.'}, HTTPStatus.CREATED
-        except Exception as e:
-            print(str(e))
-            return {'message': 'Error sending notification email.'}, HTTPStatus.INTERNAL_SERVER_ERROR
+        return {MESSAGE: "User registered successfully."}, HTTPStatus.CREATED
