@@ -655,3 +655,50 @@ class Endpoints(Resource):
         endpoints = ''
         # sorted(rule.rule for rule in api.app.url_map.iter_rules())
         return {"Available endpoints": endpoints}
+
+
+
+
+################################################################
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+@applications.route(f'{APPLICATION_REGISTER}', methods=['POST'])
+class ApplicationRegister(Resource):
+    """
+    This will register a new application.
+    """
+    @api.expect(application_fields)
+    def post(self):
+        """
+        Register a new application and send a notification email to the user.
+        """
+        # code to register the application and retrieve user email
+        user_email = 'example@example.com' # replace with actual user email
+
+        # send email notification to the user
+        from_email = 'sx2109@nyu.edu' # replace with your email address
+        from_email_password = 'Xsy12061045' # replace with your email password
+
+        # set up email message
+        msg = MIMEMultipart()
+        msg['From'] = from_email
+        msg['To'] = user_email
+        msg['Subject'] = 'You have successfully registered'
+        body = 'Dear user,\n\nYou have successfully registered.\n\nBest regards,\nYour Application Team'
+        msg.attach(MIMEText(body, 'plain'))
+
+        # connect to email server and send message
+        try:
+            server = smtplib.SMTP('smtp.gmail.com', 587) # replace with your email provider's SMTP server and port number
+            server.starttls()
+            server.login(from_email, from_email_password)
+            text = msg.as_string()
+            server.sendmail(from_email, user_email, text)
+            server.quit()
+            return {'message': 'Application registered and notification email sent.'}, HTTPStatus.CREATED
+        except Exception as e:
+            print(str(e))
+            return {'message': 'Error sending notification email.'}, HTTPStatus.INTERNAL_SERVER_ERROR
