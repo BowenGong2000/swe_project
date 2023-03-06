@@ -657,9 +657,6 @@ class Endpoints(Resource):
         return {"Available endpoints": endpoints}
 
 
-
-
-################################################################
 '''
 import smtplib
 from email.mime.text import MIMEText
@@ -693,6 +690,7 @@ class UserRegister(Resource):
         mail.sendmail(EMAIL_FROM, user_email, msg.as_string())
         mail.quit()
 
-        return {MESSAGE: "User registered successfully."}, HTTPStatus.CREATED
+        return {MESSAGE: "User registered 
+        successfully."}, HTTPStatus.CREATED
 
 '''
