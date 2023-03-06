@@ -22,7 +22,7 @@ def curr_data():
             print(doc)
 
     db2 = client.user_login_system
-    result = db2.list_collection_names(session = None)
+    result = db2.list_collection_names(session=None)
     print("forms in user_login_system:", result)
     print("users table")
     var = db2.users.find()
@@ -31,8 +31,11 @@ def curr_data():
     print(pj.get_projects_dict())
 
 file_path = "/mnt/c/Users/15801/OneDrive/桌面/try.docx"
-file_data = open(file_path, "rb")
+#file_data = open(file_path, "rb")
 connect.connect_db()
+response = requests.get('https://project-finder.herokuapp.com/projects/file/get/lets%20do')
+with open('myfile.txt', 'wb') as f:
+        f.write(response.content)
 #print(connect.insert_file("lets do it", "try.doc", file_path))
 print(connect.delete_file("lets do it"))
 #print(connect.change_one("name", "Test Project", "if_approve", False, "projects"))
