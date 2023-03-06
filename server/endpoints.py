@@ -690,7 +690,7 @@ class UserRegister(Resource):
         mail.sendmail(EMAIL_FROM, user_email, msg.as_string())
         mail.quit()
 
-        return {MESSAGE: "User registered 
+        return {MESSAGE: "User registered
         successfully."}, HTTPStatus.CREATED
 
 '''
