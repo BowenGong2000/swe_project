@@ -660,13 +660,13 @@ class Endpoints(Resource):
 
 
 ################################################################
-
+'''
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
-# 定义常量
+
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 SMTP_USERNAME = "sx2109@nyu.edu"
@@ -677,16 +677,9 @@ EMAIL_BODY = "You have successfully registered."
 
 @api.route('/register')
 class UserRegister(Resource):
-    """
-    This class will register a new user
-    """
     def post(self):
-        """
-        Register a new user
-        """
-        # Register user
-        ...
 
+        # When register a new user
         # Send email notification
         user_email = request.json.get('email')
         msg = MIMEMultipart()
@@ -701,3 +694,5 @@ class UserRegister(Resource):
         mail.quit()
 
         return {MESSAGE: "User registered successfully."}, HTTPStatus.CREATED
+
+'''
