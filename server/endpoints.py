@@ -15,6 +15,8 @@ import db.user as usr
 import db.application as apl
 
 import werkzeug.exceptions as wz
+from io import BytesIO
+import mimetypes
 
 
 app = Flask(__name__)
@@ -353,11 +355,13 @@ class GETFILE(Resource):
         if file:
             if if_send == '0':
                 return {'filename': filename}
-            response_headers = {
-                'Content-Type': file.content_type,
-                'Content-Disposition': f'attachment; filename="{filename}"'
-            }
-            return send_file(file, as_attachment=True, attachment_filename=filename, headers=response_headers)
+            file_content = file.read()
+            file_obj = BytesIO(file_content)
+            file_mimetype, encoding = mimetypes.guess_type(filename)
+            return send_file(file_obj,
+                             as_attachment=True,
+                             attachment_filename=filename,
+                             mimetype=file_mimetype)
         else:
             return {MESSAGE: f'{project} not found'}
 
