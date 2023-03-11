@@ -343,14 +343,16 @@ class DELETEFILE(Resource):
                     have file'}
 
 
-@projects.route(f'{PROJECT_GET_FILE}/<project>')
+@projects.route(f'{PROJECT_GET_FILE}/<project>/<if_send>')
 class GETFILE(Resource):
     """
-    get existing file
+    get existing file if if_send is 0 only send name of file
     """
-    def get(self, project):
+    def get(self, project, if_send):
         file, filename = pj.get_file(project)
         if file:
+            if if_send == '0':
+                return {'filename': filename}
             return send_file(file, attachment_filename=filename)
         else:
             return {MESSAGE: f'{project} not found'}
