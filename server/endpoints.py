@@ -353,7 +353,7 @@ class GETFILE(Resource):
         if file:
             if if_send == '0':
                 return {'filename': filename}
-            return send_file(file, attachment_filename=filename)
+            return send_file(file.read(), attachment_filename=filename)
         else:
             return {MESSAGE: f'{project} not found'}
 
