@@ -53,14 +53,15 @@ TEST_BAD_USER_EMAIL = "bad"
 
 TEST_APPLICATION_NAME = 'test app name'
 TEST_APPLICATION = {
+    "_id": uuid.uuid4().hex,
     apl.NAME: TEST_APPLICATION_NAME,
     apl.APPLICANT_NAME: 'test name',
     apl.APPLICANT_EMAIL: TEST_USER_EMAIL,
-    apl.PROJECT: TEST_PROJECT_NAME,
+    apl.PROJECT: "Test Project",
     apl.APP_DATE: '2022-06-08',
-    apl.RESUME: '123',
-    apl.TRANSCRIPT: '123',
-    apl.APP_STATUS: 'Processing',
+    apl.RESUME: 'string',
+    apl.TRANSCRIPT: 'string',
+    apl.APP_STATUS: 'string',
 }
 
 
@@ -267,7 +268,7 @@ def test_add_application():
     """
     resp = TEST_CLIENT.post(f'/{ep.APPLICATION_NS}{ep.APPLICATION_ADD}', json=TEST_APPLICATION)
     assert apl.application_exists(TEST_APPLICATION_NAME)
-    apl.del_user(TEST_APPLICATION_NAME)
+    apl.del_application(TEST_APPLICATION_NAME)
 
 
 """
