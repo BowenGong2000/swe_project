@@ -40,9 +40,9 @@ def get_user_application(user_email):
     return dbc.fetch_one(APPLICATION_COLLECT, {'applicant email': user_email})
 
 
-def get_project_application(project_name):
+def get_project_application(project):
     dbc.connect_db()
-    return dbc.fetch_one(APPLICATION_COLLECT, {'applied project': project_name})
+    return dbc.fetch_one(APPLICATION_COLLECT, {'applied project': project})
 
 
 def application_exists(name):
