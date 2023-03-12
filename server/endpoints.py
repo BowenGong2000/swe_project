@@ -357,7 +357,7 @@ class GETFILE(Resource):
                 return {'filename': filename}
             file_content = file.read()
             file_obj = BytesIO(file_content)
-            file_mimetype, encoding  = mimetypes.guess_type(filename)
+            file_mimetype, encoding = mimetypes.guess_type(filename)
             return send_file(file_obj,
                              as_attachment=True,
                              attachment_filename=filename,
