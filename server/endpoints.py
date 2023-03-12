@@ -26,7 +26,6 @@ DATA_NS = 'data'
 PROJECTS_NS = 'projects'
 USERS_NS = 'users'
 APPLICATION_NS = 'application'
-SPONSORS_NS = 'sponsors'
 
 data_types = Namespace(DATA_NS, 'Data Types')
 api.add_namespace(data_types)
@@ -36,8 +35,6 @@ users = Namespace(USERS_NS, 'Users')
 api.add_namespace(users)
 applications = Namespace(APPLICATION_NS, 'Applications')
 api.add_namespace(applications)
-sponsors = Namespace(SPONSORS_NS, 'Sponsors')
-api.add_namespace(sponsors)
 
 LIST = 'list'
 DICT = 'dict'
@@ -175,9 +172,6 @@ class MainMenu(Resource):
                     '2': {'url': f'/{USER_DICT_W_NS}',
                           'method': 'get',
                           'text': 'List USERS.'},
-                    '3': {'url': f'/{SPONSOR_DICT_W_NS}',
-                          'method': 'get',
-                          'text': 'List Sponsors.'},
                     'X': {'text': 'Exit'},
                 }}
 
