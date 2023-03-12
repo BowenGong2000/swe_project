@@ -49,6 +49,7 @@ CHANGE = 'change'
 DELETE = 'delete'
 FILE = 'file'
 USER = 'user'
+PROJECT = 'project'
 GET = 'get'
 
 MAIN_MENU = '/main_menu'
@@ -98,20 +99,48 @@ APPLICATION_DETAILS = f'/{DETAILS}'
 APPLICATION_DETAILS_W_NS = f'{APPLICATION_NS}/{DETAILS}'
 APPLICATION_USER = f'/{USER}'
 APPLICATION_USER_W_NS = f'{APPLICATION_NS}/{USER}'
-APPLICATION_LIST = f'/{LIST}'
-APPLICATION_LIST_W_NS = f'{APPLICATION_NS}/{LIST}'
-APPLICATION_LIST_NM = f'{APPLICATION_NS}_list'
 APPLICATION_DELETE = f'/{DELETE}'
+APPLICATION_ADD = f'/{ADD}'
+APPLICATION_PROJECT = f'/{PROJECT}'
 
-SPONSOR_DICT = f'/{DICT}'
-SPONSOR_DICT_NM = f'{SPONSORS_NS}_dict'
-SPONSOR_DICT_W_NS = f'{SPONSORS_NS}/{DICT}'
-SPONSOR_DETAILS = f'/{DETAILS}'
-SPONSOR_DETAILS_W_NS = f'{SPONSORS_NS}/{DETAILS}'
-SPONSOR_LIST = f'/{LIST}'
-SPONSOR_LIST_NM = f'{SPONSORS_NS}_list'
-SPONSOR_LIST_W_NS = f'{SPONSORS_NS}/{LIST}'
-SPONSOR_ADD = f'/{SPONSORS_NS}/{ADD}'
+
+project_fields = api.model('NewProject', {
+    pj.ACCOUNT: fields.String,
+    pj.NAME: fields.String,
+    pj.DEPARTMENT: fields.String,
+    pj.MAJOR: fields.String,
+    pj.SCHOOL_YEAR: fields.String,
+    pj.NUM_MEMBERS: fields.Integer,
+    pj.GPA: fields.Float,
+    pj.LENGTH: fields.String,
+    pj.SKILL: fields.String,
+    pj.DESCRIP: fields.String,
+    pj.POST_DATE: fields.String,
+    pj.APPROVE: fields.Boolean,
+})
+
+user_fields = api.model('NewUser', {
+    usr.EMAIL: fields.String,
+    usr.NAME: fields.String,
+    usr.PHONE: fields.String,
+    usr.PW: fields.String,
+})
+
+login_user_fields = api.model('LoginUser', {
+    usr.EMAIL: fields.String,
+    usr.PW: fields.String,
+})
+
+application_fields = api.model('NewApplication', {
+    apl.NAME: fields.String,
+    apl.APPLICANT_NAME: fields.String,
+    apl.APPLICANT_EMAIL: fields.String,
+    apl.PROJECT: fields.String,
+    apl.APP_DATE: fields.String,
+    apl.RESUME: fields.String,
+    apl.TRANSCRIPT: fields.String,
+    apl.APP_STATUS: fields.String,
+})
 
 
 @api.route('/hello')
@@ -232,22 +261,6 @@ class ProjectDetails(Resource):
             raise wz.NotFound(f'{project} not found.')
 
 
-project_fields = api.model('NewProject', {
-    pj.ACCOUNT: fields.String,
-    pj.NAME: fields.String,
-    pj.DEPARTMENT: fields.String,
-    pj.MAJOR: fields.String,
-    pj.SCHOOL_YEAR: fields.String,
-    pj.NUM_MEMBERS: fields.Integer,
-    pj.GPA: fields.Float,
-    pj.LENGTH: fields.String,
-    pj.SKILL: fields.String,
-    pj.DESCRIP: fields.String,
-    pj.POST_DATE: fields.String,
-    pj.APPROVE: fields.Boolean,
-})
-
-
 @projects.route(PROJECT_ADD)
 class AddProject(Resource):
     """
@@ -275,7 +288,7 @@ change_field = api.model("ChangeProject", {
 @projects.route(PROJECT_CHANGE_FIELD)
 class ChangeProject(Resource):
     """
-    change a feild in a exist project.
+    Change a field in a existing project.
     """
     @api.expect(change_field)
     def post(self):
@@ -333,7 +346,7 @@ class ADDFILE(Resource):
 @projects.route(f'{PROJECT_DELETE_FILE}')
 class DELETEFILE(Resource):
     """
-    delete a FILE
+    Delete a FILE
     """
     def post(self):
         name = request.json[pj.NAME]
@@ -348,7 +361,7 @@ class DELETEFILE(Resource):
 @projects.route(f'{PROJECT_GET_FILE}/<project>/<if_send>')
 class GETFILE(Resource):
     """
-    get existing file if if_send is 0 only send name of file
+    Get existing file if if_send is 0 only send name of file
     """
     def get(self, project, if_send):
         file, filename = pj.get_file(project)
@@ -410,19 +423,6 @@ class UserDetails(Resource):
             return {"user detail": usr.get_user_details(user_email)}
         else:
             raise wz.NotFound(f'{user_email} not found.')
-
-
-user_fields = api.model('NewUser', {
-    usr.EMAIL: fields.String,
-    usr.NAME: fields.String,
-    usr.PHONE: fields.String,
-    usr.PW: fields.String,
-})
-
-login_user_fields = api.model('LoginUser', {
-    usr.EMAIL: fields.String,
-    usr.PW: fields.String,
-})
 
 
 @users.route(USER_ADD)
@@ -518,7 +518,7 @@ class UserUpdate(Resource):
         email = request.json[usr.EMAIL]
         del request.json[usr.EMAIL]
         """
-        Check if the email address exist
+        Check if the email address exists
         """
         user_exist = usr.user_exists(email)
         if user_exist:
@@ -559,15 +559,6 @@ class UserDelete(Resource):
 """Application Endpoints"""
 
 
-@applications.route(APPLICATION_LIST)
-class ApplicationList(Resource):
-    def get(self):
-        """
-        Return all applications in a list.
-        """
-        return {APPLICATION_LIST_NM: apl.get_applications()}
-
-
 @applications.route(APPLICATION_DICT)
 class ApplicationDict(Resource):
     """
@@ -594,7 +585,7 @@ class ApplicationUser(Resource):
     """
     def get(self, user_email):
         """
-        Returns the applications of a particular user.
+        Returns all applications of a particular user.
         """
         user_apl = apl.get_user_application(user_email)
 
@@ -602,6 +593,23 @@ class ApplicationUser(Resource):
             return {f'{user_email}': user_apl}
         else:
             return ({MESSAGE: f'{user_email} has no valid applications.'})
+
+
+@applications.route(f'{APPLICATION_PROJECT}/<project_name>')
+class ApplicationProject(Resource):
+    """
+    This will get all applications of a particular project.
+    """
+    def get(self, project_name):
+        """
+        Returns all applications of a particular project.
+        """
+        proj_apl = apl.get_project_application(project_name)
+
+        if proj_apl is not None:
+            return {f'{project_name}': proj_apl}
+        else:
+            return ({MESSAGE: f'{project_name} has no valid applications.'})
 
 
 @applications.route(f'{APPLICATION_DETAILS}/<application_name>')
@@ -621,18 +629,6 @@ class ApplicationDetails(Resource):
             return ({MESSAGE: f'{application_name} not found.'})
 
 
-application_fields = api.model('NewApplication', {
-    apl.NAME: fields.String,
-    apl.APPLICANT_NAME: fields.String,
-    apl.APPLICANT_EMAIL: fields.String,
-    apl.PROJECT: fields.String,
-    apl.APP_DATE: fields.String,
-    apl.RESUME: fields.String,
-    apl.TRANSCRIPT: fields.String,
-    apl.APP_STATUS: fields.String,
-})
-
-
 @applications.route(f'{APPLICATION_DELETE}/<application_name>')
 class ApplicationDelete(Resource):
     """
@@ -650,6 +646,37 @@ class ApplicationDelete(Resource):
             return {MESSAGE: f'{application_name} is deleted.'}
         else:
             raise wz.NotFound(f'{application_name} not found.')
+
+
+@applications.route(APPLICATION_ADD)
+class AddApplication(Resource):
+    """
+    Add an application.
+    """
+    @api.expect(application_fields)
+    def post(self):
+        """
+        Add an application.
+        """
+        print(f'{request.json=}')
+        apl_name = request.json[apl.NAME]
+        apl_project = request.json[apl.PROJECT]
+
+        """ Check if the application name is used """
+        if apl.application_exists(apl_name):
+            return ({MESSAGE: "The application name is already existed"})
+
+        """ Check if the applied project exists """
+        if pj.check_if_exist(apl_project):
+            apl.add_application(apl_name, request.json)
+            return {MESSAGE: f'Your application {apl_name} is added.'}
+        else:
+            return {MESSAGE: f'Project {apl_project} is not existed.'}
+
+
+"""
+List all endpoints
+"""
 
 
 @api.route('/endpoints')

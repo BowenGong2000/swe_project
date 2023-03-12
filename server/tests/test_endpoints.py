@@ -220,16 +220,6 @@ def test_update_user():
 """
 Tests for Applications
 """
-def test_get_applications_list():
-    """
-    See if we can get all applications and return in a list.
-    """
-    resp = TEST_CLIENT.get(ep.APPLICATION_LIST_W_NS)
-    resp_json = resp.get_json()[ep.APPLICATION_LIST_NM]
-    assert isinstance(resp_json, list)
-    assert len(resp_json) > 0
-
-
 def test_get_applications_dict():
     """
     See if we can get all applications info properly.
