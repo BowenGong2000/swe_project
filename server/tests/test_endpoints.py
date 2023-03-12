@@ -48,12 +48,7 @@ TEST_LOGIN_USER = {
     usr.EMAIL: TEST_USER_EMAIL,
     usr.PW: '1234',
 }
-TEST_NEW_USER = {
-    usr.NAME: 'new',
-    usr.EMAIL: TEST_USER_EMAIL,
-    usr.PHONE: 'new',
-    usr.PW: 'new',
-}
+
 TEST_BAD_USER_EMAIL = "bad"
 
 TEST_APPLICATION_NAME = 'test app name'
@@ -206,13 +201,13 @@ def test_update_user():
     Check if user info can be updated properly
     """
     usr.add_user(TEST_USER_EMAIL, TEST_USER)
-    resp = TEST_CLIENT.post(f'/{ep.USERS_NS}{ep.USER_UPDATE}', json=TEST_NEW_USER)
+    resp = TEST_CLIENT.post(f'/{ep.USERS_NS}{ep.USER_UPDATE}', json=TEST_USER)
     
     db_name = usr.get_user_details(TEST_USER_EMAIL)["name"]
     db_phone = usr.get_user_details(TEST_USER_EMAIL)["phone"]
 
-    assert db_name == TEST_NEW_USER['name']
-    assert db_phone == TEST_NEW_USER['phone']
+    assert db_name == TEST_USER['name']
+    assert db_phone == TEST_USER['phone']
 
     usr.del_user(TEST_USER_EMAIL)
 
@@ -234,7 +229,6 @@ def test_get_applications_dict():
     """
     assert len(resp_json['Data']) > 0
 
-
 def test_get_application_details():
     """
     See if we can get application details by name
@@ -242,7 +236,6 @@ def test_get_application_details():
     resp_json = TEST_CLIENT.get(f'{ep.APPLICATION_DETAILS_W_NS}/{TEST_APPLICATION_NAME}').get_json()
     assert isinstance(resp_json, dict)
     assert len(resp_json) > 0
-
 
 def test_get_user_application():
     """
@@ -252,6 +245,13 @@ def test_get_user_application():
     assert isinstance(resp_json, dict)
     assert len(resp_json) > 0
 
+def test_get_project_application():
+    """
+    See if we can get applications by project
+    """
+    resp_json = TEST_CLIENT.get(f'{ep.APPLICATION_PROJECT_W_NS}/{TEST_PROJECT_NAME}').get_json()
+    assert isinstance(resp_json, dict)
+    assert len(resp_json) > 0
 
 def test_delete_application():
     """
@@ -260,6 +260,14 @@ def test_delete_application():
     apl.add_application(TEST_APPLICATION_NAME, TEST_APPLICATION)
     resp = TEST_CLIENT.post(f'/{ep.APPLICATION_NS}{ep.APPLICATION_DELETE}/{TEST_APPLICATION_NAME}')
     assert apl.application_exists(TEST_APPLICATION_NAME) == False
+
+def test_add_application():
+    """
+    See if adding application works properly.
+    """
+    resp = TEST_CLIENT.post(f'/{ep.APPLICATION_NS}{ep.APPLICATION_ADD}', json=TEST_APPLICATION)
+    assert apl.application_exists(TEST_APPLICATION_NAME)
+    apl.del_user(TEST_APPLICATION_NAME)
 
 
 """
