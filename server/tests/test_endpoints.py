@@ -198,7 +198,7 @@ def test_delete_user():
     Check if user can be deleted properly
     """
     usr.add_user(TEST_USER_EMAIL, TEST_USER)
-    resp = TEST_CLIENT.post(f'/{ep.USERS_NS}/{ep.USER_DELETE}/{TEST_USER_EMAIL}')
+    resp = TEST_CLIENT.post(f'/{ep.USERS_NS}{ep.USER_DELETE}/{TEST_USER_EMAIL}')
     assert usr.user_exists(TEST_USER_EMAIL) == False
     
 def test_update_user():
