@@ -550,38 +550,6 @@ class UserDelete(Resource):
         else:
             raise wz.NotFound({MESSAGE: f'{user_email} not found.'})
 
-# @users.route('/',  methods=("POST", "GET"))
-# class uploadImage():
-#     """
-#     This will allow user to upload images.
-#     """
-
-#     @api.expect(user_fields)
-#     def post():
-#         if request.method == 'POST':
-#             # Upload file flask
-#             uploaded_img = request.files['uploaded-file']
-#             # Extracting uploaded data file name
-#             img_filename = secure_filename(uploaded_img.filename)
-#             # Upload file to database (defined uploaded folder in static path)
-#             uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
-#             # Storing uploaded file path in flask session
-#             session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
-    
-#             return render_template('index_upload_and_show_data_page2.html')
- 
-# @users.route('/show_image')
-# class displayImage():
-#     """
-#     This will show the profile image.
-#     """
-
-#     @api.expect(user_fields)
-#     def post():
-#     # Retrieving uploaded file path from session
-#         img_file_path = session.get('uploaded_img_file_path', None)
-#         # Display image in Flask application web page
-#         return render_template('show_image.html', user_image = img_file_path)
 
 """Application Endpoints"""
 
