@@ -63,7 +63,7 @@ def fetch_all_with_filt(collection, filt, db=PROJECT_DB):
     """
     Find with a filter and return all doc found.
     """
-    ret = {}
+    ret = []
     for doc in client[db][collection].find(filt):
         del doc['_id']
         ret.append(doc)
