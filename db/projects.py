@@ -45,6 +45,14 @@ def get_projects_dict():
     return dbc.fetch_all_as_dict(PROJECT_KEY, PROJECTS_COLLECT)
 
 
+def get_user_project(user_email):
+    """
+    Get projects by its account user
+    """
+    dbc.connect_db()
+    return dbc.fetch_all_with_filt(PROJECTS_COLLECT, {"account.email": user_email})
+
+
 def del_project(name):
     """
     Delete a doc from db collection by its name.

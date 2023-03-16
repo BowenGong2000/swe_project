@@ -65,9 +65,6 @@ PROJECT_DICT = f'/{DICT}'
 PROJECT_DICT_W_NS = f'{PROJECTS_NS}/{DICT}'
 PROJECT_DETAILS = f'/{DETAILS}'
 PROJECT_DETAILS_W_NS = f'{PROJECTS_NS}/{DETAILS}'
-PROJECT_LIST = f'/{LIST}'
-PROJECT_LIST_NM = f'{PROJECTS_NS}_list'
-PROJECT_LIST_W_NS = f'{PROJECTS_NS}/{LIST}'
 PROJECT_ADD = f'/{ADD}'
 PROJECT_CHANGE_FIELD = f'/{CHANGE}'
 PROJECT_DELETE = f'/{DELETE}'
@@ -75,6 +72,7 @@ PROJECT_ADD_FILE = f'/{FILE}/{ADD}'
 PROJECT_DELETE_FILE = f'/{FILE}/{DELETE}'
 PROJECT_CHANGE_FILE = f'/{FILE}/{CHANGE}'
 PROJECT_GET_FILE = f'/{FILE}/{GET}'
+PROJECT_USER = f'/{USER}'
 
 USER_DICT = f'/{DICT}'
 USER_DICT_NM = f'{USERS_NS}_dict'
@@ -212,18 +210,6 @@ Project endpoints
 """
 
 
-@projects.route(PROJECT_LIST)
-class ProjectList(Resource):
-    """
-    This will get currrent projects in list.
-    """
-    def get(self):
-        """
-        Returns current projects in list.
-        """
-        return {PROJECT_LIST_NM: pj.get_projects()}
-
-
 @projects.route(PROJECT_DICT)
 class ProjectDict(Resource):
     """
@@ -236,6 +222,23 @@ class ProjectDict(Resource):
         return {'Data': pj.get_projects_dict(),
                 'Type': 'Data',
                 'Title': 'Current Projects'}
+
+
+@projects.route(f'{PROJECT_USER}/<user_email>')
+class ProjectUser(Resource):
+    """
+    This will get a particular user's projects.
+    """
+    def get(self, user_email):
+        """
+        Returns all projects of a particular user.
+        """
+        user_pj = pj.get_user_project(user_email)
+
+        if user_pj is not None:
+            return {f'{user_email}': user_pj}
+        else:
+            return ({MESSAGE: f'{user_email} has no active projects.'})
 
 
 @projects.route(f'{PROJECT_DETAILS}/<project>')

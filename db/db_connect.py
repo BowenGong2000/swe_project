@@ -59,6 +59,17 @@ def fetch_one(collection, filt, db=PROJECT_DB):
         return doc
 
 
+def fetch_all_with_filt(collection, filt, db=PROJECT_DB):
+    """
+    Find with a filter and return all doc found.
+    """
+    ret = {}
+    for doc in client[db][collection].find(filt):
+        del doc['_id']
+        ret.append(doc)
+    return ret
+
+
 def fetch_all(collection, db=PROJECT_DB):
     """
     Find all docs within the DB and reuturn in list
