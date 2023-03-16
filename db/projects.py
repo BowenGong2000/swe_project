@@ -50,7 +50,8 @@ def get_user_project(user_email):
     Get projects by its account user
     """
     dbc.connect_db()
-    return dbc.fetch_all_with_filt(PROJECTS_COLLECT, {"account.email": user_email})
+    return dbc.fetch_all_with_filt(PROJECTS_COLLECT,
+                                   {"account.email": user_email})
 
 
 def del_project(name):

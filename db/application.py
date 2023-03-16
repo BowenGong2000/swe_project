@@ -37,12 +37,14 @@ def get_application_details(name):
 
 def get_user_application(user_email):
     dbc.connect_db()
-    return dbc.fetch_all_with_filt(APPLICATION_COLLECT, {'applicant_email': user_email})
+    return dbc.fetch_all_with_filt(APPLICATION_COLLECT,
+                                   {'applicant_email': user_email})
 
 
 def get_project_application(project):
     dbc.connect_db()
-    return dbc.fetch_all_with_filt(APPLICATION_COLLECT, {'applied_project': project})
+    return dbc.fetch_all_with_filt(APPLICATION_COLLECT,
+                                   {'applied_project': project})
 
 
 def application_exists(name):
