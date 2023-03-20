@@ -22,14 +22,27 @@
               <p class="center">You are currently logged in.</p>
               
               <!-- a function to upload a profile image,incomplete yet -->
-              <!-- <input type="file"  accept="image/*" name="image" id="file" style="display: none;"> -->
+              <body>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class="flashes">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+                <form class="center" method="POST" enctype="multipart/form-data">
+                  <input type="file" name="file">
+                  <button type="submit">Upload Profile</button>
+                </form>
+                {% if image_url %}
+                  <img src="{{ image_url }}" alt="Profile Image">
+                {% endif %}
+              </body>
 
-              <!-- <form action = "http://localhost:5000/uploader" method = "POST" 
-                enctype = "multipart/form-data">
-                <input type = "file" name = "file" />
-                <input type = "submit"/>
-              </form>    -->
-              
+              <!--                    function end                     -->
+
               <br/>
         
               <div class="center">

@@ -183,29 +183,21 @@ def about_us():
 def contact_us():
   return render_template("contact.html")
 
-@app.route('/account', methods=['GET', 'POST'])
-def upload_image():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file:
-            filename = file.filename
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            image_url = url_for('static', filename='uploads/' + filename)
-            # insert the image URL into the database
-            # result = collection.insert_one({'image_url': image_url})
-            flash('Image uploaded successfully!')
-            return redirect(request.url)
+@app.route('/account', methods=['POST'])
+def upload():
+    if 'image' not in request.files:
+        return redirect(request.url)
+    file = request.files['image']
+    if file.filename == '':
+        return redirect(request.url)
+    if file:
+        filename = file.filename
+        file.save(os.path.join('path/to/save/', filename))
+        return redirect(url_for('account', filename=filename))
 
-    return render_template('account.html')
+@app.route('/account/<filename>')
+def uploaded_file(filename):
+    return render_template('account.html', filename=filename)
 
 
 if __name__ == '__main__':    
