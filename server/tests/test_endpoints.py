@@ -121,6 +121,14 @@ def test_delete_project():
     resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_DELETE}/{TEST_PROJECT_NAME}')
     assert pj.check_if_exist(TEST_PROJECT_NAME) == False
 
+def test_get_user_project():
+    """
+    See if we can get projects by user
+    """
+    resp_json = TEST_CLIENT.get(f'{ep.PROJECT_USER_W_NS}/{TEST_USER_EMAIL}').get_json()
+    assert isinstance(resp_json, dict)
+    assert len(resp_json) > 0
+
 
 """
 Tests for Users
