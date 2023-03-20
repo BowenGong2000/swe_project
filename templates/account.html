@@ -23,22 +23,11 @@
               
               <!-- a function to upload a profile image,incomplete yet -->
               <body>
-                {% with messages = get_flashed_messages() %}
-                  {% if messages %}
-                    <ul class="flashes">
-                    {% for message in messages %}
-                      <li>{{ message }}</li>
-                    {% endfor %}
-                    </ul>
-                  {% endif %}
-                {% endwith %}
-                <form class="center" method="POST" enctype="multipart/form-data">
-                  <input type="file" name="file">
-                  <button type="submit">Upload Profile</button>
+                <h1>Profile Picture Upload</h1>
+                <form class="center" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="image">
+                    <button type="submit">Upload Profile</button>
                 </form>
-                {% if image_url %}
-                  <img src="{{ image_url }}" alt="Profile Image">
-                {% endif %}
               </body>
 
               <!--                    function end                     -->
