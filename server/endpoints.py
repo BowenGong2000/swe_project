@@ -73,7 +73,6 @@ PROJECT_DELETE_FILE = f'/{FILE}/{DELETE}'
 PROJECT_CHANGE_FILE = f'/{FILE}/{CHANGE}'
 PROJECT_GET_FILE = f'/{FILE}/{GET}'
 PROJECT_USER = f'/{USER}'
-PROJECT_USER_W_NS = f'{PROJECTS_NS}/{USER}'
 
 USER_DICT = f'/{DICT}'
 USER_DICT_NM = f'{USERS_NS}_dict'
@@ -324,23 +323,6 @@ class DeleteProject(Resource):
 upload_parser = reqparse.RequestParser()
 upload_parser.add_argument('file', location='files',
                            type=FileStorage, required=True)
-
-
-@projects.route(f'{PROJECT_USER}/<user_email>')
-class ProjectUser(Resource):
-    """
-    This will get a particular user's projects.
-    """
-    def get(self, user_email):
-        """
-        Returns all projects of a particular user.
-        """
-        user_pj = pj.get_user_project(user_email)
-
-        if user_pj is not None:
-            return {f'{user_email}': user_pj}
-        else:
-            return ({MESSAGE: f'{user_email} has no valid applications.'})
 
 
 @projects.route(f'{PROJECT_ADD_FILE}/<name>/<filename>')
