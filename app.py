@@ -183,29 +183,29 @@ def about_us():
 def contact_us():
   return render_template("contact.html")
 
-@app.route('/',  methods=("POST", "GET"))
-def uploadFile():
+@app.route('/account', methods=['GET', 'POST'])
+def upload_image():
     if request.method == 'POST':
-        # Upload file flask
-        uploaded_img = request.files['uploaded-file']
-        # Extracting uploaded data file name
-        img_filename = secure_filename(uploaded_img.filename)
-        # Upload file to database (defined uploaded folder in static path)
-        uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
-        # Storing uploaded file path in flask session
-        session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
- 
-        return render_template('index_upload_and_show_data_page2.html')
- 
-@app.route('/show_image')
-def displayImage():
-    # Retrieving uploaded file path from session
-    img_file_path = session.get('uploaded_img_file_path', None)
-    # Display image in Flask application web page
-    return render_template('show_image.html', user_image = img_file_path)
- 
-if __name__=='__main__':
-    app.run(debug = True)
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file:
+            filename = file.filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            image_url = url_for('static', filename='uploads/' + filename)
+            # insert the image URL into the database
+            # result = collection.insert_one({'image_url': image_url})
+            flash('Image uploaded successfully!')
+            return redirect(request.url)
+
+    return render_template('account.html')
 
 
 if __name__ == '__main__':    
