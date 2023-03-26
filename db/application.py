@@ -54,17 +54,17 @@ def application_exists(name):
     return get_application_details(name) is not None
 
 
-def del_application(name):
-    """
-    Delete a doc from db collection by its name.
-    """
-    return dbc.del_one(APPLICATION_COLLECT, {APPLICATION_KEY: name})
+#def del_application(name):
+#    """
+#    Delete a doc from db collection by its name.
+#    """
+#    return dbc.del_one(APPLICATION_COLLECT, {APPLICATION_KEY: name})
 
 
-def add_application(name, appl_details):
-    dbc.connect_db()
-    appl_details[APPLICATION_KEY] = name
-    return dbc.insert_one(APPLICATION_COLLECT, appl_details)
+#def add_application(name, appl_details):
+#    dbc.connect_db()
+#    appl_details[APPLICATION_KEY] = name
+#    return dbc.insert_one(APPLICATION_COLLECT, appl_details)
 
 
 def main():
