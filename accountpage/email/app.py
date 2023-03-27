@@ -14,6 +14,26 @@ def index():
     return ("hello")
 
 
+@app.route('/subscribe')
+def subscribe():
+    title = "subscribe to my email new sletter"
+    return render_template(subscribe.html,title=title)
+
+@app.route('/form',method=["POST"])
+def form():
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
+    email = request.form.get("email")
+    if not first_name or not last_name or not email:
+        error_statement = "all form fields required..."
+    subscribe.append(f"{first_name}{last_name}"| {email title="thank you"})
+    title = "thank you!"
+    return render_template("form.html",title=title)
+def subscribe():
+
+def index():
+    return ("hello")
+
 # @app.route('/about')
 # def about():
 #     title = "About me"
