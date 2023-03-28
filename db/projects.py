@@ -35,6 +35,12 @@ def get_projects():
     return dbc.fetch_all(PROJECTS_COLLECT)
 
 
+def get_projects_names():
+    dbc.connect_db()
+    all_projects = dbc.fetch_all_as_dict(PROJECT_KEY, PROJECTS_COLLECT)
+    return list(all_projects.keys())
+
+
 def get_project_details(project):
     dbc.connect_db()
     return dbc.fetch_one(PROJECTS_COLLECT, {PROJECT_KEY: project})

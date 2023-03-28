@@ -63,6 +63,8 @@ DATA_DETAILS_W_NS = f'{DATA_NS}/{DETAILS}'
 
 PROJECT_DICT = f'/{DICT}'
 PROJECT_DICT_W_NS = f'{PROJECTS_NS}/{DICT}'
+PROJECT_LIST = f'/{LIST}'
+PROJECT_LIST_NM = f'{PROJECTS_NS}_list'
 PROJECT_DETAILS = f'/{DETAILS}'
 PROJECT_DETAILS_W_NS = f'{PROJECTS_NS}/{DETAILS}'
 PROJECT_ADD = f'/{ADD}'
@@ -223,6 +225,18 @@ class ProjectDict(Resource):
         return {'Data': pj.get_projects_dict(),
                 'Type': 'Data',
                 'Title': 'Current Projects'}
+
+
+@projects.route(PROJECT_LIST)
+class ProjectList(Resource):
+    """
+    This will get a list of project names
+    """
+    def get(self):
+        """
+        Return a list of project names
+        """
+        return {PROJECT_LIST_NM: pj.get_projects_names()}
 
 
 @projects.route(f'{PROJECT_USER}/<user_email>')
