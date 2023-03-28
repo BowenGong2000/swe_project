@@ -186,18 +186,6 @@ def about_us():
 def contact_us():
   return render_template("contact.html")
     
-# @app.route('/upload', methods=['POST'])
-# def upload():
-#     if 'image' not in request.files:
-#         return redirect(request.url)
-#     file = request.files['image']
-#     if file.filename == '':
-#         return redirect(request.url)
-#     if file:
-#         filename = file.filename
-#         file.save(os.path.join('static/uploaded_img', filename))
-#         return render_template('uploaded.html', filename=filename)
-    
 @app.route('/', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
@@ -214,11 +202,6 @@ def upload():
 
     # Render the upload.html template if the request method is GET
     return render_template('account.html')
-
-
-# @app.route('/account/<filename>')
-# def uploaded_profile(filename):
-#     return render_template('uploaded.html', filename=filename)
 
 
 if __name__ == '__main__':    
