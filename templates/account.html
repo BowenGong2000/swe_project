@@ -15,7 +15,11 @@
               <!-- <div class="sidebar"> -->
                 <!-- <div class = "avatar-box"> -->
                 <div id="header" class="center">
-                    <img class="rounded-circle account-img" src="{{ image_file }}">
+                {% if filename %}
+                  <br><br>
+                  <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+                {% endif %}
+                  <img class="rounded-circle account-img" src="{{ image_file }}">
  
                 </div>
               <h1 class="center">Hello!  {{ session['user']['name'] }}</h1>
@@ -23,10 +27,11 @@
               
               <!-- a function to upload a profile image,incomplete yet -->
               <body>
-                <h1>Profile Picture Upload</h1>
-                <form class="center" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="image">
-                    <button type="submit">Upload Profile</button>
+                <h1 class="center">Upload Profile Image</h1>
+                <form class="center" method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+                  <input type="file" name="file">
+                  <br><br>
+                  <button type="submit">Upload</button>
                 </form>
               </body>
 

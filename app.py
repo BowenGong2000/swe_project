@@ -15,6 +15,9 @@ import method as mth
 app = Flask(__name__)
 app.secret_key = 'hskfakgkajgalg' #random key
 
+# set the upload folder 
+UPLOAD_FOLDER = 'static/uploaded_img'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #export data from database
 #todo give top matches
@@ -183,17 +186,35 @@ def about_us():
 def contact_us():
   return render_template("contact.html")
     
-@app.route('/upload', methods=['POST'])
+# @app.route('/upload', methods=['POST'])
+# def upload():
+#     if 'image' not in request.files:
+#         return redirect(request.url)
+#     file = request.files['image']
+#     if file.filename == '':
+#         return redirect(request.url)
+#     if file:
+#         filename = file.filename
+#         file.save(os.path.join('static/uploaded_img', filename))
+#         return render_template('uploaded.html', filename=filename)
+    
+@app.route('/', methods=['GET', 'POST'])
 def upload():
-    if 'image' not in request.files:
-        return redirect(request.url)
-    file = request.files['image']
-    if file.filename == '':
-        return redirect(request.url)
-    if file:
+    if request.method == 'POST':
+        # Get the file from the request
+        file = request.files['file']
+
+        # Save the file to the upload folder
         filename = file.filename
-        file.save(os.path.join('static/uploaded_img', filename))
-        return render_template('uploaded.html', filename=filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+
+        # Render the upload.html template with the filename
+        return render_template('account.html', filename=filename)
+
+    # Render the upload.html template if the request method is GET
+    return render_template('account.html')
+
 
 # @app.route('/account/<filename>')
 # def uploaded_profile(filename):
