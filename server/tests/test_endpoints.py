@@ -50,6 +50,8 @@ TEST_LOGIN_USER = {
 }
 
 TEST_BAD_USER_EMAIL = "bad"
+TEST_BAD_PROJECT_NAME = "bad"
+TEST_BAD_APPLICATION_NAME = "bad"
 
 TEST_APPLICATION_NAME = 'test app name'
 TEST_APPLICATION = {
@@ -98,6 +100,13 @@ def test_get_project_details():
     resp_json = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_PROJECT}').get_json()
     assert isinstance(resp_json, dict)
     assert len(resp_json) > 0
+
+def test_get_missing_project_details():
+    """
+    See if we can get error message if a missing project is entered
+    """
+    resp = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_BAD_PROJECT_NAME}')
+    assert resp.status_code == HTTPStatus.NOT_FOUND
 
 def test_get_project_dict():
     """
@@ -245,6 +254,14 @@ def test_get_application_details():
     resp_json = TEST_CLIENT.get(f'{ep.APPLICATION_DETAILS_W_NS}/{TEST_APPLICATION_NAME}').get_json()
     assert isinstance(resp_json, dict)
     assert len(resp_json) > 0
+
+def test_get_missing_application_details():
+    """
+    See if we can get error message if a missing application is entered
+    """
+    resp = TEST_CLIENT.get(f'{ep.APPLICATION_DETAILS_W_NS}/{TEST_BAD_APPLICATION_NAME}')
+    assert resp.status_code == HTTPStatus.NOT_FOUND
+
 
 def test_get_user_application():
     """
