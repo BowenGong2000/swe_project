@@ -323,7 +323,7 @@ class DeleteProject(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def post(self, project):
+    def delete(self, project):
         """
         Delete a existing project from db
         """
@@ -557,7 +557,7 @@ class UserDelete(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def post(self, user_email):
+    def delete(self, user_email):
         """
         Delete a existing user from db
         """
@@ -630,6 +630,8 @@ class ApplicationDetails(Resource):
     """
     This will get details of a specific application.
     """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     def get(self, application_name):
         """
         Returns the details of a specific application.
@@ -649,7 +651,7 @@ class ApplicationDelete(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def post(self, application_name):
+    def delete(self, application_name):
         """
         Delete a existing application from db
         """

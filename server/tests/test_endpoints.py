@@ -127,7 +127,7 @@ def test_delete_project():
     Check if project can be deleted properly
     """
     pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
-    resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_DELETE}/{TEST_PROJECT_NAME}')
+    resp = TEST_CLIENT.delete(f'/{ep.PROJECTS_NS}{ep.PROJECT_DELETE}/{TEST_PROJECT_NAME}')
     assert pj.check_if_exist(TEST_PROJECT_NAME) == False
 
 def test_get_user_project():
@@ -211,7 +211,7 @@ def test_delete_user():
     Check if user can be deleted properly
     """
     usr.add_user(TEST_USER_EMAIL, TEST_USER)
-    resp = TEST_CLIENT.post(f'/{ep.USERS_NS}{ep.USER_DELETE}/{TEST_USER_EMAIL}')
+    resp = TEST_CLIENT.delete(f'/{ep.USERS_NS}{ep.USER_DELETE}/{TEST_USER_EMAIL}')
     assert usr.user_exists(TEST_USER_EMAIL) == False
     
 def test_update_user():
@@ -284,7 +284,7 @@ def test_delete_application():
     Check if application can be deleted properly
     """
     apl.add_application(TEST_APPLICATION_NAME, TEST_APPLICATION)
-    resp = TEST_CLIENT.post(f'/{ep.APPLICATION_NS}{ep.APPLICATION_DELETE}/{TEST_APPLICATION_NAME}')
+    resp = TEST_CLIENT.delete(f'/{ep.APPLICATION_NS}{ep.APPLICATION_DELETE}/{TEST_APPLICATION_NAME}')
     assert apl.application_exists(TEST_APPLICATION_NAME) == False
 
 def test_add_application():
