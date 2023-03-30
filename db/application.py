@@ -62,6 +62,18 @@ def del_application(name):
 
 
 def add_application(name, appl_details):
+    if not isinstance(name, str):
+        raise TypeError(f'Wrong type for name: {type(name)=}')
+
+    if not isinstance(appl_details, dict):
+        raise TypeError(f'Wrong type for details: {type(appl_details)=}')
+
+    for field in REQUIRED_FLDS:
+        """
+        check if missing any data for mandatory fields; if not, raise error
+        """
+        if field not in appl_details:
+            raise ValueError(f'Required {field=} missing from details.')
     dbc.connect_db()
     appl_details[APPLICATION_KEY] = name
     return dbc.insert_one(APPLICATION_COLLECT, appl_details)

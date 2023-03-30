@@ -641,7 +641,7 @@ class ApplicationDetails(Resource):
         if apl_d is not None:
             return {f'{application_name}': apl_d}
         else:
-            return ({MESSAGE: f'{application_name} not found.'})
+            raise wz.NotFound(f'{application_name} not found.')
 
 
 @applications.route(f'{APPLICATION_DELETE}/<application_name>')

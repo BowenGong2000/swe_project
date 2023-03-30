@@ -58,6 +58,21 @@ def test_application_not_exists():
     assert not appl.application_exists('application does not exist!')
 
 
+def test_add_wrong_name_type():
+    with pytest.raises(TypeError):
+        appl.add_application(7, {})
+
+
+def test_add_wrong_details_type():
+    with pytest.raises(TypeError):
+        appl.add_application('a new application', [])
+
+
+def test_add_missing_field():
+    with pytest.raises(ValueError):
+        appl.add_application('a new application', {'foo': 'bar'})
+
+
 def test_add_application():
     if not RUNNING_ON_CICD_SERVER:
         appl.add_application(appl.TEST_APPLICATION_NAME, create_application_details())
