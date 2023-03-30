@@ -66,7 +66,6 @@ def add_user(email, usr_details):
         """
         if field not in usr_details:
             raise ValueError(f'Required {field=} missing from details.')
-        
     dbc.connect_db()
     usr_details[USER_KEY] = email
     return dbc.insert_one(USER_COLLECT, usr_details)

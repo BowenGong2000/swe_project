@@ -88,7 +88,6 @@ def add_project(name, details):
         """
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
-        
     dbc.connect_db()
     doc[PROJECT_KEY] = name
     return dbc.insert_one(PROJECTS_COLLECT, doc)
