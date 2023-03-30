@@ -73,7 +73,6 @@ def test_add_missing_field():
         us.add_user('a new user', {'foo': 'bar'})
 
 
-
 def test_add_user():
     if not RUNNING_ON_CICD_SERVER:
         us.add_user(us.TEST_USER_EMAIL, create_user_details())

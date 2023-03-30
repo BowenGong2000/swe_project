@@ -9,7 +9,7 @@ EMAIL = 'email'
 PHONE = 'phone'
 PW = 'password'
 
-REQUIRED_FLDS = [EMAIL]
+REQUIRED_FLDS = [PW]
 
 USER_KEY = 'email'
 USER_COLLECT = 'users'
