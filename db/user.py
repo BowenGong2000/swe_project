@@ -54,6 +54,19 @@ def del_user(email):
 
 
 def add_user(email, usr_details):
+    if not isinstance(email, str):
+        raise TypeError(f'Wrong type for name: {type(email)=}')
+
+    if not isinstance(usr_details, dict):
+        raise TypeError(f'Wrong type for details: {type(usr_details)=}')
+
+    for field in REQUIRED_FLDS:
+        """
+        check if missing any data for mandatory fields; if not, raise error
+        """
+        if field not in usr_details:
+            raise ValueError(f'Required {field=} missing from details.')
+        
     dbc.connect_db()
     usr_details[USER_KEY] = email
     return dbc.insert_one(USER_COLLECT, usr_details)

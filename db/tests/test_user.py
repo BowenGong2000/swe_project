@@ -58,6 +58,22 @@ def test_user_not_exists():
     assert not us.user_exists('User does not exist!')
 
 
+def test_add_wrong_name_type():
+    with pytest.raises(TypeError):
+        us.add_user(7, {})
+
+
+def test_add_wrong_details_type():
+    with pytest.raises(TypeError):
+        us.add_user('a new user', [])
+
+
+def test_add_missing_field():
+    with pytest.raises(ValueError):
+        us.add_user('a new user', {'foo': 'bar'})
+
+
+
 def test_add_user():
     if not RUNNING_ON_CICD_SERVER:
         us.add_user(us.TEST_USER_EMAIL, create_user_details())

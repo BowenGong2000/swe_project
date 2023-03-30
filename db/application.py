@@ -74,6 +74,7 @@ def add_application(name, appl_details):
         """
         if field not in appl_details:
             raise ValueError(f'Required {field=} missing from details.')
+        
     dbc.connect_db()
     appl_details[APPLICATION_KEY] = name
     return dbc.insert_one(APPLICATION_COLLECT, appl_details)
