@@ -48,6 +48,9 @@ FILE = 'file'
 USER = 'user'
 PROJECT = 'project'
 GET = 'get'
+PROFILE_PIC = 'profile'
+UPDATE = 'update'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 MAIN_MENU = '/main_menu'
 MAIN_MENU_NM = 'Main Menu'
@@ -90,6 +93,8 @@ USER_LOGIN = '/login'
 USER_SIGNUP = '/signup'
 USER_UPDATE = '/update'
 USER_DELETE = f'/{DELETE}'
+USER_PROFILE_PICTURE_UPDATE = f'/{PROFILE_PIC}/{UPDATE}'
+USER_PROFILE_PICTURE_GET = f'/{PROFILE_PIC}/{GET}'
 
 APPLICATION_DICT = f'/{DICT}'
 APPLICATION_DICT_W_NS = f'{APPLICATION_NS}/{DICT}'
@@ -567,6 +572,36 @@ class UserDelete(Resource):
             return {MESSAGE: f'{user_email} is deleted.'}
         else:
             raise wz.NotFound({MESSAGE: f'{user_email} not found.'})
+
+
+upload_parser_profile = reqparse.RequestParser()
+upload_parser_profile.add_argument('file', location='files',
+                           type=FileStorage, 
+                           required=True,
+                           help='Only PNG and JPEG files allowed')
+@users.route(f'{USER_PROFILE_PICTURE_UPDATE}/<user_email>')
+class UserProfilePictureUpdate(Resource):
+    """
+    update a profile picture into data base
+    """
+    def post(self, user_email):
+        def allowed_file(filename):
+            return '.' in filename and filename.rsplit('.', 1)[1].lower() \
+                in ALLOWED_EXTENSIONS
+        args = upload_parser_profile.parse_args()
+        file = args['file']
+        if file and allowed_file(file.filename):
+            pj.update_profile_pic(user_email,file)
+        else:
+            raise wz.NotFound('File is None')
+
+@users.route(f'{USER_PROFILE_PICTURE_GET}/<user_email>')
+class UserProfilePictureGet(Resource):
+    """
+    get a profile picture
+    """
+    def get(self, user_email):
+        file, filename = pj.get_file(project)
 
 
 """Application Endpoints"""

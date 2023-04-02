@@ -116,35 +116,44 @@ def insert_file(name, filename, file, db=PROJECT_DB):
     return fs.put(data, filename=filename, name=name)
 
 
-def delete_file(name, db=PROJECT_DB):
+def delete_file(info_dict, db=PROJECT_DB):
     """
     delete a file in db
     """
     fs = gridfs.GridFS(client[db])
-    file_id = fs.find_one({'name': name})._id
+    file_id = fs.find_one(info_dict)._id
     return fs.delete(file_id)
 
 
-def check_file(name, db=PROJECT_DB):
+def check_file(info_dict, db=PROJECT_DB):
     """
     check if file exist
     """
     fs = gridfs.GridFS(client[db])
-    if fs.find_one({'name': name}) is not None:
+    if fs.find_one(info_dict) is not None:
         return True
     return False
 
 
-def get_file(name, db=PROJECT_DB):
+def get_file(info_dict, db=PROJECT_DB):
     """
     get a existing file
     """
     fs = gridfs.GridFS(client[db])
-    if fs.find_one({'name': name}) is not None:
-        file = fs.find_one({'name': name})
+    if fs.find_one(info_dict) is not None:
+        file = fs.find_one(info_dict)
         return file, file.filename
     else:
         return None, None
+
+
+def insert_pic(email, file, db=PROJECT_DB):
+    """
+    insert a picture with email as key
+    """
+    data = file.read()
+    fs = gridfs.GridFS(client[db])
+    return fs.put(data, email=email, filename='prof_img.png')
 
 
 def main():

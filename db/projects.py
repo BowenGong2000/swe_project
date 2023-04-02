@@ -117,22 +117,47 @@ def check_file_if_exist(name):
     if not isinstance(name, str):
         raise TypeError(f'Wrong type for name: {type(name)=}')
     dbc.connect_db()
-    return dbc.check_file(name)
+    name_dict = {'name':name}
+    return dbc.check_file(name_dict)
 
 
 def delete_file(name):
     if not isinstance(name, str):
         raise TypeError(f'Wrong type for name: {type(name)=}')
     dbc.connect_db()
-    return dbc.delete_file(name)
+    name_dict = {'name': name}
+    return dbc.delete_file(name_dict)
 
 
 def get_file(name):
     if not isinstance(name, str):
         raise TypeError(f'Wrong type for name: {type(name)=}')
     dbc.connect_db()
-    if dbc.check_file(name):
-        file, filename = dbc.get_file(name)
+    name_dict = {'name':name}
+    if dbc.check_file(name_dict):
+        file, filename = dbc.get_file(name_dict)
+        return file, filename
+    else:
+        return None, None
+    
+
+def update_profile_pic(email, file):
+    if not isinstance(email, str):
+        raise TypeError(f'Wrong type for name: {type(name)=}')
+    dbc.connect_db()
+    email_dict = {'email': email}
+    if dbc.check_file(email_dict):
+        dbc.delete_file(email_dict)
+    return dbc.insert_pic(email, file)
+
+
+def get_profile(email):
+    if not isinstance(email, str):
+        raise TypeError(f'Wrong type for name: {type(email)=}')
+    dbc.connect_db()
+    email_dict = {'email': email}
+    if dbc.check_file(email_dict):
+        file, filename = dbc.get_file(email_dict)
         return file, filename
     else:
         return None, None
