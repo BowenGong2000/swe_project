@@ -147,13 +147,13 @@ def get_file(info_dict, db=PROJECT_DB):
         return None, None
 
 
-def insert_pic(email, file, db=PROJECT_DB):
+def insert_pic(email, filename, file, db=PROJECT_DB):
     """
     insert a picture with email as key
     """
     data = file.read()
     fs = gridfs.GridFS(client[db])
-    return fs.put(data, email=email, filename='prof_img.png')
+    return fs.put(data, email=email, filename=filename)
 
 
 def main():

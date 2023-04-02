@@ -576,24 +576,27 @@ class UserDelete(Resource):
 
 upload_parser_profile = reqparse.RequestParser()
 upload_parser_profile.add_argument('file', location='files',
-                           type=FileStorage, 
-                           required=True,
-                           help='Only PNG and JPEG files allowed')
-@users.route(f'{USER_PROFILE_PICTURE_UPDATE}/<user_email>')
+                                   type=FileStorage,
+                                   required=True,
+                                   help='Only PNG and JPEG files allowed')
+
+
+@users.route(f'{USER_PROFILE_PICTURE_UPDATE}/<user_email>/<filename>')
 class UserProfilePictureUpdate(Resource):
     """
     update a profile picture into data base
     """
-    def post(self, user_email):
+    def post(self, user_email, filename):
         def allowed_file(filename):
             return '.' in filename and filename.rsplit('.', 1)[1].lower() \
                 in ALLOWED_EXTENSIONS
         args = upload_parser_profile.parse_args()
         file = args['file']
         if file and allowed_file(file.filename):
-            pj.update_profile_pic(user_email,file)
+            pj.update_profile_pic(user_email, filename, file)
         else:
             raise wz.NotFound('File is None')
+
 
 @users.route(f'{USER_PROFILE_PICTURE_GET}/<user_email>')
 class UserProfilePictureGet(Resource):
@@ -601,7 +604,17 @@ class UserProfilePictureGet(Resource):
     get a profile picture
     """
     def get(self, user_email):
-        file, filename = pj.get_file(project)
+        file, filename = pj.get_profile(user_email)
+        if file:
+            file_content = file.read()
+            file_obj = BytesIO(file_content)
+            file_mimetype, encoding = mimetypes.guess_type(filename)
+            return send_file(file_obj,
+                             as_attachment=True,
+                             attachment_filename=filename,
+                             mimetype=file_mimetype)
+        else:
+            return {MESSAGE: f'{user_email} profile picture not found'}
 
 
 """Application Endpoints"""
