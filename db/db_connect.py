@@ -156,6 +156,16 @@ def insert_pic(email, filename, file, db=PROJECT_DB):
     return fs.put(data, email=email, filename=filename)
 
 
+def counter(collection, db=PROJECT_DB):
+    """
+    count the total number of collection
+    """
+    ret = client[db][collection].count_documents({})
+    if ret:
+        return ret
+    return None
+
+
 def main():
     connect_db()
 

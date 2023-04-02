@@ -1,0 +1,10 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Profile Picture Uploaded</title>
+    </head>
+    <body>
+        <h1>Profile Picture Uploaded</h1>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Profile Picture">
+    </body>
+</html>

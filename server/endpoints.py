@@ -50,6 +50,7 @@ PROJECT = 'project'
 GET = 'get'
 PROFILE_PIC = 'profile'
 UPDATE = 'update'
+STATISTIC = 'statistic'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 MAIN_MENU = '/main_menu'
@@ -79,6 +80,7 @@ PROJECT_CHANGE_FILE = f'/{FILE}/{CHANGE}'
 PROJECT_GET_FILE = f'/{FILE}/{GET}'
 PROJECT_USER = f'/{USER}'
 PROJECT_USER_W_NS = f'{PROJECTS_NS}/{USER}'
+PROJECT_STATISTIC = f'/{STATISTIC}'
 
 USER_DICT = f'/{DICT}'
 USER_DICT_NM = f'{USERS_NS}_dict'
@@ -395,6 +397,22 @@ class GETFILE(Resource):
                              mimetype=file_mimetype)
         else:
             return {MESSAGE: f'{project} not found'}
+
+
+@projects.route(f'{PROJECT_STATISTIC}')
+class PROJECTSTATISTIC(Resource):
+    """
+    Get value of project statistic
+    """
+    def get(self):
+        user_num = usr.get_user_num()
+        proj_num = pj.get_proj_num()
+        application_num = apl.get_application_num()
+        if user_num and proj_num and application_num:
+            return {"user": user_num,
+                    "project": proj_num,
+                    "application": application_num}
+        return {MESSAGE: 'field not found'}
 
 
 """

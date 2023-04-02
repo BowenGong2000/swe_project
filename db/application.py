@@ -79,6 +79,14 @@ def add_application(name, appl_details):
     return dbc.insert_one(APPLICATION_COLLECT, appl_details)
 
 
+def get_application_num():
+    dbc.connect_db()
+    count = dbc.counter(APPLICATION_COLLECT)
+    if count:
+        return count
+    return None
+
+
 def main():
     applications = get_applications()
     print(f'{applications=}')

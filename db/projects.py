@@ -165,6 +165,14 @@ def get_profile(email):
         return None, None
 
 
+def get_proj_num():
+    dbc.connect_db()
+    count = dbc.counter(PROJECTS_COLLECT)
+    if count:
+        return count
+    return None
+
+
 def main():
     print('Getting projects as a list:')
     projects = get_projects()
