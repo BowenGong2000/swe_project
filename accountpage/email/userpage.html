@@ -1,75 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit HTML Page</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      background-color: #57068c;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Settings</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Aldrich" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #57068c;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
 
-    h1, p {
-      margin: 0;
-      padding: 0.5em;
-    }
+        h1 {
+            margin: 0;
+            padding: 1em;
+            text-align: center;
+        }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-      padding: 0.5em;
-    }
+        .card-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    label {
-      font-weight: bold;
-    }
+        .card2 {
+            background-color: #fff;
+            color: #000;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    input {
-      padding: 0.5em;
-      border: none;
-      border-radius: 5px;
-      font-size: 1em;
-    }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            padding: 1em;
+        }
 
-    input[type="color"] {
-      width: 2em;
-      height: 2em;
-    }
-  </style>
-  <script>
-    function updateTitle() {
-      const title = document.getElementById("title-input").value;
-      document.getElementById("page-title").innerText = title;
-    }
+        label {
+            font-weight: bold;
+        }
 
-    function updateParagraph() {
-      const content = document.getElementById("content-input").value;
-      document.getElementById("page-content").innerText = content;
-    }
+        input,
+        textarea,
+        select {
+            padding: 0.5em;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
 
-    function updateBackgroundColor() {
-      const color = document.getElementById("color-input").value;
-      document.body.style.backgroundColor = color;
-    }
-  </script>
+        input[type="submit"] {
+            background-color: #57068c;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.75em;
+            border-radius: 5px;
+        }
+    </style>
 </head>
-<body>
-  <h1 id="page-title">Welcome to user setting page</h1>
-  <p id="page-content">This is a paragraph.</p>
 
-  <form>
-    <label for="title-input">Title: </label>
-    <input type="text" id="title-input" oninput="updateTitle()">
-    <label for="content-input">Paragraph Content: </label>
-    <input type="text" id="content-input" oninput="updateParagraph()">
-    <label for="color-input">Background Color: </label>
-    <input type="color" id="color-input" onchange="updateBackgroundColor()">
-  </form>
+<body>
+    <div class="card-wrapper">
+        <div class="card2">
+            <h1>User Information Settings</h1>
+
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age">
+
+                <label for="grade">Grade:</label>
+                <input type="number" id="grade" name="grade">
+
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                    <option value="prefer_not_to_say">Prefer not to say</option>
+                </select>
+
+                <label for="background">User Background:</label>
+                <textarea id="background" name="background" rows="4" cols="50"></textarea>
+
+                <label for="info">User Information:</label>
+                <textarea id="info" name="info" rows="4" cols="50"></textarea>
+
+                <input type="submit" value="Save Changes">
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>
-s s
