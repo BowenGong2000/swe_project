@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit HTML Page</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      background-color: #57068c;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, p {
+      margin: 0;
+      padding: 0.5em;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      padding: 0.5em;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      padding: 0.5em;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    input[type="color"] {
+      width: 2em;
+      height: 2em;
+    }
+  </style>
+  <script>
+    function updateTitle() {
+      const title = document.getElementById("title-input").value;
+      document.getElementById("page-title").innerText = title;
+    }
+
+    function updateParagraph() {
+      const content = document.getElementById("content-input").value;
+      document.getElementById("page-content").innerText = content;
+    }
+
+    function updateBackgroundColor() {
+      const color = document.getElementById("color-input").value;
+      document.body.style.backgroundColor = color;
+    }
+  </script>
+</head>
+<body>
+  <h1 id="page-title">Welcome to user setting page</h1>
+  <p id="page-content">This is a paragraph.</p>
+
+  <form>
+    <label for="title-input">Title: </label>
+    <input type="text" id="title-input" oninput="updateTitle()">
+    <label for="content-input">Paragraph Content: </label>
+    <input type="text" id="content-input" oninput="updateParagraph()">
+    <label for="color-input">Background Color: </label>
+    <input type="color" id="color-input" onchange="updateBackgroundColor()">
+  </form>
+</body>
+</html>
+s s
