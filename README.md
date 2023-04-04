@@ -6,43 +6,41 @@ To build production, type `make prod`.
 
 To create the env for a new developer, run `make dev_env`.
 
-Tech Stack used for this project:
-Testing: pytest
-Server: Flask && flask-restx
-Lint: flake8
-Database: MongoDB
-CI/CD: Github Action
-Cloud deployment: Heroku
-Frontend: React
-###################################
+## Tech Stack used for this project:
 
-Backend deployed to Heroku at
-https://project-finder.herokuapp.com/
+Testing: pytest
+
+Server: Flask && flask-restx
+
+Lint: flake8
+
+Database: MongoDB
+
+CI/CD: Github Action
+
+Cloud deployment: Heroku
+
+
+Backend deployed to Heroku at https://project-finder.herokuapp.com/
+
+
+Frontend deployed to Heroku at https://project-matcher.herokuapp.com/
+
 
 Backend Github Link: https://github.com/BowenGong2000/swe_project
+
+
 Frontend Github Link: https://github.com/FantasiA10/Project-matcher
 
-## Project Setup Update: 
 
-1. install pymongo, 
-    pip install pymongo
-2. install pymongo[srv]
-    pip install "pymongo[srv]"
-3. install passlib for password encyption
-    pip install passlib
-4. run command
-    sed -i -e 's/\r$//' server.sh
-5. run command
-    for Windows users: 
-        ./server.sh
+## Access Locally: 
 
-    for Mac users: 
-        ./run.sh-e
-        
-Go to http://127.0.0.1:5000
-The login and register page should appears. 
+1. install pymongo `pip install pymongo`
+2. install pymongo[srv] `pip install "pymongo[srv]"`
+3. install passlib for password encyption `pip install passlib`
+4. run command `./local.sh`      
+5. Go to http://127.0.0.1:8000
 
-To login to home page user should register a new account, and use that account to login to homepage. 
 
 ## Requirements
 
