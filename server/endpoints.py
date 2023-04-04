@@ -330,7 +330,7 @@ class DeleteProject(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def delete(self, project):
+    def post(self, project):
         """
         Delete a existing project from db
         """
@@ -580,7 +580,7 @@ class UserDelete(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def delete(self, user_email):
+    def post(self, user_email):
         """
         Delete a existing user from db
         """
@@ -717,7 +717,7 @@ class ApplicationDelete(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def delete(self, application_name):
+    def post(self, application_name):
         """
         Delete a existing application from db
         """
