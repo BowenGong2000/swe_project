@@ -51,6 +51,7 @@ GET = 'get'
 PROFILE_PIC = 'profile'
 UPDATE = 'update'
 STATISTIC = 'statistic'
+DEPART = 'departments'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 MAIN_MENU = '/main_menu'
@@ -69,6 +70,7 @@ PROJECT_DICT = f'/{DICT}'
 PROJECT_DICT_W_NS = f'{PROJECTS_NS}/{DICT}'
 PROJECT_LIST = f'/{LIST}'
 PROJECT_LIST_NM = f'{PROJECTS_NS}_list'
+PROJECT_LIST_W_NS = f'{PROJECTS_NS}/{LIST}'
 PROJECT_DETAILS = f'/{DETAILS}'
 PROJECT_DETAILS_W_NS = f'{PROJECTS_NS}/{DETAILS}'
 PROJECT_ADD = f'/{ADD}'
@@ -81,6 +83,8 @@ PROJECT_GET_FILE = f'/{FILE}/{GET}'
 PROJECT_USER = f'/{USER}'
 PROJECT_USER_W_NS = f'{PROJECTS_NS}/{USER}'
 PROJECT_STATISTIC = f'/{STATISTIC}'
+PROJECT_DEPART = f'/{DEPART}'
+PROJECT_DEPART_W_NS = f'{PROJECTS_NS}/{DEPART}'
 
 USER_DICT = f'/{DICT}'
 USER_DICT_NM = f'{USERS_NS}_dict'
@@ -350,10 +354,13 @@ upload_parser.add_argument('file', location='files',
 @projects.route(f'{PROJECT_ADD_FILE}/<name>/<filename>')
 class ADDFILE(Resource):
     """
-    add a FILE
+    This will add a FILE
     """
     @api.expect(upload_parser)
     def post(self, name, filename):
+        """
+        Add a file to db
+        """
         args = upload_parser.parse_args()
         file = args['file']
         if file is not None:
@@ -366,9 +373,12 @@ class ADDFILE(Resource):
 @projects.route(f'{PROJECT_DELETE_FILE}')
 class DELETEFILE(Resource):
     """
-    Delete a FILE
+    This is will delete a FILE
     """
     def post(self):
+        """
+        Delete a file
+        """
         name = request.json[pj.NAME]
         if pj.check_if_exist(name) and pj.check_file_if_exist(name):
             pj.delete_file(name)
@@ -381,9 +391,12 @@ class DELETEFILE(Resource):
 @projects.route(f'{PROJECT_GET_FILE}/<project>/<if_send>')
 class GETFILE(Resource):
     """
-    Get existing file if if_send is 0 only send name of file
+    This will get existing file if if_send is 0 only send name of file
     """
     def get(self, project, if_send):
+        """
+        Get existing file if if_send is 0 only send name of file
+        """
         file, filename = pj.get_file(project)
         if file:
             if if_send == '0':
@@ -402,9 +415,12 @@ class GETFILE(Resource):
 @projects.route(f'{PROJECT_STATISTIC}')
 class PROJECTSTATISTIC(Resource):
     """
-    Get value of project statistic
+    This will get value of project statistic
     """
     def get(self):
+        """
+        Get value of project statistic
+        """
         user_num = usr.get_user_num()
         proj_num = pj.get_proj_num()
         application_num = apl.get_application_num()
@@ -413,6 +429,18 @@ class PROJECTSTATISTIC(Resource):
                     "project": proj_num,
                     "application": application_num}
         return {MESSAGE: 'field not found'}
+
+
+@projects.route(PROJECT_DEPART)
+class ProjectDepart(Resource):
+    """
+    This will get a list of project departments
+    """
+    def get(self):
+        """
+        Return a list of project deparments
+        """
+        return {"departments": pj.get_proj_department_lst()}
 
 
 """
@@ -602,7 +630,7 @@ upload_parser_profile.add_argument('file', location='files',
 @users.route(f'{USER_PROFILE_PICTURE_UPDATE}/<user_email>/<filename>')
 class UserProfilePictureUpdate(Resource):
     """
-    update a profile picture into data base
+    Update a profile picture into data base
     """
     def post(self, user_email, filename):
         def allowed_file(filename):
@@ -619,7 +647,7 @@ class UserProfilePictureUpdate(Resource):
 @users.route(f'{USER_PROFILE_PICTURE_GET}/<user_email>')
 class UserProfilePictureGet(Resource):
     """
-    get a profile picture
+    Get a profile picture
     """
     def get(self, user_email):
         file, filename = pj.get_profile(user_email)

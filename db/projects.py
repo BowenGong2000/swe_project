@@ -29,6 +29,8 @@ PROJECT_KEY = 'name'
 PROJECTS_COLLECT = 'projects'
 PROJECT_FILE = 'project_file'
 
+PROJECT_DEPART_COLLECT = 'departments'
+
 
 def get_projects():
     dbc.connect_db()
@@ -171,6 +173,15 @@ def get_proj_num():
     if count:
         return count
     return None
+
+
+def get_proj_department_lst():
+    """
+    Get project departments list
+    """
+    dbc.connect_db()
+    all_departs = dbc.fetch_all_as_dict('name', PROJECT_DEPART_COLLECT)
+    return list(all_departs.keys())
 
 
 def main():

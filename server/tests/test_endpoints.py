@@ -59,7 +59,7 @@ TEST_APPLICATION = {
     apl.NAME: TEST_APPLICATION_NAME,
     apl.APPLICANT_NAME: 'test name',
     apl.APPLICANT_EMAIL: TEST_USER_EMAIL,
-    apl.PROJECT: "Test Project",
+    apl.PROJECT: "temp proj",
     apl.APP_DATE: '2022-06-08',
     apl.RESUME: 'string',
     apl.TRANSCRIPT: 'string',
@@ -89,7 +89,7 @@ def test_add_project():
 
 def test_change_project():
     """
-    check if change field work
+    Check if change field work
     """
     resp = TEST_CLIENT.post(f'{ep.PROJECTS_NS}{ep.PROJECT_CHANGE_FIELD}', json=TEST_CHANGE_PROJECT)
 
@@ -137,6 +137,25 @@ def test_get_user_project():
     resp_json = TEST_CLIENT.get(f'{ep.PROJECT_USER_W_NS}/{TEST_USER_EMAIL}').get_json()
     assert isinstance(resp_json, dict)
     assert len(resp_json) > 0
+
+def test_get_project_names():
+    """
+    See if we can get a list of project names.
+    """
+    resp = TEST_CLIENT.get(ep.PROJECT_LIST_W_NS)
+    resp_json = resp.get_json()[ep.PROJECT_LIST_NM]
+    assert isinstance(resp_json, list)
+    assert len(resp_json) > 0
+
+def test_get_department_lst():
+    """
+    See if we can get a list of department names.
+    """
+    resp = TEST_CLIENT.get(ep.PROJECT_DEPART_W_NS)
+    resp_json = resp.get_json()['departments']
+    assert isinstance(resp_json, list)
+    assert len(resp_json) > 0
+
 
 
 """
