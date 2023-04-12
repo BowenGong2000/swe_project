@@ -38,8 +38,3 @@ def test_data_type_exists(new_data_type):
 
 def test_data_type_not_exists():
     assert not dtyp.data_type_exists('Some nonsense data type')
-
-
-@pytest.mark.skip("Can't run this test until the delete function is written.")
-def test_del_data_type():
-    pass

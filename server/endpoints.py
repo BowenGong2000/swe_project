@@ -324,7 +324,7 @@ class ChangeProject(Resource):
         name = request.json[pj.NAME]
         field = request.json[pj.FIELD]
         val = request.json[pj.VALUE]
-        ret = pj.change_project_single_field(name, field, val)
+        pj.change_project_single_field(name, field, val)
         return {"updated info": pj.get_project_details(name)}
 
 
