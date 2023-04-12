@@ -3,6 +3,7 @@ import os
 import db.application as appl
 
 TEST_DEL_NAME = 'Test Application Del'
+TEST_USER_ACCOUNT = 'yzzzz@nyu.edu'
 RUNNING_ON_CICD_SERVER = os.environ.get('CI', False)
 
 
@@ -78,3 +79,16 @@ def test_add_application():
         appl.add_application(appl.TEST_APPLICATION_NAME, create_application_details())
         assert appl.application_exists(appl.TEST_APPLICATION_NAME)
         appl.del_application(appl.TEST_APPLICATION_NAME)
+
+
+def test_get_application_num():
+    if not RUNNING_ON_CICD_SERVER:
+        num = appl.get_application_num()
+        assert isinstance(num, int)
+
+
+def test_get_user_application():
+    apls = appl.get_user_application(TEST_USER_ACCOUNT)
+    assert isinstance(apls, list)
+    for apl in apls:
+        assert apl['applicant_email'] == TEST_USER_ACCOUNT

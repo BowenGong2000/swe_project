@@ -78,3 +78,9 @@ def test_add_user():
         us.add_user(us.TEST_USER_EMAIL, create_user_details())
         assert us.user_exists(us.TEST_USER_EMAIL)
         us.del_user(us.TEST_USER_EMAIL)
+
+
+def test_get_user_num():
+    if not RUNNING_ON_CICD_SERVER:
+        num = us.get_user_num()
+        assert isinstance(num, int)

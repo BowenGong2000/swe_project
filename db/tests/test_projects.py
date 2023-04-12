@@ -3,6 +3,7 @@ import pytest
 import db.projects as pj
 
 TEST_DEL_NAME = 'Test Project Del'
+TEST_USER_ACCOUNT = 'yzzzz@nyu.edu'
 RUNNING_ON_CICD_SERVER = os.environ.get('CI', False)
 
 
@@ -78,3 +79,23 @@ def test_add_project():
         pj.add_project(pj.TEST_PROJECT_NAME, create_project_details())
         assert pj.check_if_exist(pj.TEST_PROJECT_NAME)
         pj.del_project(pj.TEST_PROJECT_NAME)
+
+
+def test_get_project_num():
+    if not RUNNING_ON_CICD_SERVER:
+        num = pj.get_proj_num()
+        assert isinstance(num, int)
+
+
+def test_get_user_project():
+    pjs = pj.get_user_project(TEST_USER_ACCOUNT)
+    assert isinstance(pjs, list)
+    for project in pjs:
+        assert project['account']['email'] == TEST_USER_ACCOUNT
+
+
+def test_change_project_single_field():
+    pj.add_project(pj.TEST_PROJECT_NAME, create_project_details())
+    the_pj = pj.change_project_single_field(pj.TEST_PROJECT_NAME, pj.APPROVE, False)
+    assert the_pj[pj.APPROVE] == False
+    pj.del_project(pj.TEST_PROJECT_NAME)

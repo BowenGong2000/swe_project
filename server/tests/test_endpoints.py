@@ -92,6 +92,8 @@ def test_change_project():
     Check if change field work
     """
     resp = TEST_CLIENT.post(f'{ep.PROJECTS_NS}{ep.PROJECT_CHANGE_FIELD}', json=TEST_CHANGE_PROJECT)
+    info = resp.get_json()['updated info']
+    assert info[pj.APPROVE] == False
 
 def test_get_project_details():
     """
@@ -156,6 +158,14 @@ def test_get_department_lst():
     assert isinstance(resp_json, list)
     assert len(resp_json) > 0
 
+def test_statistics():
+    """
+    See if we can get statistics.
+    """
+    resp = TEST_CLIENT.get(ep.PROJECT_STATISTIC_W_NS)
+    resp_json = resp.get_json()
+    assert isinstance(resp_json, dict)
+    assert len(resp_json) == 3
 
 
 """

@@ -83,6 +83,7 @@ PROJECT_GET_FILE = f'/{FILE}/{GET}'
 PROJECT_USER = f'/{USER}'
 PROJECT_USER_W_NS = f'{PROJECTS_NS}/{USER}'
 PROJECT_STATISTIC = f'/{STATISTIC}'
+PROJECT_STATISTIC_W_NS = f'{PROJECTS_NS}/{STATISTIC}'
 PROJECT_DEPART = f'/{DEPART}'
 PROJECT_DEPART_W_NS = f'{PROJECTS_NS}/{DEPART}'
 
@@ -323,8 +324,8 @@ class ChangeProject(Resource):
         name = request.json[pj.NAME]
         field = request.json[pj.FIELD]
         val = request.json[pj.VALUE]
-        pj.change_project_single_field(name, field, val)
-        return {MESSAGE: 'Project changed.'}
+        ret = pj.change_project_single_field(name, field, val)
+        return {"updated info": pj.get_project_details(name)}
 
 
 @projects.route(f'{PROJECT_DELETE}/<project>')
