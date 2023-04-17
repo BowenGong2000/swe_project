@@ -633,6 +633,7 @@ class UserProfilePictureUpdate(Resource):
     """
     Update a profile picture into data base
     """
+    @api.expect(upload_parser_profile)
     def post(self, user_email, filename):
         def allowed_file(filename):
             return '.' in filename and filename.rsplit('.', 1)[1].lower() \
@@ -641,6 +642,7 @@ class UserProfilePictureUpdate(Resource):
         file = args['file']
         if file and allowed_file(file.filename):
             pj.update_profile_pic(user_email, filename, file)
+            return {MESSAGE: 'File stored in to data base'}
         else:
             raise wz.NotFound('File is None')
 
