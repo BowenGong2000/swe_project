@@ -92,3 +92,10 @@ def test_get_user_application():
     assert isinstance(apls, list)
     for apl in apls:
         assert apl['applicant_email'] == TEST_USER_ACCOUNT
+
+
+def test_get_project_application():
+    apls = appl.get_project_application(TEST_USER_ACCOUNT)
+    assert isinstance(apls, list)
+    for apl in apls:
+        assert apl['applied_project'] == TEST_USER_ACCOUNT
