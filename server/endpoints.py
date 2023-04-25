@@ -150,11 +150,11 @@ application_fields = api.model('NewApplication', {
     apl.APP_DATE: fields.String,
     apl.APP_STATUS: fields.String,
     apl.RESUME_FILENAME: fields.String,
-    apl.RESUME_CONTENT: fields.String,
+    apl.RESUME_CONTENT: fields.Raw,
     apl.TRANSCRIPT_FILENAME: fields.String,
-    apl.TRANSCRIPT_CONTENT: fields.String,
+    apl.TRANSCRIPT_CONTENT: fields.Raw,
     apl.COVERLETTER_FILENAME: fields.String,
-    apl.COVERLETTER_CONTENT: fields.String,
+    apl.COVERLETTER_CONTENT: fields.Raw,
 })
 
 
