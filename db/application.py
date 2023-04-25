@@ -14,7 +14,7 @@ RESUME_FILENAME = 'resume_filename'
 RESUME_CONTENT = 'resume_content'
 TRANSCRIPT_FILENAME = 'transcript_filename'
 TRANSCRIPT_CONTENT = 'transcript_content'
-COVERLETTER_FILENAME = 'coverleter_filename'
+COVERLETTER_FILENAME = 'coverletter_filename'
 COVERLETTER_CONTENT = 'coverletter_content'
 
 REQUIRED_FLDS = [NAME, APPLICANT_EMAIL, PROJECT, APP_DATE,
