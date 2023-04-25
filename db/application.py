@@ -10,11 +10,15 @@ APPLICANT_EMAIL = 'applicant_email'
 PROJECT = 'applied_project'
 APP_DATE = 'application_date'
 APP_STATUS = 'application_status'
-RESUME = 'resume'
-TRANSCRIPT = 'transcript'
-COVER_LETTER = 'cover_leter'
+RESUME_FILENAME = 'resume_filename'
+RESUME_CONTENT = 'resume_content'
+TRANSCRIPT_FILENAME = 'transcript_filename'
+TRANSCRIPT_CONTENT = 'transcript_content'
+COVERLETTER_FILENAME = 'coverleter_filename'
+COVERLETTER_CONTENT = 'coverletter_content'
 
-REQUIRED_FLDS = [NAME, APPLICANT_EMAIL, PROJECT, APP_DATE, RESUME]
+REQUIRED_FLDS = [NAME, APPLICANT_EMAIL, PROJECT, APP_DATE,
+                 RESUME_FILENAME, RESUME_CONTENT]
 
 APPLICATION_COLLECT = 'applications'
 APPLICATION_KEY = 'application_name'

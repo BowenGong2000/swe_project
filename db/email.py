@@ -5,8 +5,8 @@ from email.mime.application import MIMEApplication
 from email.header import Header
 import mimetypes
 
-EMAIL = ''
-PASSWORD = ''
+EMAIL = 'projectmatchernet@gmail.com'
+PASSWORD = 'Ilovecs123!'
 RESUME_FILENAME = 'resume_filename'
 RESUME_CONTENT = 'resume_content'
 TRANSCRIPT_FILENAME = 'transcript_filename'

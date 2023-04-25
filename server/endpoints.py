@@ -148,9 +148,13 @@ application_fields = api.model('NewApplication', {
     apl.APPLICANT_EMAIL: fields.String,
     apl.PROJECT: fields.String,
     apl.APP_DATE: fields.String,
-    apl.RESUME: fields.String,
-    apl.TRANSCRIPT: fields.String,
     apl.APP_STATUS: fields.String,
+    apl.RESUME_FILENAME: fields.String,
+    apl.RESUME_CONTENT: fields.String,
+    apl.TRANSCRIPT_FILENAME: fields.String,
+    apl.TRANSCRIPT_CONTENT: fields.String,
+    apl.COVERLETTER_FILENAME: fields.String,
+    apl.COVERLETTER_CONTENT: fields.String,
 })
 
 
