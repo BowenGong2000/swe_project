@@ -34,7 +34,7 @@ jobs:
 
       - name: Check Enviroments
         env:
-          MONGO_PW: ${{serets.MONGO_PW}}
+          MONGO_PW: ${{secrets.MONGO_PW}}
         run: |
           echo "All environment variables:"
           printenv
