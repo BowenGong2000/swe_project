@@ -35,7 +35,9 @@ jobs:
       - name: Check Enviroments
         env:
           MONGO_PW: ${{MONGO_PW}}
-        run: echo MONGO_PW
+        run: |
+          echo "All environment variables:"
+          printenv
 
       - name: Install Python packages.
         run: make dev_env
