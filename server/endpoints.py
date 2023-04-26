@@ -36,6 +36,8 @@ api.add_namespace(users)
 applications = Namespace(APPLICATION_NS, 'Applications')
 api.add_namespace(applications)
 
+FACE = 'face'
+
 LIST = 'list'
 DICT = 'dict'
 HELLO = '/hello'
@@ -102,6 +104,8 @@ USER_UPDATE = '/update'
 USER_DELETE = f'/{DELETE}'
 USER_PROFILE_PICTURE_UPDATE = f'/{PROFILE_PIC}/{UPDATE}'
 USER_PROFILE_PICTURE_GET = f'/{PROFILE_PIC}/{GET}'
+USER_LOGIN_FACE_UPDATE=f'/{FACE}/{UPDATE}'  
+USER_LOGIN_FACE_MATCH=f'/{FACE}/{GET}'  
 
 APPLICATION_DICT = f'/{DICT}'
 APPLICATION_DICT_W_NS = f'{APPLICATION_NS}/{DICT}'
