@@ -33,7 +33,9 @@ jobs:
         uses: supercharge/mongodb-github-action@1.8.0
 
       - name: Check Enviroments
-        run:  echo $MONGO_PW
+        env:
+          MONGO_PW: ${{MONGO_PW}}
+        run: echo MONGO_PW
 
       - name: Install Python packages.
         run: make dev_env
