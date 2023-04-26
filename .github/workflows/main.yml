@@ -15,6 +15,7 @@ on:
 env:
   DEMO_HOME: /home/runner/work/swe_project/swe_project/
   PYTHONPATH: /home/runner/work/swe_project/swe_project/
+  MONGO_PW: ${{secrets.MONGO_PW}}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,12 +33,9 @@ jobs:
       - name: Install MongoDB
         uses: supercharge/mongodb-github-action@1.8.0
 
-      - name: Check Enviroments
-        env:
-          MONGO_PW: ${{secrets.MONGO_PW}}
+      - name: Check Enviroment Variables
         run: |
-          echo "All environment variables:"
-          printenv
+          echo "All environment variables"
 
       - name: Install Python packages.
         run: make dev_env
