@@ -1,4 +1,5 @@
 
+from unittest.mock import patch
 import pytest
 from http import HTTPStatus
 from passlib.hash import pbkdf2_sha256
@@ -82,25 +83,15 @@ def test_hello():
 """
 Tests for Projects
 """
-def test_add_project():
-    """
-    See if adding project works properly.
-    """
-    resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_ADD}', json=TEST_PROJECT)
-    assert pj.check_if_exist(TEST_PROJECT_NAME)
+
+@pytest.fixture(scope='function')
+def a_project():
+    ret = pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
+    yield ret
     pj.del_project(TEST_PROJECT_NAME)
 
-def test_change_project():
-    """
-    Check if change field work
-    """
-    pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
-    resp = TEST_CLIENT.post(f'{ep.PROJECTS_NS}{ep.PROJECT_CHANGE_FIELD}', json=TEST_CHANGE_PROJECT)
-    info = resp.get_json()['updated info']
-    assert info[pj.APPROVE] == False
-    pj.del_project(TEST_PROJECT_NAME)
-
-def test_get_project_details():
+@patch('db.projects.get_project_details', return_value=TEST_PROJECT)
+def test_get_project_details(mock_get_project_details):
     """
     See if we can get the details of a project properly
     """
@@ -108,12 +99,21 @@ def test_get_project_details():
     assert isinstance(resp_json, dict)
     assert len(resp_json) > 0
 
-def test_get_missing_project_details():
+@patch('db.projects.get_project_details', return_value=None)
+def test_get_missing_project_details(mock_get_project_details):
     """
     See if we can get error message if a missing project is entered
     """
     resp = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_BAD_PROJECT_NAME}')
     assert resp.status_code == HTTPStatus.NOT_FOUND
+
+def test_add_project():
+    """
+    See if adding project works properly.
+    """
+    resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_ADD}', json=TEST_PROJECT)
+    assert pj.check_if_exist(TEST_PROJECT_NAME)
+    pj.del_project(TEST_PROJECT_NAME)
 
 def test_get_project_dict():
     """
@@ -128,14 +128,6 @@ def test_get_project_dict():
     Test if the dict is not empty.
     """
     assert len(resp_json['Data']) > 0
-
-def test_delete_project():
-    """
-    Check if project can be deleted properly
-    """
-    pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
-    resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_DELETE}/{TEST_PROJECT_NAME}')
-    assert pj.check_if_exist(TEST_PROJECT_NAME) == False
 
 def test_get_user_project():
     """
@@ -171,6 +163,24 @@ def test_statistics():
     resp_json = resp.get_json()
     assert isinstance(resp_json, dict)
     assert len(resp_json) == 3
+
+def test_change_project():
+    """
+    Check if change field work
+    """
+    pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
+    resp = TEST_CLIENT.post(f'{ep.PROJECTS_NS}{ep.PROJECT_CHANGE_FIELD}', json=TEST_CHANGE_PROJECT)
+    info = resp.get_json()['updated info']
+    assert info[pj.APPROVE] == False
+    pj.del_project(TEST_PROJECT_NAME)
+
+def test_delete_project():
+    """
+    Check if project can be deleted properly
+    """
+    pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
+    resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_DELETE}/{TEST_PROJECT_NAME}')
+    assert pj.check_if_exist(TEST_PROJECT_NAME) == False
 
 
 """
