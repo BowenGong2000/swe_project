@@ -281,7 +281,7 @@ class ProjectDetails(Resource):
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     def get(self, project):
         """
-        Returns the details of a specific project (in dictionary)
+        Returns the details of a specific project.
         """
         pjd = pj.get_project_details(project)
         if pjd is not None:
@@ -317,12 +317,12 @@ change_field = api.model("ChangeProject", {
 @projects.route(PROJECT_CHANGE_FIELD)
 class ChangeProject(Resource):
     """
-    Change a field in a existing project.
+    Change the 'if_approve' status of a project (FOR DEVEOPLER).
     """
     @api.expect(change_field)
     def post(self):
         """
-        Change details of a project.
+        Change the 'if_approve' status of a project (FOR DEVEOPLER).
         """
         print(f'{request.json=}')
         name = request.json[pj.NAME]
@@ -344,9 +344,16 @@ class DeleteProject(Resource):
         Delete a existing project from db
         """
         pjd = pj.get_project_details(project)
+        pj_apl = apl.get_project_application(project)
+
         if pjd is not None:
-            pj.del_project(project)
-            return {MESSAGE: f'{project} is deleted.'}
+            pj.del_project(project)      
+            if pj_apl is not None:
+                for item in pj_apl:
+                    apl.del_application(item['application_name'])
+                return {MESSAGE: f'{project} and its applications are deleted.'}
+            else:
+                return {MESSAGE: f'Project {project} is deleted.'}
         else:
             raise wz.NotFound(f'{project} not found.')
 
