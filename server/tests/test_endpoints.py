@@ -30,7 +30,7 @@ TEST_PROJECT = {
 }
 
 TEST_CHANGE_PROJECT = {
-    pj.NAME: "sample project",
+    pj.NAME: TEST_PROJECT_NAME,
     pj.FIELD: "if_approve",
     pj.VALUE: False
 }
@@ -59,11 +59,14 @@ TEST_APPLICATION = {
     apl.NAME: TEST_APPLICATION_NAME,
     apl.APPLICANT_NAME: 'test name',
     apl.APPLICANT_EMAIL: TEST_USER_EMAIL,
-    apl.PROJECT: "temp proj",
+    apl.PROJECT: "IE",
     apl.APP_DATE: '2022-06-08',
-    apl.RESUME: 'string',
-    apl.TRANSCRIPT: 'string',
-    apl.APP_STATUS: 'string',
+    apl.RESUME_FILENAME: None,
+    apl.RESUME_CONTENT: None,
+    apl.TRANSCRIPT_FILENAME: None,
+    apl.TRANSCRIPT_CONTENT: None,
+    apl.COVERLETTER_FILENAME: None,
+    apl.COVERLETTER_CONTENT: None,
 }
 
 
@@ -91,9 +94,11 @@ def test_change_project():
     """
     Check if change field work
     """
+    pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
     resp = TEST_CLIENT.post(f'{ep.PROJECTS_NS}{ep.PROJECT_CHANGE_FIELD}', json=TEST_CHANGE_PROJECT)
     info = resp.get_json()['updated info']
     assert info[pj.APPROVE] == False
+    pj.del_project(TEST_PROJECT_NAME)
 
 def test_get_project_details():
     """
