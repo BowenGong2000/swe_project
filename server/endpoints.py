@@ -9,7 +9,6 @@ from flask_restx import Resource, Api, fields, Namespace, reqparse
 from passlib.hash import pbkdf2_sha256
 from werkzeug.datastructures import FileStorage
 
-import db.data_type as dtyp
 import db.projects as pj
 import db.user as usr
 import db.application as apl
@@ -22,13 +21,10 @@ import mimetypes
 app = Flask(__name__)
 api = Api(app)
 
-DATA_NS = 'data'
 PROJECTS_NS = 'projects'
 USERS_NS = 'users'
 APPLICATION_NS = 'application'
 
-data_types = Namespace(DATA_NS, 'Data Types')
-api.add_namespace(data_types)
 projects = Namespace(PROJECTS_NS, 'Projects')
 api.add_namespace(projects)
 users = Namespace(USERS_NS, 'Users')
@@ -58,15 +54,6 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 MAIN_MENU = '/main_menu'
 MAIN_MENU_NM = 'Main Menu'
-
-DATA_DICT = f'/{DICT}'
-DATA_DICT_W_NS = f'{DATA_NS}/{DICT}'
-DATA_DICT_NM = f'{DATA_NS}_dict'
-DATA_LIST = f'/{LIST}'
-DATA_LIST_NM = f'{DATA_NS}_list'
-DATA_LIST_W_NS = f'{DATA_NS}/{LIST}'
-DATA_DETAILS = f'/{DETAILS}'
-DATA_DETAILS_W_NS = f'{DATA_NS}/{DETAILS}'
 
 PROJECT_DICT = f'/{DICT}'
 PROJECT_DICT_W_NS = f'{PROJECTS_NS}/{DICT}'
@@ -198,36 +185,6 @@ class MainMenu(Resource):
                 }}
 
 
-@data_types.route(DATA_LIST)
-class DataList(Resource):
-    """
-    This will get a list of data types
-    """
-    def get(self):
-        """
-        Return a list of data types
-        """
-        return {DATA_LIST_NM: dtyp.get_data_types()}
-
-
-@data_types.route(f'{DATA_DETAILS}/<data_type>')
-class DataTypeDetails(Resource):
-    """
-    This will return data details.
-    """
-    @api.response(HTTPStatus.OK, 'Success')
-    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self, data_type):
-        """
-        Returns data details.
-        """
-        dt = dtyp.get_data_type_details(data_type)
-        if dt is not None:
-            return {data_type: dtyp.get_data_type_details(data_type)}
-        else:
-            raise wz.NotFound(f'{data_type} not found.')
-
-
 """
 Project endpoints
 """
@@ -285,7 +242,7 @@ class ProjectDetails(Resource):
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     def get(self, project):
         """
-        Returns the details of a specific project (in dictionary)
+        Returns the details of a specific project.
         """
         pjd = pj.get_project_details(project)
         if pjd is not None:
@@ -321,12 +278,12 @@ change_field = api.model("ChangeProject", {
 @projects.route(PROJECT_CHANGE_FIELD)
 class ChangeProject(Resource):
     """
-    Change a field in a existing project.
+    Change the 'if_approve' status of a project (FOR DEVEOPLER).
     """
     @api.expect(change_field)
     def post(self):
         """
-        Change details of a project.
+        Change the 'if_approve' status of a project (FOR DEVEOPLER).
         """
         print(f'{request.json=}')
         name = request.json[pj.NAME]
@@ -348,9 +305,16 @@ class DeleteProject(Resource):
         Delete a existing project from db
         """
         pjd = pj.get_project_details(project)
+        pj_apl = apl.get_project_application(project)
+
         if pjd is not None:
             pj.del_project(project)
-            return {MESSAGE: f'{project} is deleted.'}
+            if pj_apl is not None:
+                for item in pj_apl:
+                    apl.del_application(item['application_name'])
+                return {MESSAGE: 'Project and its applications are deleted.'}
+            else:
+                return {MESSAGE: f'Project {project} is deleted.'}
         else:
             raise wz.NotFound(f'{project} not found.')
 

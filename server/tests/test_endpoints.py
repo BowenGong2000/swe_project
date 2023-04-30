@@ -1,4 +1,5 @@
 
+from unittest.mock import patch
 import pytest
 from http import HTTPStatus
 from passlib.hash import pbkdf2_sha256
@@ -30,7 +31,7 @@ TEST_PROJECT = {
 }
 
 TEST_CHANGE_PROJECT = {
-    pj.NAME: "sample project",
+    pj.NAME: TEST_PROJECT_NAME,
     pj.FIELD: "if_approve",
     pj.VALUE: False
 }
@@ -59,11 +60,14 @@ TEST_APPLICATION = {
     apl.NAME: TEST_APPLICATION_NAME,
     apl.APPLICANT_NAME: 'test name',
     apl.APPLICANT_EMAIL: TEST_USER_EMAIL,
-    apl.PROJECT: "temp proj",
+    apl.PROJECT: "IE",
     apl.APP_DATE: '2022-06-08',
-    apl.RESUME: 'string',
-    apl.TRANSCRIPT: 'string',
-    apl.APP_STATUS: 'string',
+    apl.RESUME_FILENAME: None,
+    apl.RESUME_CONTENT: None,
+    apl.TRANSCRIPT_FILENAME: None,
+    apl.TRANSCRIPT_CONTENT: None,
+    apl.COVERLETTER_FILENAME: None,
+    apl.COVERLETTER_CONTENT: None,
 }
 
 
@@ -79,23 +83,15 @@ def test_hello():
 """
 Tests for Projects
 """
-def test_add_project():
-    """
-    See if adding project works properly.
-    """
-    resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_ADD}', json=TEST_PROJECT)
-    assert pj.check_if_exist(TEST_PROJECT_NAME)
+
+@pytest.fixture(scope='function')
+def a_project():
+    ret = pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
+    yield ret
     pj.del_project(TEST_PROJECT_NAME)
 
-def test_change_project():
-    """
-    Check if change field work
-    """
-    resp = TEST_CLIENT.post(f'{ep.PROJECTS_NS}{ep.PROJECT_CHANGE_FIELD}', json=TEST_CHANGE_PROJECT)
-    info = resp.get_json()['updated info']
-    assert info[pj.APPROVE] == False
-
-def test_get_project_details():
+@patch('db.projects.get_project_details', return_value=TEST_PROJECT)
+def test_get_project_details(mock_get_project_details):
     """
     See if we can get the details of a project properly
     """
@@ -103,12 +99,21 @@ def test_get_project_details():
     assert isinstance(resp_json, dict)
     assert len(resp_json) > 0
 
-def test_get_missing_project_details():
+@patch('db.projects.get_project_details', return_value=None)
+def test_get_missing_project_details(mock_get_project_details):
     """
     See if we can get error message if a missing project is entered
     """
     resp = TEST_CLIENT.get(f'{ep.PROJECT_DETAILS_W_NS}/{TEST_BAD_PROJECT_NAME}')
     assert resp.status_code == HTTPStatus.NOT_FOUND
+
+def test_add_project():
+    """
+    See if adding project works properly.
+    """
+    resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_ADD}', json=TEST_PROJECT)
+    assert pj.check_if_exist(TEST_PROJECT_NAME)
+    pj.del_project(TEST_PROJECT_NAME)
 
 def test_get_project_dict():
     """
@@ -123,14 +128,6 @@ def test_get_project_dict():
     Test if the dict is not empty.
     """
     assert len(resp_json['Data']) > 0
-
-def test_delete_project():
-    """
-    Check if project can be deleted properly
-    """
-    pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
-    resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_DELETE}/{TEST_PROJECT_NAME}')
-    assert pj.check_if_exist(TEST_PROJECT_NAME) == False
 
 def test_get_user_project():
     """
@@ -166,6 +163,24 @@ def test_statistics():
     resp_json = resp.get_json()
     assert isinstance(resp_json, dict)
     assert len(resp_json) == 3
+
+def test_change_project():
+    """
+    Check if change field work
+    """
+    pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
+    resp = TEST_CLIENT.post(f'{ep.PROJECTS_NS}{ep.PROJECT_CHANGE_FIELD}', json=TEST_CHANGE_PROJECT)
+    info = resp.get_json()['updated info']
+    assert info[pj.APPROVE] == False
+    pj.del_project(TEST_PROJECT_NAME)
+
+def test_delete_project():
+    """
+    Check if project can be deleted properly
+    """
+    pj.add_project(TEST_PROJECT_NAME, TEST_PROJECT)
+    resp = TEST_CLIENT.post(f'/{ep.PROJECTS_NS}{ep.PROJECT_DELETE}/{TEST_PROJECT_NAME}')
+    assert pj.check_if_exist(TEST_PROJECT_NAME) == False
 
 
 """
@@ -323,33 +338,3 @@ def test_add_application():
     resp = TEST_CLIENT.post(f'/{ep.APPLICATION_NS}{ep.APPLICATION_ADD}', json=TEST_APPLICATION)
     assert apl.application_exists(TEST_APPLICATION_NAME)
     apl.del_application(TEST_APPLICATION_NAME)
-
-
-"""
-Tests for Data Types
-"""
-def test_get_DataList(): 
-    """
-    see if we can get data list properly
-    Return should look like:
-        {DATA_LIST_NM: [list of data ...]}
-    """
-    resp_json = TEST_CLIENT.get(ep.DATA_LIST_W_NS).get_json()
-    assert isinstance(resp_json[ep.DATA_LIST_NM], list)
-
-def test_get_DataList_not_empty():
-    """
-    see if we can get data list properly
-    Return should look like:
-        {DATA_LIST_NM: [list of data ...]}
-    """
-    resp_json = TEST_CLIENT.get(ep.DATA_LIST_W_NS).get_json()
-    assert len(resp_json[ep.DATA_LIST_NM]) > 0
-
-def test_get_data_type_details():
-    """
-    see if we can get data type details properly
-    """
-    resp_json = TEST_CLIENT.get(f'{ep.DATA_DETAILS_W_NS}/{TEST_DATA_TYPE}').get_json()
-    assert TEST_DATA_TYPE in resp_json
-    assert isinstance(resp_json[TEST_DATA_TYPE], dict) 
