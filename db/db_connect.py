@@ -21,7 +21,6 @@ def connect_db():
         if os.environ.get("CLOUD_MONGO", CLOUD) == CLOUD:
             password = "1234"
             if not password:
-                print("password=",password)
                 raise ValueError('You must set your password '
                                  + 'to use Mongo in the cloud.')
 
