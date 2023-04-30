@@ -9,7 +9,6 @@ from flask_restx import Resource, Api, fields, Namespace, reqparse
 from passlib.hash import pbkdf2_sha256
 from werkzeug.datastructures import FileStorage
 
-import db.data_type as dtyp
 import db.projects as pj
 import db.user as usr
 import db.application as apl
@@ -22,13 +21,10 @@ import mimetypes
 app = Flask(__name__)
 api = Api(app)
 
-DATA_NS = 'data'
 PROJECTS_NS = 'projects'
 USERS_NS = 'users'
 APPLICATION_NS = 'application'
 
-data_types = Namespace(DATA_NS, 'Data Types')
-api.add_namespace(data_types)
 projects = Namespace(PROJECTS_NS, 'Projects')
 api.add_namespace(projects)
 users = Namespace(USERS_NS, 'Users')
@@ -56,15 +52,6 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 MAIN_MENU = '/main_menu'
 MAIN_MENU_NM = 'Main Menu'
-
-DATA_DICT = f'/{DICT}'
-DATA_DICT_W_NS = f'{DATA_NS}/{DICT}'
-DATA_DICT_NM = f'{DATA_NS}_dict'
-DATA_LIST = f'/{LIST}'
-DATA_LIST_NM = f'{DATA_NS}_list'
-DATA_LIST_W_NS = f'{DATA_NS}/{LIST}'
-DATA_DETAILS = f'/{DETAILS}'
-DATA_DETAILS_W_NS = f'{DATA_NS}/{DETAILS}'
 
 PROJECT_DICT = f'/{DICT}'
 PROJECT_DICT_W_NS = f'{PROJECTS_NS}/{DICT}'
@@ -192,36 +179,6 @@ class MainMenu(Resource):
                           'text': 'List USERS.'},
                     'X': {'text': 'Exit'},
                 }}
-
-
-@data_types.route(DATA_LIST)
-class DataList(Resource):
-    """
-    This will get a list of data types
-    """
-    def get(self):
-        """
-        Return a list of data types
-        """
-        return {DATA_LIST_NM: dtyp.get_data_types()}
-
-
-@data_types.route(f'{DATA_DETAILS}/<data_type>')
-class DataTypeDetails(Resource):
-    """
-    This will return data details.
-    """
-    @api.response(HTTPStatus.OK, 'Success')
-    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self, data_type):
-        """
-        Returns data details.
-        """
-        dt = dtyp.get_data_type_details(data_type)
-        if dt is not None:
-            return {data_type: dtyp.get_data_type_details(data_type)}
-        else:
-            raise wz.NotFound(f'{data_type} not found.')
 
 
 """

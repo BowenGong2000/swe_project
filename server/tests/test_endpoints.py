@@ -328,33 +328,3 @@ def test_add_application():
     resp = TEST_CLIENT.post(f'/{ep.APPLICATION_NS}{ep.APPLICATION_ADD}', json=TEST_APPLICATION)
     assert apl.application_exists(TEST_APPLICATION_NAME)
     apl.del_application(TEST_APPLICATION_NAME)
-
-
-"""
-Tests for Data Types
-"""
-def test_get_DataList(): 
-    """
-    see if we can get data list properly
-    Return should look like:
-        {DATA_LIST_NM: [list of data ...]}
-    """
-    resp_json = TEST_CLIENT.get(ep.DATA_LIST_W_NS).get_json()
-    assert isinstance(resp_json[ep.DATA_LIST_NM], list)
-
-def test_get_DataList_not_empty():
-    """
-    see if we can get data list properly
-    Return should look like:
-        {DATA_LIST_NM: [list of data ...]}
-    """
-    resp_json = TEST_CLIENT.get(ep.DATA_LIST_W_NS).get_json()
-    assert len(resp_json[ep.DATA_LIST_NM]) > 0
-
-def test_get_data_type_details():
-    """
-    see if we can get data type details properly
-    """
-    resp_json = TEST_CLIENT.get(f'{ep.DATA_DETAILS_W_NS}/{TEST_DATA_TYPE}').get_json()
-    assert TEST_DATA_TYPE in resp_json
-    assert isinstance(resp_json[TEST_DATA_TYPE], dict) 
