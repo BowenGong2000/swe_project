@@ -347,11 +347,11 @@ class DeleteProject(Resource):
         pj_apl = apl.get_project_application(project)
 
         if pjd is not None:
-            pj.del_project(project)      
+            pj.del_project(project)  
             if pj_apl is not None:
                 for item in pj_apl:
                     apl.del_application(item['application_name'])
-                return {MESSAGE: f'{project} and its applications are deleted.'}
+                return {MESSAGE: 'Project and its applications are deleted.'}
             else:
                 return {MESSAGE: f'Project {project} is deleted.'}
         else:
