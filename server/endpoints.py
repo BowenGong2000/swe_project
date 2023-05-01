@@ -92,7 +92,7 @@ USER_DELETE = f'/{DELETE}'
 USER_PROFILE_PICTURE_UPDATE = f'/{PROFILE_PIC}/{UPDATE}'
 USER_PROFILE_PICTURE_GET = f'/{PROFILE_PIC}/{GET}'
 USER_LOGIN_FACE_UPDATE=f'/{FACE}/{UPDATE}'  
-USER_LOGIN_FACE_MATCH=f'/{FACE}/{GET}'  
+USER_LOGIN_FACE_GET=f'/{FACE}/{GET}'  
 
 APPLICATION_DICT = f'/{DICT}'
 APPLICATION_DICT_W_NS = f'{APPLICATION_NS}/{DICT}'
@@ -636,6 +636,25 @@ class UserProfilePictureGet(Resource):
                              mimetype=file_mimetype)
         else:
             return {MESSAGE: f'{user_email} profile picture not found'}
+
+
+
+@users.route(f'{USER_LOGIN_FACE_UPDATE}/<user_email>/<image_data>')
+class UploadFace(Resource):
+    """
+    upload user image
+    """
+    def get(self, user_email, image_data):
+        
+        user_exist = usr.user_exists(user_email)
+        if user_exist:
+            return usr.add_users_face(user_email,image_data)
+        else:
+            return {MESSAGE: f'{user_email} profile picture not found'}
+
+
+# @users.route(f'{USER_LOGIN_FACE_GET}/<user_email>/<image_data>')
+# class UploadFace(Resource):
 
 
 """Application Endpoints"""
