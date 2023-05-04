@@ -15,7 +15,6 @@ on:
 env:
   DEMO_HOME: /home/runner/work/swe_project/swe_project/
   PYTHONPATH: /home/runner/work/swe_project/swe_project/
-  MONGO_PW: ${{secrets.MONGO_PW}}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -42,6 +41,8 @@ jobs:
 
       - name: Run Python tests.
         run: make all_tests
+        env:
+            MONGO_PW: ${{secrets.MONGO_PW}} 
         
       # Deploy to Heroku
       #  - uses: akhileshns/heroku-deploy@v3.12.12
