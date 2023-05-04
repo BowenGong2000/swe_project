@@ -20,13 +20,13 @@ USER_COLLECT = 'users'
 
 image_folder = './user_images'
 
+
 def add_users_face(email, img):
     dbc.connect_db()
     user_detail = dbc.fetch_one(USER_COLLECT, {USER_KEY: email})
-    user_detail[FACE]=img
+    user_detail[FACE] = img
     dbc.del_one(USER_COLLECT, {USER_KEY: email})
     return dbc.insert_one(USER_COLLECT, user_detail)
-
 
 
 def get_users():
