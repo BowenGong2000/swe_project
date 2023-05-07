@@ -1,10 +1,7 @@
 
-# swe_project
-An example flask rest API server, for SE Fall 2022.
+# SWE project Fall 2022
+A flask rest API server, for NYU project finder website.
 
-To build production, type `make prod`.
-
-To create the env for a new developer, run `make dev_env`.
 
 ## Tech Stack used for this project:
 
@@ -41,12 +38,17 @@ Frontend Github Link: https://github.com/FantasiA10/Project-matcher
 4. run command `./local.sh`      
 5. Go to http://127.0.0.1:8000
 
+NOTE: 
+To run `make prod`, you need to set MONGO_PW locally. `export MONGO_PW=1234`
+To build production, type `make prod`.
+To create the env for a new developer, run `make dev_env`.
+
 
 ## Requirements
 
 ### User endpoints:
 - Signup (add a user)
-- Login (verify credential)
+- Login (verify credentials)
 - Get info of a user
 - List all registered users
 - Delete a user
@@ -60,6 +62,7 @@ Frontend Github Link: https://github.com/FantasiA10/Project-matcher
 - Delete a project
 - Approve a project (admin only)
 - Upload and download project files
+- Get website statitstics
 
 ### Application endpoints:
 - List all applications of a user
@@ -67,6 +70,9 @@ Frontend Github Link: https://github.com/FantasiA10/Project-matcher
 - Create a application for a specific project
 - Send user email notifications
 - Cancel/Delete a application
+- Upload and download resume, transcript, coverletter etc.
+- Get applications by filters (by user_email / by project_name)
+- View applicants
 
 ### Flow Chart:
 ![alt text](static/images/flowchart.png)
