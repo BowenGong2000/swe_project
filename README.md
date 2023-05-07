@@ -38,9 +38,11 @@ Frontend Github Link: https://github.com/FantasiA10/Project-matcher
 4. run command `./local.sh`      
 5. Go to http://127.0.0.1:8000
 
-NOTE: 
-To run `make prod`, you need to set MONGO_PW locally. `export MONGO_PW=1234`
+### NOTE: 
+You need to set MONGO_PW locally using command `export MONGO_PW=1234`
+
 To build production, type `make prod`.
+
 To create the env for a new developer, run `make dev_env`.
 
 
