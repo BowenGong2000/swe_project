@@ -484,6 +484,8 @@ class LoginUser(Resource):
     """
     Log user in and retrun an auth key
     """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.expect(login_user_fields)
     def post(self):
         """
@@ -507,7 +509,7 @@ class LoginUser(Resource):
             if check:
                 return {"Auth-Key": pwd_db}
 
-        return ({MESSAGE: "Your login credentials are invalid"})
+        raise wz.NotFound('Your login credentials are invalid')
 
 
 @users.route(USER_SIGNUP)
