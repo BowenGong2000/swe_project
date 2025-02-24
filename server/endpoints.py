@@ -2,7 +2,10 @@
 This is the file containing all of the endpoints for our flask app.
 The endpoint called `endpoints` will return all available endpoints.
 """
-
+"""
+This is the file containing all of the endpoints for our flask app.
+The endpoint called `endpoints` will return all available endpoints.
+"""
 from http import HTTPStatus
 from flask import Flask, request, send_file
 from flask_restx import Resource, Api, fields, Namespace, reqparse
