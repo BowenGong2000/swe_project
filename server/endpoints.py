@@ -2,10 +2,7 @@
 This is the file containing all of the endpoints for our flask app.
 The endpoint called `endpoints` will return all available endpoints.
 """
-"""
-This is the file containing all of the endpoints for our flask app.
-The endpoint called `endpoints` will return all available endpoints.
-"""
+
 from http import HTTPStatus
 from flask import Flask, request, send_file
 from flask_restx import Resource, Api, fields, Namespace, reqparse
@@ -188,6 +185,26 @@ class MainMenu(Resource):
                 }}
 
 
+@api.route(MAIN_MENU)
+class MainMenu(Resource):
+    """
+    This will deliver our main menu.
+    """
+    def get(self):
+        """
+        Gets the main menu.
+        """
+        return {'Title': MAIN_MENU_NM,
+                'Default': 1,
+                'Choices': {
+                    '1': {'url': f'/{PROJECT_DICT_W_NS}',
+                          'method': 'get',
+                          'text': 'List Current Projects.'},
+                    '2': {'url': f'/{USER_DICT_W_NS}',
+                          'method': 'get',
+                          'text': 'List USERS.'},
+                    'X': {'text': 'Exit'},
+                }}
 """
 Project endpoints
 """
@@ -345,6 +362,46 @@ class ADDFILE(Resource):
         else:
             raise wz.NotFound('file is None')
 
+@projects.route(f'{PROJECT_DELETE_FILE}')
+class DELETEFILE(Resource):
+    """
+    This is will delete a FILE
+    """
+    def post(self):
+        """
+        Delete a file
+        """
+        name = request.json[pj.NAME]
+        if pj.check_if_exist(name) and pj.check_file_if_exist(name):
+            pj.delete_file(name)
+            return {MESSAGE: 'file deleted'}
+        else:
+            return {MESSAGE: f'{name} not exist in projects or {name} not \
+                    have file'}
+
+
+@projects.route(f'{PROJECT_GET_FILE}/<project>/<if_send>')
+class GETFILE(Resource):
+    """
+    This will get existing file if if_send is 0 only send name of file
+    """
+    def get(self, project, if_send):
+        """
+        Get existing file if if_send is 0 only send name of file
+        """
+        file, filename = pj.get_file(project)
+        if file:
+            if if_send == '0':
+                return {'filename': filename}
+            file_content = file.read()
+            file_obj = BytesIO(file_content)
+            file_mimetype, encoding = mimetypes.guess_type(filename)
+            return send_file(file_obj,
+                             as_attachment=True,
+                             attachment_filename=filename,
+                             mimetype=file_mimetype)
+        else:
+            return {MESSAGE: f'{project} not found'}
 
 @projects.route(f'{PROJECT_DELETE_FILE}')
 class DELETEFILE(Resource):
